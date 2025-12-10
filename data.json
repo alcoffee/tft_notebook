@@ -1,0 +1,3214 @@
+{
+  "unit": [
+    {
+      "id": 1,
+      "slug": "aatrox",
+      "name": "Aatrox",
+      "cost": 5,
+      "synergies": [
+        "Darkin",
+        "World Ender",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "The Darkin Blade",
+        "description": "On cast, Aatrox cycles through one of the following abilities:\n\nSlash in a line, dealing [170/255/2500] (AD + AP) physical damage to enemies hit and 20% Sundering them for 4 seconds.\n\nSwipe in a cone, dealing [204/306/3000] (AD + AP) physical damage to enemies hit and knocking them up for 1 second.\n\nSlam on target, dealing [272/408/4000] (AD + AP) physical damage in a 1 hex circle. Targets below 15% max Health are executed.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.90",
+        "armor": "55",
+        "magic_resist": "55",
+        "range": "1"
+      },
+      "unlock": "Field a unit with 40% Omnivamp in Combat + Level 8",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 2,
+      "slug": "ahri",
+      "name": "Ahri",
+      "cost": 3,
+      "synergies": [
+        "Ionia",
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Fox-Fire",
+        "description": "Fire 3 flames at target, each dealing [85/130/200](AP) magic damage. Every 3rd cast, fire 9 flames split between the target and up to 2 nearby enemies.\n\nIf there are nearby enemies, dash away.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.80",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 3,
+      "slug": "ambessa",
+      "name": "Ambessa",
+      "cost": 4,
+      "synergies": [
+        "Noxus",
+        "Vanquisher"
+      ],
+      "ability": {
+        "name": "Lacerate",
+        "description": "Swipe and dash around target, dealing [50/75/325](AD + AP) physical damage to enemies in the path. Then slam chains on target, dealing [138/206/894](AD + AP) physical damage in a line. If any enemies are killed, immediately recast this ability, dealing 100% damage.",
+        "mana": {
+          "start": "0",
+          "max": "20"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 4,
+      "slug": "anivia",
+      "name": "Anivia",
+      "cost": 1,
+      "synergies": [
+        "Freljord",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Frostbite",
+        "description": "Fire an ice shard at target that deals [325/455/650](AP) magic damage. If they are Chilled, the damage Critically Strikes.",
+        "mana": {
+          "start": "0",
+          "max": "45"
+        }
+      },
+      "base_stats": {
+        "health": "500/900/1620",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.70",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 5,
+      "slug": "annie",
+      "name": "Annie",
+      "cost": 5,
+      "synergies": [
+        "Dark Child",
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Enraged Inferno",
+        "description": "Erupt the entire battlefield in flames, permanently Burning and Wounding all enemies and dealing [1500/2250/8000](AP) magic damage to each of them over 45 seconds.\n\nAnnie's max Mana is reduced by 150 for the rest of combat. Subsequent casts launch a fireball at target that deals [240/360/3000](AP) magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "170"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 6,
+      "slug": "aphelios",
+      "name": "Aphelios",
+      "cost": 2,
+      "synergies": [
+        "Targon"
+      ],
+      "ability": {
+        "name": "Incendiary Onslaught",
+        "description": "Start with Infernum equipped. On cast, switch to Severum for [8](AP) attacks.\n\nInfernum: Attacks hit 3 enemies and apply 30% Sunder for 6 seconds.\nSeverum: Gain 200% Attack Speed and 10% Omnivamp. Attacks are replaced with swipes that deal [70/105/175](AD) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "20/30/45",
+        "attack_speed": "0.75",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 7,
+      "slug": "ashe",
+      "name": "Ashe",
+      "cost": 2,
+      "synergies": [
+        "Freljord",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "True Ice Arrow",
+        "description": "Fire an arrow at target that deals [140/210/325](AD + AP) physical damage to them and [46/69/107](AD + AP) damage to adjacent enemies. Targets below 30% max Health take true damage instead. 30% Chill all enemies hit for 3 seconds.\n\nBloodsworn Bond: When you field Ashe and Tryndamere, your strongest copies permanently increase their power on kill.",
+        "mana": {
+          "start": "20",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "550/990/1782",
+        "attack_damage": "53/80/119",
+        "attack_speed": "0.70",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 8,
+      "slug": "aurelionsol",
+      "name": "Aurelion Sol",
+      "cost": 7,
+      "synergies": [
+        "Star Forger",
+        "Targon"
+      ],
+      "ability": {
+        "name": "The Skies Descend",
+        "description": "Passive: After dealing ability damage to an enemy, gain Stardust. Stardust makes The Skies Descend more powerful. (Current Stardust: @TFTUnitProperty.:TFT16_AurelionSol_Stardust@)\n\nActive: Crash a star on target, dealing [400/600/5000](AP) magic damage in a 2 hex radius.\n\nStardust Upgrades:\n15: Create a shockwave that deals [50/75/1000](AP) additional magic damage in a 3 Hex radius.\n60: The star crash deals 12% more damage.\n100: Shockwave increases to a 4 hex radius.\n175: Knock up targets in the star crash for 2 seconds.\n250: Shockwave increases to 10 radius.\n400: The star crash deals 25% bonus true damage.\n600: Also call down a meteor storm that deals [1000/1500/9999](AP) magic damage split between living enemies.\n1199: Summon a black hole at the epicenter, instantly killing enemies within.",
+        "mana": {
+          "start": "20",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.80",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "4"
+      },
+      "unlock": "Field Targon 5 in Combat",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 9,
+      "slug": "azir",
+      "name": "Azir",
+      "cost": 5,
+      "synergies": [
+        "Shurima",
+        "Emperor",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Arise!",
+        "description": "Passive: After witnessing 3 attacks from Azir, Sand Soldiers deal [100/150/3000](AP) magic damage to their target.\n\nActive: Summon a Sand Soldier near target and command them to strike. If 2 Soldiers are already out, they all immediately deal [70/105/1500](AP) magic damage instead.",
+        "mana": {
+          "start": "20",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Marksman"
+    },
+    {
+      "id": 10,
+      "slug": "bard",
+      "name": "Bard",
+      "cost": 2,
+      "synergies": [
+        "Caretaker"
+      ],
+      "ability": {
+        "name": "Traveler's Call",
+        "description": "Launch 6 Meeps at nearby enemies that deal [105/160/240](AP) magic damage. Add an additional Meep for each 3-star unit on your board. (Total Meeps: @TFT16_Bard_Num3Stars@)",
+        "mana": {
+          "start": "0",
+          "max": "55"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "unlock": "Reroll 4 times before Stage 2 Carousel",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 11,
+      "slug": "baronnashor",
+      "name": "Baron Nashor",
+      "cost": 7,
+      "synergies": [
+        "Void",
+        "Riftscourge"
+      ],
+      "ability": {
+        "name": "Wrath of the Void",
+        "description": "Passive: Immune to Crowd Control effects. Attacks deal damage in a line on target. If no enemies are in range, dash to the next one and knock up adjacent enemies on arrival.\n\nWhile in the Void Rift, erupt a tentacle below a random enemy every 3/3/0.25 seconds that knocks them up for 1.5 seconds.\n\nActive: Slam and erect spikes in a 2 hex circle, dealing [280/420/20500](AD + AP) physical damage to enemies hit. Then over 3 seconds, spit 10 globs of acid that deal [140/210/10250](AD + AP) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "3000/5400/9720",
+        "attack_damage": "120/180/270",
+        "attack_speed": "0.50",
+        "armor": "85",
+        "magic_resist": "85",
+        "range": "2"
+      },
+      "unlock": "Level 10 + Void 7",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 12,
+      "slug": "belveth",
+      "name": "Bel'Veth",
+      "cost": 4,
+      "synergies": [
+        "Void",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "Endless Banquet",
+        "description": "Passive: On takedown, gain [100/100/200]% stacking Attack Speed that decays over 3 seconds.\n\nActive: Deal [150/225/900](AD) physical damage in a 2 hex radius and transform for the rest of combat.\n\nWhile transformed, gain [33/33/133]%(AP) Attack Speed, 33% max Health, and increased Move Speed. Attacks deal [15/25/100] bonus true damage, increased by [3/5/25] for each time the same enemy is hit.",
+        "mana": {
+          "start": "0",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "1000/1800/3240",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.85",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "2"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 13,
+      "slug": "blitzcrank",
+      "name": "Blitzcrank",
+      "cost": 1,
+      "synergies": [
+        "zaun",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Static Field",
+        "description": "Gain [325/400/500](AP) Shield for 4 seconds and deal [56/84/126](MR) magic damage to all enemies within 1 hex.",
+        "mana": {
+          "start": "60",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.55",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 14,
+      "slug": "braum",
+      "name": "Braum",
+      "cost": 4,
+      "synergies": [
+        "Freljord",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Unbreakable Frost",
+        "description": "Raise shield for 4 seconds, gaining [55/55/90]%(AP) Durability and redirecting projectiles to towards Braum instead. When hit, deal [27/43/1180](Armor + AP) magic damage to nearby enemies and 30% Chill them for 2 seconds.",
+        "mana": {
+          "start": "60",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 15,
+      "slug": "briar",
+      "name": "Briar",
+      "cost": 1,
+      "synergies": [
+        "Noxus",
+        "Slayer",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Blood Frenzy",
+        "description": "Leap to the furthest enemy within 3 hexes. For 4 seconds gain increased Move Speed, 25% Attack Damage, and [300](AP)% decaying Attack Speed.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.75",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Attack Assassin"
+    },
+    {
+      "id": 16,
+      "slug": "brock",
+      "name": "Brock",
+      "cost": 7,
+      "synergies": [
+        "Ixtal"
+      ],
+      "ability": {
+        "name": "Seismic Slam",
+        "description": "Passive: Immune to crowd control effects. Attacks briefly knock up the target and deal 50% damage in a 1 hex radius around them.\n\nActive: Slam the ground, dealing [190/272/1630](Health + AD) physical damage to ALL enemies, reduced by 15% for each hex from the center (down to 40%.) If this is the first time they've been hit by Seismic Slam this combat, knock them up for up to 1.75 seconds. [12/12/99] rocks fall around the battlefield, each dealing [270/405/700](AD + AP) physical damage to enemies hit.",
+        "mana": {
+          "start": "40",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "2000/3600/6480",
+        "attack_damage": "300/450/675",
+        "attack_speed": "0.50",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "Collect 500 Ixtal Clues total",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 17,
+      "slug": "caitlyn",
+      "name": "Caitlyn",
+      "cost": 1,
+      "synergies": [
+        "Piltover",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Ace in the Hole",
+        "description": "Fire a bullet towards the farthest enemy, dealing [515/775/1205](AD + AP) physical damage to the first enemy it hits. If they die, the bullet ricochets, dealing excess damage to the next enemy hit.",
+        "mana": {
+          "start": "0",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "500/900/1620",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.70",
+        "armor": "15",
+        "magic_resist": "15",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 18,
+      "slug": "chogath",
+      "name": "Cho'Gath",
+      "cost": 2,
+      "synergies": [
+        "Void",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Rupture",
+        "description": "Restore [180/200/250](AP) Health and rupture a 2 hex circle beneath target. After a brief delay, enemies within are knocked up for 1.5 seconds and take [88/152/248](Health + AP) magic damage.",
+        "mana": {
+          "start": "40",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 19,
+      "slug": "darius",
+      "name": "Darius",
+      "cost": 3,
+      "synergies": [
+        "Noxus",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Decimate",
+        "description": "Restore [250/352/512](Health + AP) Health and spin, dealing [90/135/210](AD) physical damage to adjacent enemies and applying a stack of Hemorrhage that deals [15/25/40](AD) physical damage each second for 4 seconds.\n\nIf an enemy with Hemorrhage drops below 8% Health, slam on them, instantly killing them. (Each stack increases the execute threshold by 5%)",
+        "mana": {
+          "start": "15",
+          "max": "75"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.65",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "unlock": "Have Draven drop 1 gold",
+      "role": "Attack Tank"
+    },
+    {
+      "id": 20,
+      "slug": "diana",
+      "name": "Diana",
+      "cost": 4,
+      "synergies": [
+        "Targon"
+      ],
+      "ability": {
+        "name": "Lunar Rush",
+        "description": "Passive: Ability damage from your strongest Leona and strongest Diana marks enemies as Moonlit, reducing their damage by 10%.\n\nActive: Gain [200/250/300](AP) Shield for 2 seconds. Unleash a bolt of lunar energy at the farthest non-Moonlit enemy within 4 hexes, dealing [165/250/500](AP) magic damage. Then, dash to all Moonlit enemies, dealing [150/225/1250](AP) magic damage to them.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "1300/2340/4212",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.90",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Field a 2-star Leona with 3 items in combat",
+      "role": "Magic Assassin"
+    },
+    {
+      "id": 21,
+      "slug": "drmundo",
+      "name": "Dr. Mundo",
+      "cost": 3,
+      "synergies": [
+        "zaun",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Maximum Dosage",
+        "description": "Bulk up for 5 seconds. While bulked, restore [114/177/275](Health + AP) Health every second and attacks deal [105/171/291](Health + AD) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "role": "Attack Tank"
+    },
+    {
+      "id": 22,
+      "slug": "draven",
+      "name": "Draven",
+      "cost": 3,
+      "synergies": [
+        "Noxus",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Spinning Axes",
+        "description": "Passive: If Draven has an empowered axe in hand, his next attack will throw it. On takedown, gain an Adoration stack, doubled if Draven or Darius scored the kill. Every 11 Adoration stacks grants [1/3/5] Gold.\n\nActive: Spin an empowered axe that replaces his basic attack and deals [150/225/375](AD + AP) physical damage and returns to Draven after hitting an enemy.",
+        "mana": {
+          "start": "60",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.75",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 23,
+      "slug": "ekko",
+      "name": "Ekko",
+      "cost": 2,
+      "synergies": [
+        "Zaun",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Parallel Convergence",
+        "description": "Create a 1 hex zone around the target that lasts 3 seconds. The next 3 attacks deal [115/175/260](AP) bonus magic damage.\n\nWhen the zone ends, it deals [130/195/295](AP) magic damage + 10% of the target's damage taken during the duration to all enemies in the zone.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.85",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 24,
+      "slug": "fiddlesticks",
+      "name": "Fiddlesticks",
+      "cost": 5,
+      "synergies": [
+        "Harvester",
+        "Vanquisher"
+      ],
+      "ability": {
+        "name": "Crowstorm",
+        "description": "Teleport into the largest cluster of enemies and Stun them for [1.75/1.75/99] seconds. Begin losing 20 mana per second. While casting, deal [95/140/6666](AP) magic damage per second to all enemies within a 2 hex radius. The closest 2 enemies take 33% more damage.",
+        "mana": {
+          "start": "40",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "2"
+      },
+      "role": "Magic Assassin"
+    },
+    {
+      "id": 25,
+      "slug": "fizz",
+      "name": "Fizz",
+      "cost": 4,
+      "synergies": [
+        "Bilgewater",
+        "Yordle"
+      ],
+      "ability": {
+        "name": "Playful Trickster",
+        "description": "Become briefly untargetable, then jump to the farthest enemy within 4 hexes and deal [75/115/300](AP) magic damage to adjacent enemies. For the next 4 attacks, gain 50% Attack Speed and deal [70/105/450](AP) bonus magic damage on hit.",
+        "mana": {
+          "start": "0",
+          "max": "20"
+        }
+      },
+      "base_stats": {
+        "health": "1000/1800/3240",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.90",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "unlock": "Field 5 Yordles or Bilgewater units + Level 7",
+      "role": "Magic Assassin"
+    },
+    {
+      "id": 26,
+      "slug": "galio",
+      "name": "Galio",
+      "cost": 5,
+      "synergies": [
+        "Demacia",
+        "Heroic"
+      ],
+      "ability": {
+        "name": "Inspirational Might",
+        "description": "Passive: Every 3rd attack deals [247/371/5850](MR) magic damage in a circle around the target.\n\nActive: Dash into the largest group of units and inspire all allies within 2 hexes, granting them [500/600/2000](AP) Shield for 4 seconds. Then crash down, dealing [293/439/3250](MR) bonus magic damage to all enemies with 2 hexes.",
+        "mana": {
+          "start": "90",
+          "max": "140"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.90",
+        "armor": "65",
+        "magic_resist": "65",
+        "range": "1"
+      },
+      "unlock": "12 star levels of Demacia",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 27,
+      "slug": "gangplank",
+      "name": "Gangplank",
+      "cost": 3,
+      "synergies": [
+        "Bilgewater",
+        "Slayer",
+        "Vanquisher"
+      ],
+      "ability": {
+        "name": "Powder Kegs",
+        "description": "Toss barrels at the 3 nearest enemies and detonate them. They deal [200/300/475](AD + AP) damage, reduced by 20% for each barrel in the chain. Barrels reduce their target's Armor by 10, increased to 30 if the damage critically strikes.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.80",
+        "armor": "55",
+        "magic_resist": "55",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 28,
+      "slug": "garen",
+      "name": "Garen",
+      "cost": 4,
+      "synergies": [
+        "Demacia",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Judgment",
+        "description": "Spin for 3 seconds, gaining [50/50/90]% Durability and healing for [420/566/1389](Health + AP) over the duration. Each second, deal [100/150/1700](AD) physical damage to adjacent enemies and reduce their Armor and Magic Resistance by 5.",
+        "mana": {
+          "start": "50",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.60",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Attack Tank"
+    },
+    {
+      "id": 29,
+      "slug": "graves",
+      "name": "Graves",
+      "cost": 2,
+      "synergies": [
+        "Bilgewater",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Collateral Damage",
+        "description": "Passive: Attacks fire in a cone on target, dealing 45% damage to other enemies hit.\n\nActive: Fire an explosive shell at target, dealing [190/285/430](AD) physical damage split among enemies in a 1 hex circle.\n\nPartners in Crime: When you field Graves and Twisted Fate, both gain bonuses.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "55/83/124",
+        "attack_speed": "0.70",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "2"
+      },
+      "unlock": "Field a Twisted Fate with 2 items in combat",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 30,
+      "slug": "gwen",
+      "name": "Gwen",
+      "cost": 3,
+      "synergies": [
+        "Shadow Isles",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Snip Snip!",
+        "description": "Dash around target and snip [5](Souls) times, dealing [45/68/105](AP) magic damage to them and [20/30/50](AP) damage to all other enemies in a cone.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "40/60/90",
+        "attack_speed": "0.80",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "2"
+      },
+      "unlock": "Collect 20 Souls",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 31,
+      "slug": "illaoi",
+      "name": "Illaoi",
+      "cost": 1,
+      "synergies": [
+        "Bilgewater",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Tentacle Smash",
+        "description": "Restore [249/328/439](Health + AP) Health and slam a tentacle, dealing [180/270/405](AD) physical damage to enemies in a line.",
+        "mana": {
+          "start": "40",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Attack Tank"
+    },
+    {
+      "id": 32,
+      "slug": "jarvaniv",
+      "name": "Jarvan IV",
+      "cost": 1,
+      "synergies": [
+        "Demacia",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Demacian Standard",
+        "description": "Gain [350/425/500](AP) Shield for 4 seconds. Grant all allies [15/20/33]%(AP) Attack Speed for 4 seconds.",
+        "mana": {
+          "start": "30",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "55/83/124",
+        "attack_speed": "0.60",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 33,
+      "slug": "jhin",
+      "name": "Jhin",
+      "cost": 1,
+      "synergies": [
+        "Ionia",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Curtain Call",
+        "description": "For the next 4 attacks, gain infinite range and replace attacks with a cannon shot. Cannon shots deal [140/212/314](AD + AP) physical damage. The 4th shot deals 144% more damage.",
+        "mana": {
+          "start": "0",
+          "max": "70"
+        }
+      },
+      "base_stats": {
+        "health": "444/799/1439",
+        "attack_damage": "48/72/108",
+        "attack_speed": "0.70",
+        "armor": "24",
+        "magic_resist": "24",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 34,
+      "slug": "jinx",
+      "name": "Jinx",
+      "cost": 3,
+      "synergies": [
+        "Zaun",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Switcheroo!",
+        "description": "Passive: After attacking [18/18/16] times, switch to Fishbones. While equipped, attacks are replaced with 3 rockets that target random enemies and deal [40/60/101](AD) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "18"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.75",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Attack Specialist"
+    },
+    {
+      "id": 35,
+      "slug": "kaisa",
+      "name": "Kai'Sa",
+      "cost": 4,
+      "synergies": [
+        "Assimilator",
+        "Void",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Icathian Rain",
+        "description": "Dash away from all enemies, then fire [15/15/25] missiles split across the 4 nearest enemies. Each missile deals [44/66/140](AD + AP) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "10"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.50",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "Field a Longshot with 3 items in combat + Level 8",
+      "role": "Attack Caster"
+    },
+    {
+      "id": 36,
+      "slug": "kalista",
+      "name": "Kalista",
+      "cost": 4,
+      "synergies": [
+        "Shadow Isles",
+        "Vanquisher"
+      ],
+      "ability": {
+        "name": "Endless Rend",
+        "description": "Summon [20](Souls) spears split among the 3 nearest enemies. After a brief delay, they each impale their target, dealing [30/45/465](AD + AP) physical damage and reducing Armor by 1.",
+        "mana": {
+          "start": "20",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "Collect 75 Souls",
+      "role": "Attack Caster"
+    },
+    {
+      "id": 37,
+      "slug": "kennen",
+      "name": "Kennen",
+      "cost": 3,
+      "synergies": [
+        "Ionia",
+        "Yordle",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Slicing Maelstrom",
+        "description": "Gain [600/700/900](AP) Shield and summon storm of lightning. 6 waves of bolts hit enemies within, dealing [120/180/290](AP) magic damage over 3 seconds. The first 3 targets to be struck by 3 bolts are Stunned for 1.5 seconds. Multiple Stuns on the same enemy have 50% effectiveness.",
+        "mana": {
+          "start": "70",
+          "max": "125"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.65",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "unlock": "8 star levels of Ionia, Yordle, or Defender",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 38,
+      "slug": "kindred",
+      "name": "Kindred",
+      "cost": 5,
+      "synergies": [
+        "Eternal",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Lamb's Respite",
+        "description": "Dash, then create a 2-hex radius zone for [2.5/2.5/99] seconds that prevents allies within from dying. While active, double current Attack Speed and on attack, fire a secondary arrow at a nearby enemy that deals [25/38/999](AD) physical damage.\n\nWhen the zone ends, heal all allies for [8]%(AP) of damage dealt while it was up and dash away.",
+        "mana": {
+          "start": "80",
+          "max": "200"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "73/110/164",
+        "attack_speed": "0.90",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 39,
+      "slug": "kobukoyuumi",
+      "name": "Kobuko & Yuumi",
+      "cost": 3,
+      "synergies": [
+        "Yordle",
+        "Bruiser",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "You & Me!",
+        "description": "Passive: Yuumi joins your strongest Kobuko. Every 3 seconds, she alternates between healing the lowest Health ally for [140/180/240](AP) Health or granting [25/33/50]% Attack Speed to the ally who has dealt the most damage for 4 seconds.\n\nActive: Dance, restoring [176/277/446](Health + AP) Health over 3 seconds.",
+        "mana": {
+          "start": "30",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "950/1710/3078",
+        "attack_damage": "20/30/45",
+        "attack_speed": "0.65",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "unlock": "6 star levels of Brawler, Yordle, or Invoker",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 40,
+      "slug": "kogmaw",
+      "name": "Kog'Maw",
+      "cost": 1,
+      "synergies": [
+        "Void",
+        "Sorcerer",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Caustic Spittle",
+        "description": "Deal [140/200/300](AP) magic damage to target and reduce their Armor and Magic Resist by [8/10/15]. Adjacent enemies are dealt 50% of the damage and effect.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "500/900/1620",
+        "attack_damage": "20/30/45",
+        "attack_speed": "0.70",
+        "armor": "15",
+        "magic_resist": "15",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 41,
+      "slug": "leblanc",
+      "name": "LeBlanc",
+      "cost": 3,
+      "synergies": [
+        "Noxus",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Distortions",
+        "description": "Summon 3 dashing mirror images that strike the target and up to 2 other nearby enemies. The target takes [250/375/580](AP) magic damage and is Stunned for 1 second, while other units hit take [140/210/325](AP) magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.75",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "unlock": "Field a Sion with 2 items in combat",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 42,
+      "slug": "leona",
+      "name": "Leona",
+      "cost": 3,
+      "synergies": [
+        "Targon"
+      ],
+      "ability": {
+        "name": "Solar Flare",
+        "description": "Passive: Reduce instances of incoming damage by [15/40/80](AP).\n\nActive: Call down sun beams on the 3 nearest enemies, Stunning them for 1 second and dealing [90/130/220](AP) magic damage. Wound and 1% Burn them for 4 seconds.",
+        "mana": {
+          "start": "70",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "1000/1800/3240",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.65",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 43,
+      "slug": "lissandra",
+      "name": "Lissandra",
+      "cost": 4,
+      "synergies": [
+        "Freljord",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Frozen Tomb",
+        "description": "Encase target in ice, Stunning them for 1 second and dealing [275/415/2500](AP) magic damage. All enemies within 2 hexes of them split [415/625/2800](AP) magic damage. If the target dies, shards fly out and split excess damage between the 2 nearest enemies.\n\nChilled enemies take 12% more damage from this ability.",
+        "mana": {
+          "start": "0",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 44,
+      "slug": "loris",
+      "name": "Loris",
+      "cost": 3,
+      "synergies": [
+        "Piltover",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Piltover Tussle",
+        "description": "Gain [700/800/1000](AP) Shield for 4 seconds. Charge and knock the target backwards, Stunning them and units hit for 1.25 seconds and dealing [150/225/360](AP) magic damage to them. After charging, force nearby enemies to target this unit.",
+        "mana": {
+          "start": "70",
+          "max": "140"
+        }
+      },
+      "base_stats": {
+        "health": "950/1710/3078",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.60",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 45,
+      "slug": "luciansenna",
+      "name": "Lucian & Senna",
+      "cost": 5,
+      "synergies": [
+        "Soulbound",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "The Culling",
+        "description": "Fire [12/12/42](AS) shots towards target. Each shot explodes on the first enemy hit, dealing [98/147/900](AD + AP) physical damage to all nearby enemies. If an enemy is afflicted with Black Mist, purify them, immediately draining their Armor for the total amount.",
+        "mana": {
+          "start": "0",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.80",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "4"
+      },
+      "role": "Attack Caster"
+    },
+    {
+      "id": 46,
+      "slug": "lulu",
+      "name": "Lulu",
+      "cost": 1,
+      "synergies": [
+        "Yordle",
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Whimsy",
+        "description": "Deal [280/420/630](AP) magic damage to target and make them dance for 2 seconds. The projectile then bounces to the nearest target, dealing [120/180/270](AP) magic damage.",
+        "mana": {
+          "start": "20",
+          "max": "70"
+        }
+      },
+      "base_stats": {
+        "health": "500/900/1620",
+        "attack_damage": "25/38/56",
+        "attack_speed": "0.70",
+        "armor": "15",
+        "magic_resist": "15",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 47,
+      "slug": "lux",
+      "name": "Lux",
+      "cost": 4,
+      "synergies": [
+        "Demacia",
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Final Spark",
+        "description": "Fire a ball of light at the most enemies, dealing [30/45/100](AP) magic damage to the first 2 enemies hit and Rooting them for 1 second. Then fire a beam, dealing [290/435/1500](AP) magic damage to enemies hit by the ball and [90/135/800](AP) magic damage to all other enemies hit.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 48,
+      "slug": "malzahar",
+      "name": "Malzahar",
+      "cost": 3,
+      "synergies": [
+        "Void",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Void Swarm",
+        "description": "Summon 2 Voidlings that each attack a nearby enemy 10 times. Each attack deals [30/45/80](AP) magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 49,
+      "slug": "mel",
+      "name": "Mel",
+      "cost": 5,
+      "synergies": [
+        "Noxus",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Radiant Eclipse",
+        "description": "Passive: While gaining Mana, throw out [2/2/9] radiant orbs that orbit around target. They deal [40/60/90](AP) magic damage in a 1 hex radius and drain 1 Mana from enemies hit each second. After draining 250/250/10 mana, gain a random Radiant Item. (@TFTUnitProperty.:TFT16_Mel_ManaSpent@/250/250/10)\n\nActive: Detonate orbs on target, causing a 3 hex radius explosion that deals [1000/1500/10000](AP) magic damage to them and [500/750/10000](AP) damage to all other enemies hit.",
+        "mana": {
+          "start": "0",
+          "max": "200"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "2-star Ambessa with 1 item dies",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 50,
+      "slug": "milio",
+      "name": "Milio",
+      "cost": 3,
+      "synergies": [
+        "Ixtal",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Ultra Mega Fire Kick!!!",
+        "description": "Launch a fuemigo at target that bounces 3 times, dealing [180/270/420](AP) magic damage to enemies hit. The last bounce deals [160/240/375](AP) magic damage to enemies in a 1 hex radius.",
+        "mana": {
+          "start": "0",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 51,
+      "slug": "missfortune",
+      "name": "Miss Fortune",
+      "cost": 4,
+      "synergies": [
+        "Bilgewater",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Heartbreaker",
+        "description": "Passive: Attacks ricochet to the highest current Health enemy, dealing 50% damage.\n\nActive: Fire waves of bullets that land on the 2 nearest enemies. The first wave deals [130/200/670](AD + AP) physical damage and the rest deal [85/130/436](AD + AP) physical damage. Every 3rd cast, increase the number of waves by 1.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Attack Caster"
+    },
+    {
+      "id": 52,
+      "slug": "nasus",
+      "name": "Nasus",
+      "cost": 4,
+      "synergies": [
+        "Shurima"
+      ],
+      "ability": {
+        "name": "Fury of the Sands",
+        "description": "Steal [485/620/3000](AP) Health split between the [4/4/8] nearest enemies. For 8 seconds, gain 30 Armor and Magic Resist and deal [23/41/583](Health) magic damage to adjacent enemies each second.",
+        "mana": {
+          "start": "0",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "1500/2700/4860",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.65",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Lost 2/3/4 combats with Azir",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 53,
+      "slug": "nautilus",
+      "name": "Nautilus",
+      "cost": 3,
+      "synergies": [
+        "Bilgewater",
+        "Juggernaut",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Titan's Wrath",
+        "description": "Passive: Every 4 seconds and on cast, the next attack deals damage in a 1 hex circle and deals [45/68/108](MR) bonus magic damage.\n\nActive: Gain [465/562/717](Health + AP) Shield for 4 seconds.",
+        "mana": {
+          "start": "60",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 54,
+      "slug": "neeko",
+      "name": "Neeko",
+      "cost": 2,
+      "synergies": [
+        "Ixtal",
+        "Sorcerer",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Pop Blossom",
+        "description": "Leap at target and gain [400/500/600](AP) Shield for 4 seconds. Slam down after a brief delay, dealing [150/225/350](AP) magic damage to enemies within two hexes and 20% Chilling them for 3 seconds.",
+        "mana": {
+          "start": "30",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.60",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 55,
+      "slug": "nidalee",
+      "name": "Nidalee",
+      "cost": 4,
+      "synergies": [
+        "Ixtal",
+        "Huntress"
+      ],
+      "ability": {
+        "name": "Relentless Pounce",
+        "description": "Jump on an adjacent enemy with the lowest health, then deal [300/450/1400](AP) magic damage to them and [100/150/600](AP) magic damage to adjacent enemies. If any die, cast again, dealing 70% damage.\n\nTanks take 50% more damage from this ability and Fighters take 25% more.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.90",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Field two 2-star Neekos in combat together",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 56,
+      "slug": "orianna",
+      "name": "Orianna",
+      "cost": 2,
+      "synergies": [
+        "Piltover",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Command: Protect",
+        "description": "Send the Ball to target, dealing [220/330/500](AP) magic damage and splitting [100/150/250](AP) magic damage among enemies within a 1 hex circle.\n\nThen grant [80/120/200](AP) Shield to the two lowest Health allies for 3 seconds.",
+        "mana": {
+          "start": "20",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "550/990/1782",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.70",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "unlock": "3 Piltover or higher",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 57,
+      "slug": "ornn",
+      "name": "Ornn",
+      "cost": 5,
+      "synergies": [
+        "Blacksmith",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Call of the Forge",
+        "description": "Summon an elemental from behind the farthest enemy. It 20% Chills enemies hit for 3 seconds and deals [100/150/3000](AP) magic damage to them.\n\nWhen it arrives, headbutt it and redirect it toward another distant enemy, dealing [150/225/4500](AP) magic damage instead.",
+        "mana": {
+          "start": "50",
+          "max": "150"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.55",
+        "armor": "55",
+        "magic_resist": "55",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 58,
+      "slug": "poppy",
+      "name": "Poppy",
+      "cost": 2,
+      "synergies": [
+        "Demacia",
+        "Yordle",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Hammer Shock",
+        "description": "Gain [330/410/500](AP) Shield for 4 seconds and deal [70/105/165](AD) physical damage to target. After a delay, briefly knock them up and deal the damage again. Bucklers fly out from the target, granting 2 nearby allies 30% of the Shield gained.",
+        "mana": {
+          "start": "40",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.70",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "unlock": "Field a Demacian or Yordle with 2 items in combat.",
+      "role": "Attack Tank"
+    },
+    {
+      "id": 59,
+      "slug": "qiyana",
+      "name": "Qiyana",
+      "cost": 1,
+      "synergies": [
+        "Ixtal",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "Clear The Brush",
+        "description": "Dash to a nearby hex and swing forward, dealing [160/240/360](AD + AP) physical damage to enemies in a 2-hex line.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.75",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 60,
+      "slug": "reksai",
+      "name": "Rek'Sai",
+      "cost": 2,
+      "synergies": [
+        "Void",
+        "Vanquisher"
+      ],
+      "ability": {
+        "name": "Burrow",
+        "description": "Dash to the furthest enemy within 3 hexes and deal [160/240/360](AD + AP) physical damage to them. The next 3 attacks hit adjacent enemies and deal [110/165/260](AD) physical damage.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.80",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Attack Assassin"
+    },
+    {
+      "id": 61,
+      "slug": "renekton",
+      "name": "Renekton",
+      "cost": 4,
+      "synergies": [
+        "Shurima"
+      ],
+      "ability": {
+        "name": "Slice and Dice",
+        "description": "Dash to the farthest enemy within 2 hexes, dealing [80/120/360](AD) physical damage to all enemies in the path. Then slash 4 times, each dealing [60/95/600](AD + AP) physical damage. Subsequent casts increase the number of slashes by 1.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "1400/2520/4536",
+        "attack_damage": "75/113/169",
+        "attack_speed": "0.90",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Win 2/3/4 combats with Azir",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 62,
+      "slug": "riftherald",
+      "name": "Rift Herald",
+      "cost": 4,
+      "synergies": [
+        "Void",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Warp Armor",
+        "description": "Gain [350/450/1350] max Health and grow larger. Slam in a 2 Hex circle on the target, dealing [172/280/1733](AP + Health) magic damage to enemies hit. For 4 seconds, gain [30/30/80]%(AP) Durability + 1% for each enemy targeting this unit.",
+        "mana": {
+          "start": "60",
+          "max": "125"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.60",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "Have Void active for 8 player combats",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 63,
+      "slug": "rumble",
+      "name": "Rumble",
+      "cost": 1,
+      "synergies": [
+        "Yordle",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Junkyard Titan",
+        "description": "Gain [325/400/500](AP) Shield for 4 seconds. Fire a burst of flames, dealing [72/108/162](Armor) magic damage in a cone.",
+        "mana": {
+          "start": "40",
+          "max": "110"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.60",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 64,
+      "slug": "ryze",
+      "name": "Ryze",
+      "cost": 7,
+      "synergies": [
+        "Rune Mage"
+      ],
+      "ability": {
+        "name": "Runic Overload",
+        "description": "Release a runic blast, dealing [280/420/1500](AP) magic damage. It splits in two, dealing 33% of the damage to the closest two enemies. Each secondary blast splits an additional time.\n\nBilgewater: Blasts explode on impact, dealing 20% of the damage as physical damage to adjacent enemies.\nDemacia: Execute targets below [15]%(Armor/MR) Health.\nFreljord: Chill targets for 4 seconds and deal [55/99/178](Health) bonus true damage.\nIonia: Blasts split an additional time.\nIxtal: Gain a random Region's effect on combat start and every 10 seconds.\nNoxus: Blasts now pierce targets, dealing 60% reduced damage per enemy hit.\nPiltover: Every third cast is Overcharged, dealing 40% more damage.\nShadow Isles: Increase blast damage by [5]%(Souls).\nTargon: Heal the lowest Health ally for 10% of the damage dealt.\nVoid: Ignore 30% of enemies' Armor and Magic Resistance.\nYordle: Shrink targets hit, lowering their damage by 12% percent for 4 seconds.\nZaun: Poison targets, dealing [20/30/500] magic damage [3.1/3.1/3.5](AS) times over 4 seconds.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.85",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "4"
+      },
+      "unlock": "Field 4 region traits together in combat",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 65,
+      "slug": "sejuani",
+      "name": "Sejuani",
+      "cost": 3,
+      "synergies": [
+        "Freljord",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Winter's Wrath",
+        "description": "Gain [475/525/625](AP) Shield for 4 seconds. Strike in a cone and a line. Enemies hit take [70/105/170](AP) magic damage and are 30% Chilled for 4 seconds. If they are already Chilled, Stun them for 1 second.",
+        "mana": {
+          "start": "40",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.60",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 66,
+      "slug": "seraphine",
+      "name": "Seraphine",
+      "cost": 4,
+      "synergies": [
+        "Piltover",
+        "Disruptor"
+      ],
+      "ability": {
+        "name": "Grand Encore",
+        "description": "Gain 3 notes. For each one active, deal [25/40/200](AP) magic damage to a nearby enemy.\n\nWhile holding 12 notes on cast, consume them to project a wave of energy. Allies hit restore [60/90/400](AP) Health. Enemies hit take [270/405/2200](AP) magic damage, reduced by 30% for each enemy it's passed through.",
+        "mana": {
+          "start": "0",
+          "max": "20"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 67,
+      "slug": "sett",
+      "name": "Sett",
+      "cost": 5,
+      "synergies": [
+        "Ionia",
+        "The Boss"
+      ],
+      "ability": {
+        "name": "The Show Stopper",
+        "description": "Grab target and slam them forward, dealing [220/330/9999](AP) + [8/12/900]%(AP) of their max Health as magic damage to them. All other enemies within 3 hexes take 50% of the total damage.",
+        "mana": {
+          "start": "10",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "1000/1800/3240",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.90",
+        "armor": "50",
+        "magic_resist": "50",
+        "range": "1"
+      },
+      "unlock": "Level 8 + Field only 1 unit in the first 2 rows of combat",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 68,
+      "slug": "shen",
+      "name": "Shen",
+      "cost": 1,
+      "synergies": [
+        "Ionia",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Stand United",
+        "description": "Grant [250/325/425](AP) Shield to this unit and a nearby damaged ally for 4 seconds.",
+        "mana": {
+          "start": "20",
+          "max": "75"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.65",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 69,
+      "slug": "shyvana",
+      "name": "Shyvana",
+      "cost": 5,
+      "synergies": [
+        "Dragonborn",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Dragon's Descent / Flame Breath",
+        "description": "Dragon's Descent: Transform into a dragon, gaining [600/1000/9999] max Health. Briefly gain [20/20/90]% Durability and dive-bomb into the largest group of enemies, dealing [100/150/3000](AD) physical damage in a 3 hex circle.\n\nFlame Breath: Breath fire in a cone for 3.5 seconds, dealing [170/255/13579](AD + AP) physical damage each second to enemies hit.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "80/120/180",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 70,
+      "slug": "singed",
+      "name": "Singed",
+      "cost": 4,
+      "synergies": [
+        "Zaun",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Poison Trail",
+        "description": "Passive: Run around the battlefield, leaving a poison trail that lingers for 4 seconds. Poison trails deal [25/38/160](AP) magic damage per second to enemies within. Gain [0](AS) Mana each second.\n\nActive: For 4 seconds, gain increased Move Speed, restore [80/100/500](AP) Health each second, and gain 50 Armor and Magic Resistance.",
+        "mana": {
+          "start": "0",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "15/23/34",
+        "attack_speed": "0.70",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "Take 30 damage and 4 Zaunites or Juggernauts",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 71,
+      "slug": "sion",
+      "name": "Sion",
+      "cost": 2,
+      "synergies": [
+        "Noxus",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Soul Furnace",
+        "description": "Passive: Takedowns grant [18/20/60] permanent max Health. (Total: @TFTUnitProperty.:TFT16_Sion_BonusHealth@)\n\nActive: Gain [190/252/361](Health + AP) Shield for 4 seconds. When it breaks, deal [46/82/147](Health) magic damage to adjacent enemies.",
+        "mana": {
+          "start": "0",
+          "max": "70"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.55",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 72,
+      "slug": "skarner",
+      "name": "Skarner",
+      "cost": 4,
+      "synergies": [
+        "Ixtal"
+      ],
+      "ability": {
+        "name": "Impale",
+        "description": "Passive: All allies gain [10/20/100] Armor.\n\nActive: Gain [725/875/3000](AP) Shield for 4 seconds. Impale up to three nearby enemies in a line, dealing [84/126/1750](Armor) physical damage and Stunning them for [2/2.25/8] seconds.",
+        "mana": {
+          "start": "60",
+          "max": "120"
+        }
+      },
+      "base_stats": {
+        "health": "1400/2520/4536",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.65",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Field a non-Tank with a Gargoyle's Stoneplate in combat",
+      "role": "Attack Tank"
+    },
+    {
+      "id": 73,
+      "slug": "sona",
+      "name": "Sona",
+      "cost": 1,
+      "synergies": [
+        "Demacia",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Power Chord",
+        "description": "Deal [120/180/270](AP) magic damage to 2 nearby enemies and restore [40/50/80](AP) Health to the lowest Health ally.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "500/900/1620",
+        "attack_damage": "20/30/45",
+        "attack_speed": "0.70",
+        "armor": "15",
+        "magic_resist": "15",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 74,
+      "slug": "swain",
+      "name": "Swain",
+      "cost": 4,
+      "synergies": [
+        "Noxus",
+        "Sorcerer",
+        "Juggernaut"
+      ],
+      "ability": {
+        "name": "Nevermove",
+        "description": "Passive: Each second, restore [40/56/158](Health + AP) Health and deal [20/30/90](AP) magic damage to enemies within 1 Hex.\n\nActive: Open a demonic eye on the largest group of nearby enemies, dealing [100/150/1800](AP) magic damage and Stunning them for [1.75/2/8] seconds.",
+        "mana": {
+          "start": "50",
+          "max": "145"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "40/60/90",
+        "attack_speed": "0.65",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 75,
+      "slug": "sylas",
+      "name": "Sylas",
+      "cost": 7,
+      "synergies": [
+        "Chainbreaker",
+        "Sorcerer",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Stolen Might",
+        "description": "Cast one of three spells:\n\nCataclysm: Leap on a nearby enemy. Deal [120/180/1000](AP) magic damage to all enemies within 2 hexes and Stun them for [1.5/1.75/30] seconds.\n\nDemacian Justice: Deal [700/1050/99999](AP) magic damage to target. If they are below 15% max Health, execute them.\n\nFinal Spark: Gain [400/450/800](AP) Shield for 2 seconds. Deal [360/540/1000](AP) magic damage to all enemies in a line.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "1600/2880/5184",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.90",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Sell a 2-star Jarvan, a 2-star Garen, and a 2-star Lux",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 76,
+      "slug": "thex",
+      "name": "T-Hex",
+      "cost": 5,
+      "synergies": [
+        "HexMech",
+        "Piltover",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Hextech Arsenal",
+        "description": "Passive: Attacks fire a barrage of 4 bullets.\n\nActive: Gain [580/904/67573](Health) Shield and begin consuming 33 mana per second. Each second while casting, fire a laser that deals [145/215/2150](AD + AP) physical damage, reduced by 15% per enemy hit up to 45%. Additionally, launch [20](AS) missiles split between 4 nearby enemies that each deal [29/43/430](AD + AP) physical damage.",
+        "mana": {
+          "start": "30",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "1400/2520/4536",
+        "attack_damage": "75/113/169",
+        "attack_speed": "0.90",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "2"
+      },
+      "unlock": "9 Piltover star levels",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 77,
+      "slug": "tahmkench",
+      "name": "Tahm Kench",
+      "cost": 5,
+      "synergies": [
+        "Bilgewater",
+        "Glutton",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Devour",
+        "description": "Devour target for 2.5 seconds, dealing [850/1275/30000](AP) magic damage and making them immune to other sources of damage. During this time, gain 30% Durability. If they are immune to crowd control, deal [600/900/20000](AP) magic damage instead.\n\nIf they die while devoured, spit out a random component they were holding or the unit's cost in gold. Otherwise, spit them towards the farthest enemy, briefly Stunning targets on impact.",
+        "mana": {
+          "start": "10",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.55",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "Spend 500 Silver Serpents",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 78,
+      "slug": "taric",
+      "name": "Taric",
+      "cost": 4,
+      "synergies": [
+        "Targon"
+      ],
+      "ability": {
+        "name": "Starlight's Touch",
+        "description": "Passive: All allies gain [10/20/100] Magic Resist. Once per combat after dropping below 35% max Health, gain 90% Durability for 2 seconds.\n\nActive: Gain [600/700/2500](AP) Shield and grant the 2 lowest Health allies [125/150/1000](AP) Shield for 4 seconds. The next [2/2/10] attacks deal [200/300/3000](AP) bonus magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "80"
+        }
+      },
+      "base_stats": {
+        "health": "1300/2340/4212",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.65",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "role": "Magic Tank"
+    },
+    {
+      "id": 79,
+      "slug": "teemo",
+      "name": "Teemo",
+      "cost": 2,
+      "synergies": [
+        "Yordle",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Toxic Dart",
+        "description": "Shoot the closest unpoisoned enemy, dealing [125/185/285](AP) magic damage and poisoning them for 8 seconds. Poisoned enemies take [30/45/70](AP) magic damage each second.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "550/990/1782",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.70",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 80,
+      "slug": "thresh",
+      "name": "Thresh",
+      "cost": 5,
+      "synergies": [
+        "Shadow Isles",
+        "Warden"
+      ],
+      "ability": {
+        "name": "The Box",
+        "description": "Passive: Each second, deal [25/40/400](AP + Souls) magic damage to all enemies within 2 hexes. Heal for 40% of the damage dealt by this effect.\n\nActive: Create a prison of walls in a 2 hex radius that lasts [5/5/60] seconds. While active, the Passive's damage is doubled. When an enemy touches a wall, they take [100/150/4000](AP) magic damage. If there are less than 2 enemies inside The Box at any time, drag an enemy in.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.75",
+        "armor": "70",
+        "magic_resist": "70",
+        "range": "1"
+      },
+      "unlock": "Collect 150 Souls",
+      "role": "Magic Fighter"
+    },
+    {
+      "id": 81,
+      "slug": "tristana",
+      "name": "Tristana",
+      "cost": 2,
+      "synergies": [
+        "Yordle",
+        "Gunslinger"
+      ],
+      "ability": {
+        "name": "Buster Shot",
+        "description": "Fire a massive cannonball at target, dealing [280/420/635](AD + AP) physical damage. If they are within 2 hexes, knock them back 2 hexes and briefly Stun them.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "550/990/1782",
+        "attack_damage": "55/83/124",
+        "attack_speed": "0.75",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Attack Caster"
+    },
+    {
+      "id": 82,
+      "slug": "tryndamere",
+      "name": "Tryndamere",
+      "cost": 2,
+      "synergies": [
+        "Freljord",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "Undying Rage",
+        "description": "Become enraged for 5 seconds. While enraged, gain [25](AP)% Durability and attacks are replaced with a strike that deals [120/180/270](AD) physical damage. Ignore 30% of Armor against Chilled enemies.\n\nBloodsworn Bond: When you field Ashe and Tryndamere, your strongest copies permanently increase their power on kill.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.70",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "unlock": "Field an Ashe with 2 items in combat",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 83,
+      "slug": "twistedfate",
+      "name": "Twisted Fate",
+      "cost": 2,
+      "synergies": [
+        "Bilgewater",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Stacked Deck",
+        "description": "Passive: Attacks deal [30/45/70](AP) bonus magic damage. After every 3rd attack, throw 3 cards in a cone that deal [70/105/160](AP) magic damage, reduced by 50% for each enemy they pass through.\n\nPartners in Crime: When you field Graves and Twisted Fate, both gain bonuses.",
+        "mana": {
+          "start": "0",
+          "max": "3"
+        }
+      },
+      "base_stats": {
+        "health": "550/990/1782",
+        "attack_damage": "0/0/0",
+        "attack_speed": "0.70",
+        "armor": "20",
+        "magic_resist": "20",
+        "range": "4"
+      },
+      "role": "Magic Specialist"
+    },
+    {
+      "id": 84,
+      "slug": "vayne",
+      "name": "Vayne",
+      "cost": 3,
+      "synergies": [
+        "Demacia",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Tumble",
+        "description": "Tumble to a nearby hex, then fire a bolt at target that deals [106/160/245](AD + AP) true damage.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "650/1170/2106",
+        "attack_damage": "70/105/158",
+        "attack_speed": "0.80",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 85,
+      "slug": "veigar",
+      "name": "Veigar",
+      "cost": 4,
+      "synergies": [
+        "Yordle",
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Dark Storm",
+        "description": "Passive: Gain 50% more Ability Power from all sources.\n\nActive: Call down a storm of [12/12/24] meteors across the battlefield that deal [60/90/135](AP) magic damage each. They can innately critically strike. For each one that kills an enemy, permanently gain 1 Ability Power.",
+        "mana": {
+          "start": "0",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "33/50/74",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "Field a unit with 2 Rabadon's Deathcaps in combat",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 86,
+      "slug": "vi",
+      "name": "Vi",
+      "cost": 2,
+      "synergies": [
+        "Piltover",
+        "Zaun",
+        "Defender"
+      ],
+      "ability": {
+        "name": "Relentless Force",
+        "description": "Gain [125/150/175](AP) Shield for 2 seconds. Slam on target, dealing [110/165/250](AD) physical damage to enemies in a 1 hex range. Every third cast deals [140/210/315](AD) damage in a 2 hex range instead and knocks up enemies hit for 1 second.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.80",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 87,
+      "slug": "viego",
+      "name": "Viego",
+      "cost": 1,
+      "synergies": [
+        "Shadow Isles",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Blade of the Ruined King",
+        "description": "Passive: Gain 10%(Souls) Attack Speed. \n\nActive: Deal [55/85/125](AD) physical damage to target. For the rest of combat, Viego's attacks deal [24/36/54](AP) bonus stacking magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "700/1260/2268",
+        "attack_damage": "40/60/90",
+        "attack_speed": "0.75",
+        "armor": "40",
+        "magic_resist": "40",
+        "range": "1"
+      },
+      "role": "Hybrid Fighter"
+    },
+    {
+      "id": 88,
+      "slug": "volibear",
+      "name": "Volibear",
+      "cost": 5,
+      "synergies": [
+        "Freljord",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "The Relentless Storm",
+        "description": "Bite the target and mark them, dealing [136/215/2117](AD + Health) physical damage, increased by 60% if they are already marked. After casting [5/5/2] times, leap to a nearby hex, activating Stormbringer and dealing [272/430/4233](Health + AD) physical damage to enemies within a two hex radius.\n\nStormbringer: Gain [400/550/9999] Health and [50/50/999]% Attack Speed. Every [2/2/0.3] seconds, summon a lightning bolt on a nearby enemy, dealing [98/161/1155](Health + AP) magic damage. Takedowns summon a bolt on fallen enemies.",
+        "mana": {
+          "start": "0",
+          "max": "20"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "55/83/124",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "Level 8 + have a unit with 3800 Health",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 89,
+      "slug": "warwick",
+      "name": "Warwick",
+      "cost": 4,
+      "synergies": [
+        "Zaun",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Eternal Hunger",
+        "description": "Gain [100/100/400]% Attack Speed, 15% Omnivamp, increased Move Speed, and deal [45/70/550](AD) bonus physical damage on attack for the rest of combat. While this effect is active, takedowns grant Warwick, Jinx, and Vi [20/20/50]%(AP) Attack Speed for 3 seconds.",
+        "mana": {
+          "start": "0",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "2-star Jinx & 2-star Vi",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 90,
+      "slug": "wukong",
+      "name": "Wukong",
+      "cost": 4,
+      "synergies": [
+        "Ionia",
+        "Bruiser"
+      ],
+      "ability": {
+        "name": "Diverting Trickster",
+        "description": "Passive: On death, summon a Stone copy with [570/956/3361](Health) Health and Wukong's items.\n\nActive: For 4 seconds, gain [100/110/400](AP) Armor and Magic Resist. Then spin, dealing [150/225/3000](AD) physical damage to all enemies within 2 hexes.",
+        "mana": {
+          "start": "30",
+          "max": "90"
+        }
+      },
+      "base_stats": {
+        "health": "1050/1890/3402",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.65",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "role": "Attack Tank"
+    },
+    {
+      "id": 91,
+      "slug": "xerath",
+      "name": "Xerath",
+      "cost": 5,
+      "synergies": [
+        "Shurima",
+        "Ascendant"
+      ],
+      "ability": {
+        "name": "Eye of the Ascendant",
+        "description": "Launch [10/10/99] arcane blasts randomly split between the closest [4/4/10] enemies that each deal [500/750/2500](AP) magic damage.",
+        "mana": {
+          "start": "0",
+          "max": "135"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "40/60/90",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "Alternate winning and losing 3/4/5 times with Azir",
+      "role": "Magic Caster"
+    },
+    {
+      "id": 92,
+      "slug": "xinzhao",
+      "name": "Xin Zhao",
+      "cost": 2,
+      "synergies": [
+        "Demacia",
+        "Ionia",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Three Talon Strike",
+        "description": "Strike target 3 times. Each strike deals [65/100/150](AD) physical damage and restores [95/135/170](AP) Health. The final one Stuns for 1.5 seconds.",
+        "mana": {
+          "start": "15",
+          "max": "70"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "50/75/113",
+        "attack_speed": "0.65",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Attack Tank"
+    },
+    {
+      "id": 93,
+      "slug": "yasuo",
+      "name": "Yasuo",
+      "cost": 2,
+      "synergies": [
+        "Ionia",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "Sweeping Blade",
+        "description": "Dash, then deal [81/124/189](AD + AP) physical damage to adjacent enemies. If only one enemy is hit, deal double damage.\n\nBlade Brothers: When you field Yasuo and Yone, Yasuo assists Yone's casts.",
+        "mana": {
+          "start": "0",
+          "max": "30"
+        }
+      },
+      "base_stats": {
+        "health": "750/1350/2430",
+        "attack_damage": "45/68/101",
+        "attack_speed": "0.80",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 94,
+      "slug": "yone",
+      "name": "Yone",
+      "cost": 4,
+      "synergies": [
+        "Ionia",
+        "Slayer"
+      ],
+      "ability": {
+        "name": "Kin of the Stained Blade",
+        "description": "Passive: Attacks alternate between dealing [80/120/800](AD) bonus physical damage and [140/210/1400](AP) bonus magic damage.\n\nActive: Strike through the most enemies possible within 3 hexes, knocking them up for 1.5 seconds and dealing [80/120/480](AD + AP) physical damage and [80/120/480](AD + AP) magic damage. Yone then splits [320/480/2160](AD + AP) physical damage and [320/480/2160](AD + AP) magic damage among all enemies hit.\n\nBlade Brothers: When you field Yasuo and Yone, Yasuo assists Yone's casts.",
+        "mana": {
+          "start": "30",
+          "max": "100"
+        }
+      },
+      "base_stats": {
+        "health": "1100/1980/3564",
+        "attack_damage": "20/30/45",
+        "attack_speed": "0.90",
+        "armor": "60",
+        "magic_resist": "60",
+        "range": "1"
+      },
+      "unlock": "3-star Yasuo",
+      "role": "Hybrid Fighter"
+    },
+    {
+      "id": 95,
+      "slug": "yorick",
+      "name": "Yorick",
+      "cost": 2,
+      "synergies": [
+        "Shadow Isles",
+        "Warden"
+      ],
+      "ability": {
+        "name": "Mourning Mist",
+        "description": "Restore [300/340/450](AP + Souls) Health. Throw a globule of black mist at the enemy who has dealt the most damage this combat, preferring unique enemies. It 20% Chills them for 4 seconds and raises the Mana cost of their next cast by 20. It then deals [123/187/288](Health) magic damage in 1 hex radius.",
+        "mana": {
+          "start": "15",
+          "max": "75"
+        }
+      },
+      "base_stats": {
+        "health": "850/1530/2754",
+        "attack_damage": "60/90/135",
+        "attack_speed": "0.60",
+        "armor": "45",
+        "magic_resist": "45",
+        "range": "1"
+      },
+      "unlock": "Field a 2-star Viego with 2 items in combat.",
+      "role": "Magic Tank"
+    },
+    {
+      "id": 96,
+      "slug": "yunara",
+      "name": "Yunara",
+      "cost": 4,
+      "synergies": [
+        "Ionia",
+        "Quickstriker"
+      ],
+      "ability": {
+        "name": "Transcendent State",
+        "description": "For the next 4 seconds, gain [75/75/300]%(AP) Attack Speed, infinite range, and replace attacks with lasers. Lasers deal [85/130/450](AD) physical damage in a line, reduced by 60/60/30% for each enemy they pass through. When lasers critically strike, they deal 33% bonus true damage.",
+        "mana": {
+          "start": "0",
+          "max": "50"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "65/98/146",
+        "attack_speed": "0.75",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Attack Marksman"
+    },
+    {
+      "id": 97,
+      "slug": "zaahen",
+      "name": "Zaahen",
+      "cost": 7,
+      "synergies": [
+        "Darkin",
+        "Immortal"
+      ],
+      "ability": {
+        "name": "Divine Challenge",
+        "description": "Dash around target and slash in a circle, dealing [90/135/1700](AD + AP) physical damage to target and [23/34/425](AD + AP) physical damage to all other adjacent enemies hit. If the target doesn't die, immediately cast again.\n\nIf this Ability is cast 25 times in a row, instead slam on target, instantly killing them and dealing [180/270/3400](AD + AP) physical damage to all enemies within 3 hexes.",
+        "mana": {
+          "start": "0",
+          "max": "40"
+        }
+      },
+      "base_stats": {
+        "health": "1200/2160/3888",
+        "attack_damage": "60/90/135",
+        "attack_speed": "1.00",
+        "armor": "80",
+        "magic_resist": "80",
+        "range": "2"
+      },
+      "unlock": "Get the Xin Zhao Champion Augment + field a 3-star Xin Zhao for 5 rounds",
+      "role": "Attack Fighter"
+    },
+    {
+      "id": 98,
+      "slug": "ziggs",
+      "name": "Ziggs",
+      "cost": 5,
+      "synergies": [
+        "Zaun",
+        "Yordle",
+        "Longshot"
+      ],
+      "ability": {
+        "name": "Mega Inferno Bomb",
+        "description": "Passive: Attacks are replaced with a bomb that bounces 1 time, dealing [30/45/500](AD + AP) magic damage to units hit.\n\nActive: Throw an enormous bomb at the largest 4-hex group of enemies that explodes on impact, dealing between [70/105/3000](AP) and [550/825/7000](AP) magic damage to enemies hit based on their distance from the epicenter.",
+        "mana": {
+          "start": "0",
+          "max": "160"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "0/0/0",
+        "attack_speed": "0.85",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "unlock": "Field a Yordle or Zaunite with 3 items and Level 9",
+      "role": "Magic Marksman"
+    },
+    {
+      "id": 99,
+      "slug": "zilean",
+      "name": "Zilean",
+      "cost": 5,
+      "synergies": [
+        "Chronokeeper",
+        "Invoker"
+      ],
+      "ability": {
+        "name": "Visions of the End",
+        "description": "Throw a Time Bomb on the nearest enemy without one. Time Bombs deal [75/115/1000](AP) magic damage each second. When the target dies, they explode, dealing [150/225/4000](AP) magic damage in a 1 hex radius and grant Zilean 15 mana.\n\nIf a Time Bomb is on an enemy for [18/16/1] seconds and Zilean is alive, the enemy instantly dies.",
+        "mana": {
+          "start": "0",
+          "max": "35"
+        }
+      },
+      "base_stats": {
+        "health": "900/1620/2916",
+        "attack_damage": "40/60/90",
+        "attack_speed": "0.90",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 100,
+      "slug": "zoe",
+      "name": "Zoe",
+      "cost": 3,
+      "synergies": [
+        "Targon"
+      ],
+      "ability": {
+        "name": "Double Trouble Bubble",
+        "description": "Passive: Damaging an enemy applies 30% Shred for 6 seconds.\n\nActive: Kick 2 bubbles at nearby enemies, dealing [330/500/825](AP) magic damage and 30% Chilling them for 3 seconds.",
+        "mana": {
+          "start": "30",
+          "max": "60"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "35/53/79",
+        "attack_speed": "0.80",
+        "armor": "25",
+        "magic_resist": "25",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    },
+    {
+      "id": 101,
+      "slug": "tibbers",
+      "name": "Tibbers",
+      "cost": 5,
+      "synergies": [
+        "Sorcerer"
+      ],
+      "ability": {
+        "name": "Summon: Tibbers",
+        "description": "Passive: If Annie has Tibbers on the board, gain 10% Attack Speed. On cast, Annie heals herself and Tibbers. While Tibbers is on the board, Annie's attacks deal bonus magic damage.\n\nActive: Annie summons Tibbers on the nearest open Hex. Tibbers lasts until Annie dies.",
+        "mana": {
+          "start": "0",
+          "max": "170"
+        }
+      },
+      "base_stats": {
+        "health": "800/1440/2592",
+        "attack_damage": "30/45/68",
+        "attack_speed": "0.80",
+        "armor": "30",
+        "magic_resist": "30",
+        "range": "4"
+      },
+      "role": "Magic Caster"
+    }
+  ],
+  "traits": [
+    {
+      "name": "Ascendant",
+      "unique": true,
+      "effect": "After each combat, an Ascendant Charm appears in your shop. These are powerful effects that can be bought for gold.",
+      "champions": ["Xerath"]
+    },
+    {
+      "name": "Assimilator",
+      "unique": true,
+      "effect": "Kai'Sa has a different Ability depending if her Attack Damage or Ability Power is higher.",
+      "champions": ["Kai'Sa"]
+    },
+    {
+      "name": "Bilgewater",
+      "unique": false,
+      "effect": "Each round, gain Silver Serpents (%i:scaleSerpents%), plus 2 additional for each Bilgewater takedown. Silver Serpents can be spent in the Black Market to grant Bilgewater champions bonus stats and special loot. Higher tiers unlock rarer loot. Current Bonus Stats: 0% Attack Damage, Ability Power, 0% Attack Speed, 0% Health. Current Serpents: 0 %i:scaleSerpents%",
+      "tiers": [
+        {"count": 3, "bonus": "18 %i:scaleSerpents%"},
+        {"count": 5, "bonus": "30 %i:scaleSerpents%, improved loot"},
+        {"count": 7, "bonus": "55 %i:scaleSerpents%, superior loot"},
+        {"count": 10, "bonus": "150 %i:scaleSerpents%, 2x stats, FIRE CANNONS!"}
+      ],
+      "champions": ["Illaoi", "Graves", "Twisted Fate", "Gangplank", "Nautilus", "Fizz", "Miss Fortune", "Tahm Kench"]
+    },
+    {
+      "name": "Blacksmith",
+      "unique": true,
+      "effect": "After each player combat your strongest Ornn participates in, he makes progress forging an Artifact item. Each item he is equipped with grants him 200/400/2000 max Health. Artifacts grant 300% more. Forging Progress: 0/4",
+      "champions": ["Ornn"]
+    },
+    {
+      "name": "Caretaker",
+      "unique": true,
+      "effect": "After winning player combat, gain a random unit from Runeterra. After losing combat, gain free rerolls, with the amount increasing by stage. Rerolls on Loss: 0",
+      "champions": ["Bard"]
+    },
+    {
+      "name": "Chainbreaker",
+      "unique": true,
+      "effect": "Sylas rotates between 3 different Abilities, depending on which one is most useful at the moment. He cannot cast the same one twice in a row.",
+      "champions": ["Sylas"]
+    },
+    {
+      "name": "Chronokeeper",
+      "unique": true,
+      "effect": "Every 2 casts, the Chronokeeper stores 1 XP. If he has enough stored for you to level up, he transfers you the required XP. If you are level 10, he instead gains 15% Damage Amp. Stored XP: 0",
+      "champions": ["Zilean"]
+    },
+    {
+      "name": "Dark Child",
+      "unique": true,
+      "effect": "Annie summons Tibbers on your bench. He can be fielded, takes up a team slot, and can be equipped with items separately. His star level is the same as Annie's.",
+      "champions": ["Annie"]
+    },
+    {
+      "name": "Darkin",
+      "unique": false,
+      "effect": "",
+      "tiers": [
+        {"count": 1, "bonus": "Darkin gain 15% Omnivamp."},
+        {"count": 2, "bonus": "AND you heal for 25% of the player damage you deal."},
+        {"count": 3, "bonus": "AND whenever Darkin restore 100 Health, they deal 100 magic damage to the 2 closest enemies."}
+      ],
+      "champions": ["Aatrox", "Zaahen"]
+    },
+    {
+      "name": "Demacia",
+      "unique": false,
+      "effect": "Each time your team loses 25% max Health, Demacians rally, reducing their Mana cost by 10%. Demacians gain Armor and Magic Resist.",
+      "tiers": [
+      {"count": 3, "bonus": "12 Armor & Magic Resist"},
+      {"count": 5, "bonus": "25 Armor & Magic Resist"},
+      {"count": 7, "bonus": "25 Armor & Magic Resist. On rally, smite enemies for 5% of their max Health."},
+      {"count": 11, "bonus": "150 Armor & Magic Resist. BATTLE FOR DEMACIA!"}
+      ],
+      "champions": ["Jarvan IV", "Sona", "Poppy", "Xin Zhao", "Vayne", "Garen", "Lux", "Galio"]
+    },
+    {
+      "name": "Dragonborn",
+      "unique": true,
+      "effect": "On cast, Shyvana replaces her spell with Flame Breath. While transformed, all allies take 10% less damage from enemy Abilities.",
+      "champions": ["Shyvana"]
+    },
+    {
+      "name": "Emperor",
+      "unique": true,
+      "effect": "Azir deploys two Guards who can be placed anywhere on the battlefield. They do not move or attack, and die when Azir does.",
+      "champions": ["Azir"]
+    },
+    {
+      "name": "Eternal",
+      "unique": true,
+      "effect": "Every 3rd attack from Kindred on the same enemy deals 350% damage, as Wolf mauls their target.",
+      "champions": ["Kindred"]
+    },
+    {
+      "name": "Freljord",
+      "unique": false,
+      "effect": "Summon a Frozen Tower. Allies in front of it gain Health and allies behind it gain Damage Amp. Freljordians gain 150% more.",
+      "tiers": [
+        {"count": 3, "bonus": "8% Health, 10% Damage Amplification"},
+        {"count": 5, "bonus": "Two Towers. 12% Health, 16% Damage Amplification"},
+        {"count": 7, "bonus": "Towers stun enemies on death for 1.5 seconds. 16% Health, 22% Damage Amplification."}
+      ],
+      "champions": ["Anivia", "Ashe", "Tryndamere", "Sejuani", "Braum", "Lissandra", "Volibear"]
+    },
+    {
+      "name": "Glutton",
+      "unique": true,
+      "effect": "Once per Planning phase, you can feed Tahm Kench a champion, permanently granting him either Health, Attack Speed, or Ability Power based on their role and star level. To feed, hold an ally from the bench over Tahm Kench until his mouth opens, then release. Current Stats: 0 Health, 0% Attack Speed, 0% Ability Power",
+      "champions": ["Tahm Kench"]
+    },
+    {
+      "name": "Harvester",
+      "unique": true,
+      "effect": "Each time an enemy champion dies, gain 15 Mana. Casting abilities does not consume Mana. All enemies lose 10 Armor and Magic Resist.",
+      "champions": ["Fiddlesticks"]
+    },
+    {
+      "name": "Heroic",
+      "unique": true,
+      "effect": "Galio cannot be fielded in combat. Instead, his traits count from the bench and when Demacians Rally, he joins the fight. On landing, he creates a 3-hex shockwave that deals 12% of his max Health as magic damage. Enemies hit are knocked up for 1.5 seconds, reduced by distance from the center.",
+      "champions": ["Galio"]
+    },
+    {
+      "name": "HexMech",
+      "unique": true,
+      "effect": "Gain a Pilot Hex. Combat Start: the unit within jumps into T-Hex, granting her 80% of their Health and bonus stats based on their role and star level. On death, the pilot ejects while T-Hex knocks back and Stuns nearby enemies for 1.5 seconds.",
+      "bonus_stats": {
+        "Tank": "+15/25/40% Omnivamp",
+        "Fighter": "+15/25/50% Attack Damage",
+        "Marksman": "+10/18/40% Damage Amp",
+        "Caster": "+3/6/12 Mana Regen",
+        "Assassin": "+30/60/120% Crit Chance"
+      },
+      "champions": ["T-Hex"]
+    },
+    {
+      "name": "Huntress",
+      "unique": true,
+      "effect": "While your strongest Neeko is alive, your strongest Nidalee cannot be targeted by basic attacks and gains 50% Durability.",
+      "champions": ["Nidalee"]
+    },
+    {
+      "name": "Immortal",
+      "unique": true,
+      "effect": "While Xin Zhao is not on your board, Zaahen gains the Ionia, Demacia, and Warden traits. On kill, Zaahen gains a stack of Determination for the rest of combat. If he has 3 or more Determination when dying, he spends it to revive and restore 60% max Health.",
+      "champions": ["Zaahen"]
+    },
+    {
+      "name": "Ionia",
+      "unique": false,
+      "effect": "Ionians gain Shield, Attack Damage, and Ability Power. Each game, they walk a different path. 0",
+      "path": {
+        "Path of Spirit": "Ionians gain bonus HP. When one casts, they gain stacking AD and AP.",
+        "Path of Generosity": "Every third takedown Ionians participate in grants 1 gold. Ionians gain AD and AP, increased by 1% for every gold earned this way.",
+        "Path of Enlightenment": "Ionians gain AD and AP plus more based on your level. After each player combat, gain XP.",
+        "Path of Transcendence": "Ionians gain bonus Health and deal bonus magic damage. These effects increase if they’re three-starred.",
+        "Path of Precision": "Ionian abilities can critically strike and they gain Critical Strike Chance. Whenever an Ionian casts, Ionian units gain stacking AD and AP."
+      },
+      "tiers": [
+        {"count": 3, "bonus": "0% Health Shield, 0% Attack Damage & Ability Power"},
+        {"count": 5, "bonus": "0% Health Shield, 0% Attack Damage & Ability Power"},
+        {"count": 7, "bonus": "0% Health Shield, 0% Attack Damage & Ability Power"}
+      ],
+      
+      "champions": ["Jhin", "Shen", "Xin Zhao", "Yasuo", "Ahri", "Kennen", "Wukong", "Yone", "Yunara", "Sett"]
+    },
+    {
+      "name": "Ixtal",
+      "unique": false,
+      "effect": "Completing a Quest grants you a new one at the start of next round.",
+      "tiers": [
+        {"count": 3, "bonus": "Complete Quests to earn Sunshards (%i:Set16Ixtal%) and spend them for loot!"},
+        {"count": 5, "bonus": "Heal 2 player health at the start of each player combat."},
+        {"count": 7, "bonus": "After winning combat, find 50 %i:Set16Ixtal% and unearth bonus loot."}
+      ],
+      "champions": ["Qiyana", "Neeko", "Milio", "Nidalee", "Skarner", "Brock"]
+    },
+    {
+      "name": "Noxus",
+      "unique": false,
+      "effect": "After the enemy team has lost 15% of their Health, summon Atakhan, Bringer of Ruin. Each Noxian champion's star level increases his power.",
+      "tiers": [
+        {"count": 3, "bonus": "He slashes enemies, dealing magic damage."},
+        {"count": 5, "bonus": "Noxians get more powerful the longer he is alive."},
+        {"count": 7, "bonus": "He drains the souls of enemies on cast."},
+        {"count": 10, "bonus": "After 10 seconds, BRING RUIN."}
+      ],
+      "champions": ["Briar", "Sion", "Darius", "Draven", "LeBlanc", "Swain", "Ambessa", "Mel"]
+    },
+    {
+      "name": "Piltover",
+      "unique": false,
+      "effect": "Build an invention on the right side of the board. After 8 seconds, the invention activates, triggering each of its Modules.",
+      "tiers": [
+        {"count": 2, "bonus": "Choose a Module"},
+        {"count": 4, "bonus": "Choose a Second Module"},
+        {"count": 6, "bonus": "Choose a Third Module"}
+      ],
+      "champions": ["Caitlyn", "Orianna", "Vi", "Loris", "Seraphine", "T-Hex"]
+    },
+    {
+      "name": "Riftscourge",
+      "unique": true,
+      "effect": "Baron Nashor takes up 2 team slots and grants +2 to the Void trait. After 8 seconds, the board enters a Void Rift. The Rift grants Void units 30% Damage Amp and constantly strikes enemies with bolts of plasma, dealing 5% max Health as magic damage.",
+      "champions": ["Baron Nashor"]
+    },
+    {
+      "name": "Rune Mage",
+      "unique": true,
+      "effect": "The Rune Mage benefits from all active Region traits, but contributes to none. He harnesses the Runic power from active Region traits to modify his Ability, enhancing it in unique ways.",
+      "champions": ["Ryze"]
+    },
+    {
+      "name": "Shadow Isles",
+      "unique": false,
+      "effect": "Whenever ANY champion dies, gain Souls (Soul). Shadow Isles champions' Abilities are uniquely empowered based on the number of Souls you have. Shadow Isles champions gain Attack Damage and Ability Power. Souls Collected: 0 Soul",
+      "tiers": [
+        {"count": 2, "bonus": "1x Soul, 18% Attack Damage & Ability Power"},
+        {"count": 3, "bonus": "1.3x Soul, 20% Attack Damage & Ability Power"},
+        {"count": 4, "bonus": "1.6x Soul, 22% Attack Damage & Ability Power"},
+        {"count": 5, "bonus": "1.9x Soul, 25% Attack Damage & Ability Power"}
+      ],
+      "champions": ["Viego", "Yorick", "Gwen", "Kalista", "Thresh"]
+    },
+    {
+      "name": "Shurima",
+      "unique": false,
+      "effect": "Each second, Shurimans gain 2% Attack Speed and restore 20 Health. At combat start, they gain additional effects.",
+      "tiers": [
+        {"count": 2, "bonus": "20% max Health"},
+        {"count": 3, "bonus": "50 Armor and Magic Resist"},
+        {"count": 4, "bonus": "A Shuriman ascends to GODHOOD every 3 seconds."}
+      ],
+      "champions": ["Nasus", "Renekton", "Azir", "Xerath"]
+    },
+    {
+      "name": "Soulbound",
+      "unique": true,
+      "effect": "Lucian and Senna fight together, swapping when either casts. Each champion has a unique ability. Your strongest Soulbound pair grants bonuses to your team. While Senna is out, all allies gain 7% Damage Reduction. While Lucian is out, all allies gain 7% Damage Amp.",
+      "champions": ["Lucian & Senna"]
+    },
+    {
+      "name": "Star Forger",
+      "unique": true,
+      "effect": "Aurelion Sol gains 40% increased Stardust for each other unique Targonian fielded in combat. Current Bonus: 0%",
+      "champions": ["Aurelion Sol"]
+    },
+    {
+      "name": "Targon",
+      "unique": false,
+      "effect": "Targonians are forged by the stars. They are traitless, but stronger than the average champion.",
+      "champions": ["Aphelios", "Leona", "Zoe", "Diana", "Taric", "Aurelion Sol"]
+    },
+    {
+      "name": "The Boss",
+      "unique": true,
+      "effect": "When Sett first drops below 45% max Health, he leaves combat to start doing sit-ups. Each sit-up restores 15% max Health and gives him 60% Attack and Move Speed. If he reaches full Health, he returns to combat Pumped Up, converting all damage from his attacks and Ability to true damage. If all of his allies die, he immediately returns to combat.",
+      "champions": ["Sett"]
+    },
+    {
+      "name": "Void",
+      "unique": false,
+      "effect": "Gain Mutations that only Void champions can use. Void champions gain Attack Speed. Champions can only have one Mutation at a time. Benching a champion removes their Mutation.",
+      "tiers": [
+        {"count": 2, "bonus": "1 Mutation, 8% Attack Speed"},
+        {"count": 4, "bonus": "2 Mutations, 18% Attack Speed"},
+        {"count": 6, "bonus": "3 Mutations, 33% Attack Speed"},
+        {"count": 9, "bonus": "Mutations become supercharged, increasing their power by 50%. 40% Attack Speed"}
+      ],
+      "champions": ["Kog'Maw", "Cho'Gath", "Rek'Sai", "Malzahar", "Bel'Veth", "Kai'Sa", "Rift Herald", "Baron Nashor"]
+    },
+    {
+      "name": "World Ender",
+      "unique": true,
+      "effect": "Aatrox gains Attack Damage equal to his Omnivamp. On first death, he becomes briefly untargetable and heals back to full Health over 2 seconds. Afterwards, he reduces his maximum Mana by 20 and gains 25% Durability.",
+      "champions": ["Aatrox"]
+    },
+    {
+      "name": "Yordle",
+      "unique": false,
+      "effect": "",
+      "tiers": [
+        {"count": 2, "bonus": "Yordles gain 50 Health and 5% Attack Speed for each Yordle fielded. 3 star Yordles grant 50% more!"},
+        {"count": 4, "bonus": "AND your first shop each round has a Yordle in it!"},
+        {"count": 6, "bonus": "AND get 2 free rerolls each round!"},
+        {"count": 8, "bonus": "AND get a Yordle Grab Bag each round!"}
+      ],
+      "champions": ["Lulu", "Rumble", "Poppy", "Teemo", "Tristana", "Kennen", "Kobuko & Yuumi", "Fizz", "Veigar", "Ziggs"]
+    },
+    {
+      "name": "Zaun",
+      "unique": false,
+      "effect": "After 4 seconds, Zaunites become Shimmer-Fused, granting them 10% Durability and 90% decaying Attack Speed for 4 seconds. After a short cooldown, they become Shimmer-Fused again.",
+      "tiers": [
+        {"count": 3, "bonus": "Refresh after 4 seconds."},
+        {"count": 5, "bonus": "At 60% Health, Zaunites restore 25% Health over 3 seconds and instantly become Shimmer-Fused."},
+        {"count": 7, "bonus": "Shimmer-Fused bonuses are increased by 30%. Refresh after 3 seconds instead."}
+      ],
+      "champions": ["Blitzcrank", "Ekko", "Vi", "Dr. Mundo", "Jinx", "Singed", "Warwick", "Ziggs"]
+    },
+    {
+      "name": "Arcanist",
+      "unique": false,
+      "effect": "Your team gains Ability Power, Arcanists gain more.",
+      "tiers": [
+        {"count": 2, "bonus": "18 Ability Power, 25 Ability Power for Arcanists"},
+        {"count": 4, "bonus": "25 Ability Power, 45 Ability Power for Arcanists"},
+        {"count": 6, "bonus": "40 Ability Power, 70 Ability Power for Arcanists"}
+      ],
+      "champions": ["Kog'Maw", "Lulu", "Neeko", "Ahri", "Swain", "Lux", "Veigar", "Annie", "Sylas"]
+    },
+    {
+      "name": "Bruiser",
+      "unique": false,
+      "effect": "Your team gains 150 maximum Health. Bruisers gain more.",
+      "tiers": [
+        {"count": 2, "bonus": "25% Health"},
+        {"count": 4, "bonus": "45% Health"},
+        {"count": 6, "bonus": "65% Health"}
+      ],
+      "champions": ["Illaoi", "Shen", "Sion", "Dr. Mundo", "Kobuko & Yuumi", "Rift Herald", "Wukong", "Tahm Kench", "Volibear"]
+    },
+    {
+      "name": "Defender",
+      "unique": false,
+      "effect": "Your team gains 12 Armor and Magic Resist. Defenders gain more.",
+      "tiers": [
+        {"count": 2, "bonus": "30 Armor & Magic Resist"},
+        {"count": 4, "bonus": "55 Armor & Magic Resist"},
+        {"count": 6, "bonus": "80 Armor & Magic Resist"}
+      ],
+      "champions": ["Jarvan IV", "Rumble", "Neeko", "Vi", "Darius", "Kennen", "Sejuani", "Garen", "Sylas"]
+    },
+    {
+      "name": "Disruptor",
+      "unique": false,
+      "effect": "Disruptors' abilities Dazzle enemies hit. Disruptors deal bonus damage to Dazzled enemies. Dazzle: Reduce damage dealt by 10%",
+      "tiers": [
+        {"count": 2, "bonus": "25% bonus damage"},
+        {"count": 4, "bonus": "45% bonus damage"}
+      ],
+      "champions": ["Ekko", "Gwen", "Malzahar", "Seraphine", "Azir", "Mel"]
+    },
+    {
+      "name": "Gunslinger",
+      "unique": false,
+      "effect": "Gunslingers gain Attack Damage. Every 4th attack from Gunslingers deals bonus physical damage.",
+      "tiers": [
+        {"count": 2, "bonus": "20% Attack Damage, 100 bonus damage"},
+        {"count": 4, "bonus": "35% Attack Damage, 200 bonus damage"}
+      ],
+      "champions": ["Jhin", "Graves", "Tristana", "Jinx", "Miss Fortune", "Lucian & Senna", "T-Hex"]
+    },
+    {
+      "name": "Invoker",
+      "unique": false,
+      "effect": "Your team gains 1 Mana Regen. Invokers gain more Mana from all sources.",
+      "tiers": [
+        {"count": 2, "bonus": "25% more Mana"},
+        {"count": 4, "bonus": "40% more Mana"}
+      ],
+      "champions": ["Anivia", "Sona", "Orianna", "Kobuko & Yuumi", "LeBlanc", "Milio", "Lissandra", "Zilean"]
+    },
+    {
+      "name": "Juggernaut",
+      "unique": false,
+      "effect": "Juggernauts gain Durability, increased while above 50% health. When a Juggernaut dies, other Juggernauts heal for 5% of their max Health.",
+      "tiers": [
+        {"count": 2, "bonus": "18% or 25% Damage Reduction"},
+        {"count": 4, "bonus": "20% or 30% Damage Reduction"},
+        {"count": 6, "bonus": "25% or 33% Damage Reduction"}
+      ],
+      "champions": ["Blitzcrank", "Briar", "Cho'Gath", "Poppy", "Nautilus", "Swain", "Singed", "Shyvana"]
+    },
+    {
+      "name": "Longshot",
+      "unique": false,
+      "effect": "Longshots gain Damage Amp and deal more damage to targets farther away.",
+      "tiers": [
+        {"count": 2, "bonus": "18% Damage Amplification + 2% per Hex"},
+        {"count": 3, "bonus": "20% Damage Amplification + 3% per Hex"},
+        {"count": 4, "bonus": "24% Damage Amplification + 4% per Hex"},
+        {"count": 5, "bonus": "30% Damage Amplification + 5% per Hex"}
+      ],
+      "champions": ["Caitlyn", "Kog'Maw", "Teemo", "Vayne", "Kai'Sa", "Ziggs"]
+    },
+    {
+      "name": "Quickstriker",
+      "unique": false,
+      "effect": "Your team gains 15% Attack Speed. Quickstrikers gain bonus Attack Speed based on their target's missing Health.",
+      "tiers": [
+        {"count": 2, "bonus": "10-30% Attack Speed"},
+        {"count": 3, "bonus": "20-45% Attack Speed"},
+        {"count": 4, "bonus": "30-60% Attack Speed"},
+        {"count": 5, "bonus": "40-80% Attack Speed"}
+      ],
+      "champions": ["Viego", "Ashe", "Twisted Fate", "Draven", "Warwick", "Yunara", "Kindred"]
+    },
+    {
+      "name": "Slayer",
+      "unique": false,
+      "effect": "Slayers gain Omnivamp and Attack Damage. They increase the bonus Attack Damage by up to 50% based on their missing Health.",
+      "tiers": [
+        {"count": 2, "bonus": "22% Attack Damage, 10% Omnivamp"},
+        {"count": 4, "bonus": "33% Attack Damage, 16% Omnivamp"},
+        {"count": 6, "bonus": "44% Attack Damage, 20% Omnivamp"}
+      ],
+      "champions": ["Briar", "Qiyana", "Tryndamere", "Yasuo", "Gangplank", "Bel'Veth", "Yone", "Aatrox"]
+    },
+    {
+      "name": "Vanquisher",
+      "unique": false,
+      "effect": "Vanquishers' abilities can critically strike. They also gain Critical Strike Chance and Critical Strike Damage.",
+      "tiers": [
+        {"count": 2, "bonus": "15% Critical Strike Chance, 15% Critical Strike Damage"},
+        {"count": 3, "bonus": "20% Critical Strike Chance, 20% Critical Strike Damage"},
+        {"count": 4, "bonus": "25% Critical Strike Chance, 25% Critical Strike Damage"},
+        {"count": 5, "bonus": "30% Critical Strike Chance, 30% Critical Strike Damage"}
+      ],
+      "champions": ["Rek'Sai", "Gangplank", "Ambessa", "Kalista", "Fiddlesticks"]
+    },
+    {
+      "name": "Warden",
+      "unique": false,
+      "effect": "When Wardens first drop below 75% and 25% Health, they gain a Shield based on their max Health.",
+      "tiers": [
+        {"count": 2, "bonus": "15% Health"},
+        {"count": 3, "bonus": "18% Health"},
+        {"count": 4, "bonus": "24% Health"},
+        {"count": 5, "bonus": "30% Health"}
+      ],
+      "champions": ["Xin Zhao", "Yorick", "Loris", "Nautilus", "Braum", "Ornn", "Thresh"]
+    }
+  ]
+}

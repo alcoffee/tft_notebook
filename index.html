@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFT Set 16 Team Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Cost Colors - Reverted to standard */
+        .cost-1 { border-color: #9ca3af; } /* Gray */
+        .cost-2 { border-color: #22c55e; } /* Green */
+        .cost-3 { border-color: #3b82f6; } /* Blue */
+        .cost-4 { border-color: #a855f7; } /* Purple */
+        .cost-5, .cost-7 { border-color: #eab308; } /* Gold */
+        
+        .trait-tier-0 { background-color: #334155; color: #94a3b8; } /* Inactive */
+        .trait-tier-1 { background-color: #78350f; color: #fdba74; border: 1px solid #92400e; } /* Bronze */
+        .trait-tier-2 { background-color: #374151; color: #e5e7eb; border: 1px solid #9ca3af; } /* Silver */
+        .trait-tier-3 { background-color: #ca8a04; color: #fff; border: 1px solid #fde047; box-shadow: 0 0 10px rgba(234, 179, 8, 0.5); } /* Gold */
+        .trait-tier-4 { background-color: #e879f9; color: #fff; background-image: linear-gradient(135deg, #a855f7, #ec4899); box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); } /* Prismatic */
+
+        .champ-card { transition: transform 0.1s; }
+        .champ-card:active { transform: scale(0.95); }
+
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none; /* Ensure tooltip doesn't block mouse events */
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Ensure tooltips are always on top */
+        .tooltip { z-index: 100; }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-30 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300">
+                TFT Set 16 Team Planner
+            </h1>
+            <div class="flex flex-wrap gap-2 justify-center">
+                <!-- Edit Actions -->
+                <button id="btn-sort" onclick="app.sortTeam()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    コスト順
+                </button>
+                <button id="btn-reset" onclick="app.clearTeam()" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    リセット
+                </button>
+                
+                <div class="w-px bg-slate-600 mx-1 hidden sm:block"></div>
+
+                <!-- Save Actions -->
+                <button id="btn-save" onclick="app.openSaveModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    保存
+                </button>
+                <button id="btn-load" onclick="app.openLoadModal()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    保存済み一覧
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 flex flex-col lg:flex-row gap-6">
+        
+        <!-- Left Column: Team & Traits -->
+        <div class="lg:w-2/3 flex flex-col gap-6 order-2 lg:order-1">
+            
+            <!-- Active Team Area -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
+                <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
+                    <h2 class="text-lg font-semibold text-slate-200">現在のチーム <span id="team-count" class="text-sm text-slate-400 ml-2">(0/13)</span></h2>
+                    <span class="text-xs text-slate-500 flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span> ローカル保存
+                    </span>
+                </div>
+                
+                <!-- Team Grid -->
+                <!-- Removed overflow-hidden from here to allow tooltips to spill out if needed, though they are absolute -->
+                <div id="team-grid" class="flex flex-wrap gap-4 min-h-[100px] items-center justify-center lg:justify-start bg-slate-900/50 p-4 rounded-lg border-2 border-dashed border-slate-700">
+                    <p class="text-slate-500 text-sm select-none pointer-events-none">データの読み込みを待機しています...</p>
+                </div>
+            </div>
+
+            <!-- Traits Panel -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
+                <h2 class="text-lg font-semibold text-slate-200 mb-4 border-b border-slate-700 pb-2">アクティブシナジー</h2>
+                <div id="traits-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <!-- Traits rendered here -->
+                    <div class="col-span-full text-center text-slate-500 py-4">
+                        ユニットを追加してシナジーを表示
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Right Column: Unit Selector -->
+        <div class="lg:w-1/3 order-1 lg:order-2">
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl sticky top-24 max-h-[calc(100vh-8rem)] flex flex-col">
+                
+                <!-- Filters -->
+                <div class="flex flex-col gap-3 mb-4">
+                    <input type="text" id="search-input" placeholder="名前または特性で検索..." 
+                           class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition" disabled>
+                    
+                    <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                        <button onclick="app.filterCost('all')" class="filter-btn active bg-blue-600 text-white px-3 py-1 rounded text-xs whitespace-nowrap">All</button>
+                        <button onclick="app.filterCost(1)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-gray-400">1 Cost</button>
+                        <button onclick="app.filterCost(2)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-green-500">2 Cost</button>
+                        <button onclick="app.filterCost(3)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-blue-500">3 Cost</button>
+                        <button onclick="app.filterCost(4)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-purple-500">4 Cost</button>
+                        <button onclick="app.filterCost(5)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-yellow-500">5+ Cost</button>
+                    </div>
+                </div>
+
+                <!-- Champion Grid -->
+                <div id="champion-pool" class="grid grid-cols-4 sm:grid-cols-5 gap-3 p-1 overflow-y-auto flex-grow content-start">
+                    <!-- Champions injected here -->
+                    <div class="col-span-full flex flex-col items-center justify-center py-10 text-slate-400 gap-3">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                        <p>データを読み込んでいます...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modals -->
+    
+    <div id="modal-save-name" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6">
+            <h3 class="text-lg font-bold text-white mb-4">チームを保存</h3>
+            <input type="text" id="save-team-name-input" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white mb-4 focus:border-blue-500 outline-none" placeholder="チーム名を入力">
+            <div class="flex justify-end gap-3">
+                <button onclick="app.closeSaveModal()" class="text-slate-400 hover:text-white text-sm font-bold px-3 py-2">キャンセル</button>
+                <button onclick="app.confirmSaveTeam()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded text-sm font-bold">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-confirm" class="fixed inset-0 z-[80] hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6 text-center">
+            <h3 class="text-lg font-bold text-white mb-2">確認</h3>
+            <p id="modal-confirm-text" class="text-slate-300 mb-6"></p>
+            <div class="flex justify-center gap-4">
+                <button onclick="app.closeConfirmModal()" class="bg-slate-600 hover:bg-slate-500 text-white px-4 py-2 rounded text-sm font-bold transition">キャンセル</button>
+                <button onclick="app.executeDelete()" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded text-sm font-bold transition">削除する</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-message" class="fixed inset-0 z-[70] hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6 text-center">
+            <p id="modal-message-text" class="text-slate-200 mb-6 font-bold"></p>
+            <button onclick="document.getElementById('modal-message').classList.add('hidden')" class="bg-slate-600 hover:bg-slate-500 text-white px-4 py-2 rounded text-sm font-bold">OK</button>
+        </div>
+    </div>
+
+    <div id="modal-saved-teams" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+            <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">保存済みチーム一覧</h3>
+                <button onclick="app.closeLoadModal()" class="text-slate-400 hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto p-4">
+                <div id="saved-teams-list" class="space-y-3">
+                    <p class="text-slate-500 text-center py-4">保存されたチームはありません。</p>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-slate-700 flex justify-between bg-slate-800/50 rounded-b-xl">
+                <button onclick="app.confirmDeleteAll()" class="text-red-400 hover:text-red-300 text-sm font-semibold transition">
+                    全データを削除
+                </button>
+                <button onclick="app.closeLoadModal()" class="bg-slate-600 hover:bg-slate-500 text-white px-4 py-2 rounded text-sm font-bold transition">
+                    閉じる
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script>
+        const DATA_URL = "./data.json";
+        const getUnitImage = (slug) => `./thumbs/${slug}.jpg`;
+
+        class TeamPlanner {
+            constructor(data) {
+                this.unitsData = data.unit || [];
+                this.traitsData = data.traits || [];
+                
+                this.team = [];
+                this.maxTeamSize = 13;
+                this.filter = { cost: 'all', search: '' };
+                this.savedTeams = [];
+                this.pendingDelete = null;
+                
+                this.storageKey = 'tft_planner_v2_local_data';
+
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) searchInput.disabled = false;
+                
+                this.toggleButtons(false);
+
+                this.loadFromLocalStorage();
+
+                this.renderChampionPool();
+                this.setupSearch();
+                this.renderTeam();
+            }
+
+            toggleButtons(disabled) {
+                ['btn-sort', 'btn-reset', 'btn-save', 'btn-load'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.disabled = disabled;
+                });
+            }
+
+            // --- Helper ---
+            getCostColorClass(cost) {
+                switch(cost) {
+                    case 1: return 'text-gray-400';
+                    case 2: return 'text-green-400';
+                    case 3: return 'text-blue-400';
+                    case 4: return 'text-purple-400';
+                    case 5: return 'text-yellow-400';
+                    case 7: return 'text-yellow-400'; // Reverted to Gold
+                    default: return 'text-slate-200';
+                }
+            }
+
+            // --- Local Storage ---
+
+            loadFromLocalStorage() {
+                try {
+                    const rawData = localStorage.getItem(this.storageKey);
+                    if (rawData) {
+                        const data = JSON.parse(rawData);
+                        if (data.savedTeams && Array.isArray(data.savedTeams)) {
+                            this.savedTeams = data.savedTeams;
+                        }
+                        if (data.currentTeam && Array.isArray(data.currentTeam)) {
+                            const restoredTeam = [];
+                            data.currentTeam.forEach(id => {
+                                const unit = this.unitsData.find(u => u.id === id);
+                                if (unit) restoredTeam.push(unit);
+                            });
+                            this.team = restoredTeam;
+                        }
+                    }
+                } catch (e) {
+                    console.error("Failed to load local data:", e);
+                }
+            }
+
+            saveToLocalStorage() {
+                try {
+                    const dataToSave = {
+                        savedTeams: this.savedTeams,
+                        currentTeam: this.team.map(u => u.id),
+                        lastUpdated: new Date().toISOString()
+                    };
+                    localStorage.setItem(this.storageKey, JSON.stringify(dataToSave));
+                } catch (e) {
+                    console.error("Failed to save local data:", e);
+                    this.showMessage("ブラウザの保存容量が不足しています。");
+                }
+            }
+
+            // --- Modals & Actions ---
+
+            openSaveModal() {
+                if (this.team.length === 0) {
+                    this.showMessage('チームが空のため保存できません。');
+                    return;
+                }
+                const input = document.getElementById('save-team-name-input');
+                input.value = `チーム ${this.savedTeams.length + 1}`;
+                document.getElementById('modal-save-name').classList.remove('hidden');
+                input.focus();
+            }
+
+            closeSaveModal() {
+                document.getElementById('modal-save-name').classList.add('hidden');
+            }
+
+            confirmSaveTeam() {
+                const input = document.getElementById('save-team-name-input');
+                const name = input.value.trim() || `チーム ${this.savedTeams.length + 1}`;
+
+                const newEntry = {
+                    id: Date.now(),
+                    name: name,
+                    unitIds: this.team.map(u => u.id),
+                    date: new Date().toLocaleString('ja-JP')
+                };
+
+                this.savedTeams.push(newEntry);
+                this.saveToLocalStorage();
+                this.closeSaveModal();
+                this.showMessage(`「${name}」を保存しました。`);
+            }
+
+            confirmDeleteTeam(index) {
+                this.pendingDelete = { type: 'single', index: index };
+                this.openConfirmModal('このチームデータを削除しますか？');
+            }
+
+            confirmDeleteAll() {
+                if (this.savedTeams.length === 0) return;
+                this.pendingDelete = { type: 'all' };
+                this.openConfirmModal('保存されている全てのチームデータを削除しますか？\nこの操作は取り消せません。');
+            }
+
+            executeDelete() {
+                if (!this.pendingDelete) return;
+
+                if (this.pendingDelete.type === 'single') {
+                    this.savedTeams.splice(this.pendingDelete.index, 1);
+                    this.saveToLocalStorage();
+                    this.renderLoadModalList(); 
+                } else if (this.pendingDelete.type === 'all') {
+                    this.savedTeams = [];
+                    this.saveToLocalStorage();
+                    this.renderLoadModalList();
+                    this.showMessage('全データを削除しました。');
+                }
+                
+                this.closeConfirmModal();
+            }
+
+            openConfirmModal(msg) {
+                document.getElementById('modal-confirm-text').innerText = msg; 
+                document.getElementById('modal-confirm').classList.remove('hidden');
+            }
+
+            closeConfirmModal() {
+                this.pendingDelete = null;
+                document.getElementById('modal-confirm').classList.add('hidden');
+            }
+
+            applySavedTeam(index) {
+                const saved = this.savedTeams[index];
+                if (!saved) return;
+
+                const newTeam = [];
+                saved.unitIds.forEach(id => {
+                    const unit = this.unitsData.find(u => u.id === id);
+                    if (unit) newTeam.push(unit);
+                });
+
+                if (newTeam.length > 0) {
+                    this.team = newTeam;
+                    this.saveToLocalStorage(); 
+                    this.renderTeam();
+                    this.closeLoadModal();
+                } else {
+                    this.showMessage('チームデータの復元に失敗しました。');
+                }
+            }
+
+            showMessage(msg) {
+                document.getElementById('modal-message-text').textContent = msg;
+                document.getElementById('modal-message').classList.remove('hidden');
+            }
+
+            openLoadModal() {
+                const modal = document.getElementById('modal-saved-teams');
+                modal.classList.remove('hidden');
+                this.renderLoadModalList();
+            }
+
+            closeLoadModal() {
+                const modal = document.getElementById('modal-saved-teams');
+                modal.classList.add('hidden');
+            }
+
+            renderLoadModalList() {
+                const container = document.getElementById('saved-teams-list');
+                container.innerHTML = '';
+
+                if (this.savedTeams.length === 0) {
+                    container.innerHTML = '<p class="text-slate-500 text-center py-8">保存されたチームはありません。</p>';
+                    return;
+                }
+
+                [...this.savedTeams].reverse().forEach((saved, reverseIndex) => {
+                    const originalIndex = this.savedTeams.length - 1 - reverseIndex;
+                    
+                    const el = document.createElement('div');
+                    el.className = 'bg-slate-700/50 rounded-lg p-3 flex justify-between items-center border border-slate-600 hover:border-slate-500 transition';
+                    
+                    const previewHtml = saved.unitIds.slice(0, 7).map(id => {
+                        const u = this.unitsData.find(unit => unit.id === id);
+                        if (!u) return '';
+                        return `<img src="${getUnitImage(u.slug)}" class="w-6 h-6 rounded-full border border-slate-500 object-cover" title="${u.name}">`;
+                    }).join('');
+
+                    el.innerHTML = `
+                        <div class="flex-grow">
+                            <div class="flex items-baseline gap-2 mb-1">
+                                <span class="font-bold text-white text-lg">${saved.name}</span>
+                                <span class="text-xs text-slate-400">${saved.date}</span>
+                            </div>
+                            <div class="flex gap-1 overflow-hidden">
+                                ${previewHtml}
+                                ${saved.unitIds.length > 7 ? `<span class="text-xs text-slate-500 flex items-center">+${saved.unitIds.length - 7}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex gap-2 ml-4">
+                            <button onclick="app.applySavedTeam(${originalIndex})" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold transition">読込</button>
+                            <button onclick="app.confirmDeleteTeam(${originalIndex})" class="bg-red-600/20 hover:bg-red-600/40 text-red-300 border border-red-800 px-3 py-1.5 rounded text-sm transition">削除</button>
+                        </div>
+                    `;
+                    container.appendChild(el);
+                });
+            }
+
+            // --- Render Logic (Updated) ---
+
+            renderChampionPool() {
+                const pool = document.getElementById('champion-pool');
+                pool.innerHTML = '';
+
+                // Improved search logic with null safety
+                const filteredUnits = this.unitsData.filter(u => {
+                    const matchesCost = this.filter.cost === 'all' || 
+                                        (this.filter.cost === 5 && u.cost >= 5) || 
+                                        u.cost === this.filter.cost;
+                    
+                    const searchTerm = this.filter.search.toLowerCase();
+                    const safeLower = (str) => (str || '').toString().toLowerCase();
+                    
+                    const matchesSearch = 
+                        safeLower(u.name).includes(searchTerm) || 
+                        (u.synergies || []).some(t => safeLower(t).includes(searchTerm)) ||
+                        safeLower(u.role).includes(searchTerm) ||
+                        (u.ability && (
+                            safeLower(u.ability.name).includes(searchTerm) || 
+                            safeLower(u.ability.description).includes(searchTerm)
+                        ));
+                    
+                    return matchesCost && matchesSearch;
+                });
+
+                filteredUnits.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
+
+                filteredUnits.forEach(unit => {
+                    const el = document.createElement('div');
+                    // Removed 'has-tooltip' to disable popup on hover for pool
+                    el.className = 'flex flex-col items-center cursor-pointer group relative w-full';
+                    el.onclick = () => this.addToTeam(unit.id);
+                    
+                    el.innerHTML = `
+                        <div class="w-full aspect-square rounded border-2 overflow-hidden champ-card cost-${unit.cost} group-hover:brightness-110 relative">
+                            <img src="${getUnitImage(unit.slug)}" alt="${unit.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/80x80/1e293b/FFF?text=${unit.name.charAt(0)}'">
+                            <div class="absolute bottom-0 right-0 bg-slate-900/80 px-1 text-xs text-white font-bold">${unit.cost}</div>
+                        </div>
+                        <span class="text-xs text-slate-400 mt-1 truncate w-full text-center group-hover:text-white">${unit.name}</span>
+                    `;
+                    pool.appendChild(el);
+                });
+            }
+
+            renderTeam() {
+                const grid = document.getElementById('team-grid');
+                const countEl = document.getElementById('team-count');
+                grid.innerHTML = '';
+                countEl.textContent = `(${this.team.length}/${this.maxTeamSize})`;
+                
+                this.calculateTraits();
+
+                if (this.team.length === 0) {
+                    grid.innerHTML = '<p class="text-slate-500 text-sm select-none pointer-events-none w-full text-center">下のリストからチャンピオンを選択してください</p>';
+                    return;
+                }
+
+                this.team.forEach((unit, index) => {
+                    const el = document.createElement('div');
+                    el.className = 'relative cursor-pointer group has-tooltip'; // Keep tooltip for team
+                    el.onclick = () => this.removeFromTeam(index);
+                    el.innerHTML = `
+                        <div class="relative w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden champ-card cost-${unit.cost}">
+                            <img src="${getUnitImage(unit.slug)}" alt="${unit.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/80x80/1e293b/FFF?text=${unit.name.charAt(0)}'">
+                            <div class="absolute inset-0 bg-red-500/0 hover:bg-red-500/40 flex items-center justify-center transition-colors">
+                                <span class="text-white font-bold opacity-0 hover:opacity-100 text-2xl">×</span>
+                            </div>
+                        </div>
+                        ${this.generateTooltip(unit)}
+                    `;
+                    grid.appendChild(el);
+                });
+            }
+
+            generateTooltip(unit) {
+                let infoSection = '';
+                const costColor = this.getCostColorClass(unit.cost); // Get color
+                
+                // Ability Info
+                if (unit.ability) {
+                    const manaText = unit.ability.mana ? `<span class="text-blue-300 ml-2 text-[10px]">(${unit.ability.mana.start}/${unit.ability.mana.max})</span>` : '';
+                    infoSection += `
+                        <div class="mb-2 border-t border-slate-600 pt-2">
+                            <p class="font-bold text-blue-400 text-xs mb-0.5">${unit.ability.name}${manaText}</p>
+                            <p class="text-[10px] leading-tight text-slate-300 line-clamp-4">${unit.ability.description}</p>
+                        </div>
+                    `;
+                }
+
+                // Stats Info
+                if (unit.base_stats) {
+                    const s = unit.base_stats;
+                    const getStat = (val) => val && val.includes ? val.split('/')[0] : val;
+                    
+                    infoSection += `
+                        <div class="grid grid-cols-3 gap-1 text-[10px] text-slate-400 border-t border-slate-600 pt-2">
+                            <div title="Health">HP: <span class="text-slate-200">${getStat(s.health)}</span></div>
+                            <div title="Attack Damage">AD: <span class="text-slate-200">${getStat(s.attack_damage)}</span></div>
+                            <div title="Attack Speed">AS: <span class="text-slate-200">${s.attack_speed}</span></div>
+                            <div title="Armor">AR: <span class="text-slate-200">${s.armor}</span></div>
+                            <div title="Magic Resist">MR: <span class="text-slate-200">${s.magic_resist}</span></div>
+                            <div title="Range">Rng: <span class="text-slate-200">${s.range}</span></div>
+                        </div>
+                    `;
+                }
+
+                if (unit.unlock) {
+                    infoSection += `
+                        <div class="text-[10px] text-yellow-200/80 mt-2 border-t border-slate-600 pt-1">
+                            Unlock: ${unit.unlock}
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="tooltip absolute z-50 top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-slate-800 border border-slate-600 rounded-lg p-3 shadow-2xl pointer-events-none">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-white text-sm">${unit.name}</h3>
+                            <span class="${costColor} font-bold text-xs">$${unit.cost}</span>
+                        </div>
+                        <div class="flex flex-wrap gap-1 mb-2">
+                            ${unit.synergies.map(s => `<span class="bg-slate-700 px-1.5 py-0.5 rounded text-[10px] text-slate-300">${s}</span>`).join('')}
+                        </div>
+                         <div class="text-xs text-slate-400 mb-1">
+                            Role: <span class="text-slate-200">${unit.role || 'Unit'}</span>
+                        </div>
+                        ${infoSection}
+                    </div>
+                `;
+            }
+
+            // --- Logic ---
+
+            addToTeam(id) {
+                if (this.team.length >= this.maxTeamSize) return;
+                const unit = this.unitsData.find(u => u.id === id);
+                if (unit) {
+                    this.team.push(unit);
+                    this.saveToLocalStorage(); 
+                    this.renderTeam();
+                }
+            }
+
+            removeFromTeam(index) {
+                this.team.splice(index, 1);
+                this.saveToLocalStorage(); 
+                this.renderTeam();
+            }
+
+            clearTeam() {
+                this.team = [];
+                this.saveToLocalStorage(); 
+                this.renderTeam();
+            }
+
+            sortTeam() {
+                this.team.sort((a, b) => {
+                    if (a.cost !== b.cost) {
+                        return a.cost - b.cost;
+                    }
+                    return a.name.localeCompare(b.name);
+                });
+                this.saveToLocalStorage(); 
+                this.renderTeam();
+            }
+
+            calculateTraits() {
+                const container = document.getElementById('traits-container');
+                container.innerHTML = '';
+
+                const uniqueUnits = [];
+                const seenIds = new Set();
+                
+                this.team.forEach(u => {
+                    if (!seenIds.has(u.slug)) {
+                        seenIds.add(u.slug);
+                        uniqueUnits.push(u);
+                    }
+                });
+
+                const traitCounts = {};
+
+                uniqueUnits.forEach(unit => {
+                    unit.synergies.forEach(trait => {
+                        traitCounts[trait] = (traitCounts[trait] || 0) + 1;
+                    });
+                });
+
+                const activeTraits = [];
+
+                Object.keys(traitCounts).forEach(traitName => {
+                    const count = traitCounts[traitName];
+                    const traitData = this.traitsData.find(t => t.name === traitName);
+                    
+                    if (!traitData) return;
+
+                    let tierLevel = 0; 
+                    let nextBreakpoint = null;
+                    let activeBreakpoint = 0;
+
+                    if (traitData.unique) {
+                         if (!traitData.tiers && count >= 1) {
+                             tierLevel = 3;
+                             activeBreakpoint = 1;
+                         }
+                    }
+
+                    if (traitData.tiers) {
+                        for (let i = 0; i < traitData.tiers.length; i++) {
+                            const t = traitData.tiers[i];
+                            if (count >= t.count) {
+                                activeBreakpoint = t.count;
+                                if (i === traitData.tiers.length - 1) tierLevel = 4;
+                                else if (i === 0) tierLevel = 1;
+                                else tierLevel = 2;
+                                if (tierLevel === 2 && i >= 2) tierLevel = 3;
+                            } else {
+                                if (!nextBreakpoint) nextBreakpoint = t.count;
+                            }
+                        }
+                    }
+
+                    if (traitData.unique && count > 0 && tierLevel === 0) {
+                        tierLevel = 3;
+                        activeBreakpoint = 1;
+                    }
+                    
+                    if (traitName === 'Targon' && count >= 1) {
+                        tierLevel = 3;
+                        activeBreakpoint = 1;
+                    }
+
+                    activeTraits.push({
+                        name: traitName,
+                        count: count,
+                        tier: tierLevel,
+                        max: nextBreakpoint || activeBreakpoint,
+                        isUnique: traitData.unique,
+                        effect: traitData.effect,
+                        tiers: traitData.tiers // Add this
+                    });
+                });
+
+                activeTraits.sort((a, b) => (b.tier - a.tier) || (b.count - a.count));
+
+                if (activeTraits.length === 0) {
+                     container.innerHTML = '<div class="col-span-full text-center text-slate-500 py-4">ユニットを追加してシナジーを表示</div>';
+                     return;
+                }
+
+                activeTraits.forEach(t => {
+                    const el = document.createElement('div');
+                    let styleClass = `trait-tier-${t.tier}`;
+                    if (t.tier === 0) styleClass = 'bg-slate-700 text-slate-400 border border-slate-600';
+
+                    el.className = `flex justify-between items-center p-2 px-3 rounded text-sm relative group has-tooltip cursor-help ${styleClass}`;
+                    
+                    // Generate tiers list HTML
+                    let tiersListHtml = '';
+                    if (t.tiers) {
+                        tiersListHtml = '<div class="mt-2 border-t border-slate-600 pt-1 space-y-0.5">';
+                        t.tiers.forEach(tier => {
+                            const isActive = t.count >= tier.count;
+                            const activeClass = isActive ? 'text-white font-bold' : 'text-slate-500';
+                            tiersListHtml += `<div class="flex gap-2 text-xs ${activeClass}"><span class="w-4 text-right">${tier.count}</span><span>${tier.bonus}</span></div>`;
+                        });
+                        tiersListHtml += '</div>';
+                    }
+                    
+                    // Trait tooltip also displays BELOW
+                    el.innerHTML = `
+                        <span class="font-bold truncate pr-2">${t.name}</span>
+                        <span class="font-mono bg-black/20 px-2 rounded">${t.count}${!t.isUnique && t.max > 1 ? ` / ${t.max}` : ''}</span>
+                        <div class="tooltip absolute z-50 top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-slate-800 border border-slate-600 rounded-lg p-3 shadow-2xl pointer-events-none text-left">
+                            <h4 class="font-bold text-yellow-400 mb-1">${t.name}</h4>
+                            <p class="text-xs text-slate-200">${t.effect}</p>
+                            ${tiersListHtml}
+                        </div>
+                    `;
+                    container.appendChild(el);
+                });
+            }
+
+            setupSearch() {
+                const input = document.getElementById('search-input');
+                input.addEventListener('input', (e) => {
+                    this.filter.search = e.target.value;
+                    this.renderChampionPool();
+                });
+            }
+
+            filterCost(cost) {
+                this.filter.cost = cost;
+                
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                    btn.classList.add('bg-slate-700', 'hover:bg-slate-600');
+                });
+                
+                const clickedBtn = event.target;
+                clickedBtn.classList.remove('bg-slate-700', 'hover:bg-slate-600');
+                clickedBtn.classList.add('bg-blue-600', 'text-white');
+
+                this.renderChampionPool();
+            }
+        }
+
+        async function initApp() {
+            const poolEl = document.getElementById('champion-pool');
+
+            try {
+                // Fetch data from external source
+                const response = await fetch(DATA_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                window.app = new TeamPlanner(data);
+                
+            } catch (error) {
+                console.error('Fetch error:', error);
+                poolEl.innerHTML = `
+                    <div class="col-span-full text-center text-red-400 py-10 bg-red-900/20 rounded border border-red-800">
+                        <p class="font-bold mb-2">データの読み込みに失敗しました</p>
+                        <p class="text-xs text-red-300 mb-2">${error.message}</p>
+                        <p class="text-xs text-slate-400 mb-4">CORS設定を確認するか、しばらく待ってから再読み込みしてください。</p>
+                        <button onclick="location.reload()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded text-sm text-white font-bold transition">再読み込み</button>
+                    </div>
+                `;
+            }
+        }
+
+        initApp();
+
+    </script>
+</body>
+</html>
