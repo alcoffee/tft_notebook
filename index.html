@@ -35,37 +35,18 @@
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.2s;
-            pointer-events: none;
+            pointer-events: none; /* Ensure tooltip doesn't block mouse events */
         }
         .has-tooltip:hover .tooltip {
             visibility: visible;
             opacity: 1;
         }
+        /* Ensure tooltips are always on top */
         .tooltip { z-index: 100; }
 
+        /* Modal Styles */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.7);
-        }
-        
-        /* Tab Styles */
-        .stage-tab {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .stage-tab.active {
-            background-color: #2563eb; /* blue-600 */
-            color: white;
-            border-color: #3b82f6;
-        }
-        .stage-tab:not(.active) {
-            background-color: #1e293b; /* slate-800 */
-            color: #94a3b8; /* slate-400 */
-            border-color: #334155;
-        }
-        .stage-tab:not(.active):hover {
-            background-color: #334155; /* slate-700 */
-            color: #e2e8f0;
         }
     </style>
 </head>
@@ -78,13 +59,17 @@
                 TFT Set 16 Team Planner
             </h1>
             <div class="flex flex-wrap gap-2 justify-center">
+                <!-- Edit Actions -->
                 <button id="btn-sort" onclick="app.sortTeam()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     コスト順
                 </button>
                 <button id="btn-reset" onclick="app.clearTeam()" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     リセット
                 </button>
+                
                 <div class="w-px bg-slate-600 mx-1 hidden sm:block"></div>
+
+                <!-- Save Actions -->
                 <button id="btn-save" onclick="app.openSaveModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     ガイド保存
                 </button>
@@ -108,13 +93,22 @@
 
             <!-- Active Team Area -->
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
+                <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
                     <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-2">
                         現在のチーム <span id="team-count" class="text-sm text-slate-400 ml-2">(0/13)</span>
                     </h2>
                     <span id="data-source-indicator" class="text-xs text-slate-500 flex items-center gap-1">
                         <!-- Filled by JS -->
                     </span>
+                </div>
+
+                <!-- Guide Code Input -->
+                <div class="mb-3 flex items-center gap-2 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">
+                    <span class="text-xs text-slate-500 font-bold whitespace-nowrap">CODE</span>
+                    <input type="text" id="guide-code-input" class="bg-transparent border-none text-slate-300 text-xs w-full focus:outline-none focus:text-white font-mono truncate" placeholder="プランナーコード (例: tft_set16_...)" spellcheck="false">
+                    <button onclick="app.copyGuideCode()" class="text-slate-500 hover:text-blue-400 transition p-1" title="クリップボードにコピー">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                    </button>
                 </div>
                 
                 <!-- Team Grid -->
@@ -151,6 +145,7 @@
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
                 <h2 class="text-lg font-semibold text-slate-200 mb-4 border-b border-slate-700 pb-2">アクティブシナジー</h2>
                 <div id="traits-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <!-- Traits rendered here -->
                     <div class="col-span-full text-center text-slate-500 py-4">
                         ユニットを追加してシナジーを表示
                     </div>
@@ -180,6 +175,7 @@
 
                 <!-- Champion Grid -->
                 <div id="champion-pool" class="grid grid-cols-4 sm:grid-cols-5 gap-3 p-1 overflow-y-auto flex-grow content-start">
+                    <!-- Champions injected here -->
                     <div class="col-span-full flex flex-col items-center justify-center py-10 text-slate-400 gap-3">
                         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                         <p>データを読み込んでいます...</p>
@@ -294,7 +290,6 @@
 
     <!-- App Logic -->
     <script>
-        // Constants & Configuration
         const CONFIG = {
             DATA_URL: "./data.json",
             NOTEBOOKS_URL: "./notebooks.json",
@@ -306,31 +301,14 @@
         // Utility Functions
         const Utils = {
             getUnitImage: (slug) => `${CONFIG.IMAGE_BASE_URL}${slug}.jpg`,
-            
             getCostColorClass: (cost) => {
-                const colors = {
-                    1: 'text-gray-400',
-                    2: 'text-green-400',
-                    3: 'text-blue-400',
-                    4: 'text-purple-400',
-                    5: 'text-yellow-400',
-                    7: 'text-yellow-400'
-                };
+                const colors = { 1: 'text-gray-400', 2: 'text-green-400', 3: 'text-blue-400', 4: 'text-purple-400', 5: 'text-yellow-400', 7: 'text-yellow-400' };
                 return colors[cost] || 'text-slate-200';
             },
-
             getCostBorderClass: (cost) => {
-                const borders = {
-                    1: 'border-gray-400',
-                    2: 'border-green-400',
-                    3: 'border-blue-400',
-                    4: 'border-purple-400',
-                    5: 'border-yellow-400',
-                    7: 'border-yellow-400'
-                };
+                const borders = { 1: 'border-gray-400', 2: 'border-green-400', 3: 'border-blue-400', 4: 'border-purple-400', 5: 'border-yellow-400', 7: 'border-yellow-400' };
                 return borders[cost] || 'border-slate-500';
             },
-
             safeLower: (str) => (str || '').toString().toLowerCase(),
         };
 
@@ -344,7 +322,7 @@
                 this.savedGuides = [];
                 this.currentGuide = {
                     name: "新しいガイド",
-                    stages: [{ name: "初期構成", unitIds: [] }]
+                    stages: [{ name: "初期構成", unitIds: [], code: "" }] // Added code per stage
                 };
                 this.activeStageIndex = 0;
                 this.filter = { cost: 'all', search: '' };
@@ -377,12 +355,15 @@
                     const rawData = localStorage.getItem(CONFIG.STORAGE_KEY);
                     if (rawData) {
                         const data = JSON.parse(rawData);
-                        if (Array.isArray(data.savedGuides) || Array.isArray(data.savedTeams)) {
-                            this.savedGuides = data.savedGuides || data.savedTeams;
-                        }
+                        const saved = data.savedGuides || data.savedTeams || [];
+                        if (Array.isArray(saved)) this.savedGuides = saved;
                         if (data.currentGuide) {
                             this.currentGuide = data.currentGuide;
                             this.activeStageIndex = data.activeStageIndex || 0;
+                            // Migrate structure if needed
+                            this.currentGuide.stages.forEach(stage => {
+                                if (stage.code === undefined) stage.code = "";
+                            });
                         }
                     }
                 } catch (e) {
@@ -411,12 +392,14 @@
                 } else if (data.stages && Array.isArray(data.stages)) {
                     imported = [this.parseGuideData(data, 0)];
                 } else {
-                    imported = Object.keys(data).map((name, i) => {
-                        const ids = this.mapUnitsToIds(data[name]);
+                    // Legacy: map of flat teams
+                    imported = Object.keys(data).map((teamName, index) => {
+                        const units = data[teamName];
+                        const unitIds = this.mapUnitsToIds(units);
                         return {
-                            id: Date.now() + i,
-                            name: name,
-                            stages: [{ name: "Final Board", unitIds: ids }],
+                            id: Date.now() + index,
+                            name: teamName,
+                            stages: [{ name: "Final Board", unitIds: unitIds, code: "" }],
                             date: '外部データ'
                         };
                     });
@@ -431,10 +414,15 @@
             parseGuideData(guide, index) {
                 const stages = (guide.stages || []).map(s => ({
                     name: s.name || "Stage",
-                    unitIds: this.mapUnitsToIds(s.units)
+                    unitIds: this.mapUnitsToIds(s.units),
+                    code: s.code || ""
                 }));
                 if (stages.length === 0 && guide.units) {
-                    stages.push({ name: "Main", unitIds: this.mapUnitsToIds(guide.units) });
+                    stages.push({ 
+                        name: "Main", 
+                        unitIds: this.mapUnitsToIds(guide.units),
+                        code: guide.code || ""
+                    });
                 }
                 return {
                     id: Date.now() + index,
@@ -465,15 +453,19 @@
                 this.saveToLocalStorage();
                 this.renderStages();
                 this.renderTeam();
+                this.renderGuideMeta(); // Update Code Input
             }
 
             confirmAddStage() {
                 const input = document.getElementById('add-stage-name-input');
                 const name = input.value.trim() || `Lv${5 + this.currentGuide.stages.length}`;
+                
                 this.currentGuide.stages.push({
                     name: name,
-                    unitIds: [...this.currentStage.unitIds] // Clone
+                    unitIds: [...this.currentStage.unitIds],
+                    code: "" // Empty code for new stage
                 });
+                
                 this.activeStageIndex = this.currentGuide.stages.length - 1;
                 this.saveToLocalStorage();
                 this.renderAll();
@@ -525,6 +517,14 @@
                 this.renderChampionPool();
                 this.renderStages();
                 this.renderTeam();
+                this.renderGuideMeta();
+            }
+            
+            renderGuideMeta() {
+                const input = document.getElementById('guide-code-input');
+                if (input) {
+                    input.value = this.currentStage.code || '';
+                }
             }
 
             renderStages() {
@@ -536,7 +536,6 @@
                     el.className = `stage-tab px-4 py-1 rounded-full text-sm font-bold whitespace-nowrap transition border select-none ${isActive ? 'active' : ''}`;
                     el.onclick = () => this.switchStage(index);
                     el.innerHTML = `<span>${stage.name}</span>`;
-                    
                     if (isActive) {
                         const editBtn = document.createElement('button');
                         editBtn.className = "ml-2 p-0.5 rounded hover:bg-white/20 text-white/70 hover:text-white transition";
@@ -546,7 +545,6 @@
                     }
                     container.appendChild(el);
                 });
-                
                 const addBtn = document.createElement('button');
                 addBtn.className = "px-3 py-1 rounded-full text-sm font-bold text-slate-400 border border-slate-600 hover:text-white hover:bg-slate-700 transition";
                 addBtn.innerHTML = "+";
@@ -562,13 +560,11 @@
                 const filtered = this.unitsData.filter(u => {
                     const costMatch = this.filter.cost === 'all' || 
                         (this.filter.cost === 5 && u.cost >= 5) || u.cost === this.filter.cost;
-                    
                     const searchMatch = !term || 
                         Utils.safeLower(u.name).includes(term) || 
                         (u.synergies || []).some(t => Utils.safeLower(t).includes(term)) ||
                         Utils.safeLower(u.role).includes(term) ||
                         (u.ability && (Utils.safeLower(u.ability.name).includes(term) || Utils.safeLower(u.ability.description).includes(term)));
-                    
                     return costMatch && searchMatch;
                 });
 
@@ -578,21 +574,24 @@
                     const el = document.createElement('div');
                     el.className = 'flex flex-col items-center cursor-pointer group relative w-full';
                     el.onclick = () => this.addToTeam(u.id);
-                    el.innerHTML = `
-                        <div class="w-full aspect-square rounded border-2 overflow-hidden champ-card cost-${u.cost} group-hover:brightness-110 relative">
-                            <img src="${Utils.getUnitImage(u.slug)}" alt="${u.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/80x80/1e293b/FFF?text=${u.name.charAt(0)}'">
-                            <div class="absolute bottom-0 right-0 bg-slate-900/80 px-1 text-xs text-white font-bold">${u.cost}</div>
-                        </div>
-                        <span class="text-xs text-slate-400 mt-1 truncate w-full text-center group-hover:text-white">${u.name}</span>
-                    `;
+                    el.innerHTML = this.createUnitCardHTML(u);
                     pool.appendChild(el);
                 });
+            }
+
+            createUnitCardHTML(u) {
+                return `
+                    <div class="w-full aspect-square rounded border-2 overflow-hidden champ-card cost-${u.cost} group-hover:brightness-110 relative">
+                        <img src="${Utils.getUnitImage(u.slug)}" alt="${u.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/80x80/1e293b/FFF?text=${u.name.charAt(0)}'">
+                        <div class="absolute bottom-0 right-0 bg-slate-900/80 px-1 text-xs text-white font-bold">${u.cost}</div>
+                    </div>
+                    <span class="text-xs text-slate-400 mt-1 truncate w-full text-center group-hover:text-white">${u.name}</span>
+                `;
             }
 
             renderTeam() {
                 const grid = document.getElementById('team-grid');
                 const units = this.getUnitsFromIds(this.currentStage.unitIds);
-                
                 document.getElementById('team-count').textContent = `(${units.length}/${CONFIG.MAX_TEAM_SIZE})`;
                 this.calculateTraits(units);
                 this.renderDiff();
@@ -631,6 +630,9 @@
                     const v = (val) => val && val.includes ? val.split('/')[0] : val;
                     info += `<div class="grid grid-cols-3 gap-1 text-[10px] text-slate-400 border-t border-slate-600 pt-2"><div>HP:${v(u.base_stats.health)}</div><div>AD:${v(u.base_stats.attack_damage)}</div><div>AS:${u.base_stats.attack_speed}</div></div>`;
                 }
+                if (u.unlock) {
+                    info += `<div class="text-[10px] text-yellow-200/80 mt-2 border-t border-slate-600 pt-1">Unlock: ${u.unlock}</div>`;
+                }
                 return `<div class="tooltip absolute z-50 top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-slate-800 border border-slate-600 rounded-lg p-3 shadow-2xl pointer-events-none">
                     <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-white text-sm">${u.name}</h3><span class="${costColor} font-bold text-xs">$${u.cost}</span></div>
                     <div class="flex flex-wrap gap-1 mb-2">${u.synergies.map(s => `<span class="bg-slate-700 px-1.5 py-0.5 rounded text-[10px] text-slate-300">${s}</span>`).join('')}</div>
@@ -644,7 +646,6 @@
                     diffDiv.classList.add('hidden');
                     return;
                 }
-
                 const prevIds = this.currentGuide.stages[this.activeStageIndex - 1].unitIds;
                 const currIds = this.currentStage.unitIds;
                 
@@ -662,6 +663,11 @@
                     if (c > p) for(let i=0; i<c-p; i++) added.push(id);
                     else if (p > c) for(let i=0; i<p-c; i++) removed.push(id);
                 });
+
+                if (added.length === 0 && removed.length === 0) {
+                    diffDiv.classList.add('hidden');
+                    return;
+                }
                 
                 diffDiv.classList.remove('hidden');
                 
@@ -742,13 +748,31 @@
                 });
             }
 
-            // --- Event Handlers & UI Updates ---
-
+            // --- Event Handlers ---
             setupEventListeners() {
                 const searchInput = document.getElementById('search-input');
-                if (searchInput) searchInput.addEventListener('input', (e) => {
-                    this.filter.search = e.target.value;
-                    this.renderChampionPool();
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => {
+                        this.filter.search = e.target.value;
+                        this.renderChampionPool();
+                    });
+                }
+                const codeInput = document.getElementById('guide-code-input');
+                if (codeInput) {
+                    codeInput.addEventListener('input', (e) => this.updateGuideCode(e.target.value));
+                }
+            }
+
+            updateGuideCode(value) {
+                this.currentStage.code = value.trim();
+                this.saveToLocalStorage();
+            }
+
+            copyGuideCode() {
+                const code = this.currentStage.code;
+                if (!code) return;
+                navigator.clipboard.writeText(code).then(() => {
+                    this.showMessage('コードをコピーしました');
                 });
             }
 
@@ -762,6 +786,8 @@
             enableSearchInput() {
                 const el = document.getElementById('search-input');
                 if (el) el.disabled = false;
+                const codeEl = document.getElementById('guide-code-input');
+                if (codeEl) codeEl.disabled = false;
             }
 
             updateIndicator() {
@@ -773,20 +799,20 @@
                 }
             }
 
-            // --- Guide Actions ---
-
+            // --- Modals ---
             confirmSaveTeam() {
                 const input = document.getElementById('save-team-name-input');
                 const name = input.value.trim() || `ガイド ${this.savedGuides.length + 1}`;
-                
                 this.currentGuide.name = name;
-                this.savedGuides.push({
+                
+                const newEntry = {
                     id: Date.now(),
                     name: name,
                     stages: JSON.parse(JSON.stringify(this.currentGuide.stages)),
                     date: new Date().toLocaleString('ja-JP')
-                });
-                
+                };
+
+                this.savedGuides.push(newEntry);
                 this.saveToLocalStorage();
                 this.closeSaveModal();
                 this.showMessage(`「${name}」を保存しました`);
@@ -799,7 +825,7 @@
                 this.currentGuide = JSON.parse(JSON.stringify(saved));
                 // Fix legacy format
                 if (!this.currentGuide.stages && this.currentGuide.unitIds) {
-                    this.currentGuide.stages = [{ name: "Main", unitIds: this.currentGuide.unitIds }];
+                    this.currentGuide.stages = [{ name: "Main", unitIds: this.currentGuide.unitIds, code: "" }];
                 }
                 
                 this.activeStageIndex = 0;
@@ -811,61 +837,88 @@
 
             executeDelete() {
                 if (!this.pendingDelete) return;
-                
                 if (this.pendingDelete.type === 'single') {
                     this.savedGuides.splice(this.pendingDelete.index, 1);
                 } else {
                     this.savedGuides = [];
                 }
-                
                 this.saveToLocalStorage();
                 this.renderLoadModalList();
                 this.closeConfirmModal();
             }
 
-            // --- Modals ---
+            // Boilerplate Modals
             openSaveModal() {
                 document.getElementById('save-team-name-input').value = this.currentGuide.name;
                 document.getElementById('modal-save-name').classList.remove('hidden');
+                document.getElementById('save-team-name-input').focus();
             }
             closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
-            
-            openLoadModal() {
-                document.getElementById('modal-saved-teams').classList.remove('hidden');
-                this.renderLoadModalList();
-            }
+            openLoadModal() { document.getElementById('modal-saved-teams').classList.remove('hidden'); this.renderLoadModalList(); }
             closeLoadModal() { document.getElementById('modal-saved-teams').classList.add('hidden'); }
-
             openAddStageModal() {
                 document.getElementById('add-stage-name-input').value = `Lv${5 + this.currentGuide.stages.length}`;
                 document.getElementById('modal-add-stage').classList.remove('hidden');
+                document.getElementById('add-stage-name-input').focus();
             }
             closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
-
             openRenameStageModal(index, e) {
                 if(e) e.stopPropagation();
                 this.renameStageIndex = index;
                 document.getElementById('rename-stage-input').value = this.currentGuide.stages[index].name;
                 document.getElementById('modal-rename-stage').classList.remove('hidden');
+                document.getElementById('rename-stage-input').focus();
             }
             closeRenameStageModal() { document.getElementById('modal-rename-stage').classList.add('hidden'); }
-
             openConfirmModal(msg) {
                 document.getElementById('modal-confirm-text').innerText = msg;
                 document.getElementById('modal-confirm').classList.remove('hidden');
             }
-            closeConfirmModal() { 
-                this.pendingDelete = null;
-                document.getElementById('modal-confirm').classList.add('hidden'); 
-            }
-
+            closeConfirmModal() { this.pendingDelete = null; document.getElementById('modal-confirm').classList.add('hidden'); }
             showMessage(msg) {
                 document.getElementById('modal-message-text').innerText = msg;
                 document.getElementById('modal-message').classList.remove('hidden');
             }
-            
-            // --- Modal List Renderers ---
 
+            confirmDeleteTeam(index) {
+                this.pendingDelete = { type: 'single', index };
+                this.openConfirmModal('このガイドを削除しますか？');
+            }
+            confirmDeleteAll() {
+                if (this.savedGuides.length === 0) return;
+                this.pendingDelete = { type: 'all' };
+                this.openConfirmModal('全てのガイドを削除しますか？');
+            }
+
+            viewTeamJson(index) {
+                const saved = this.savedGuides[index];
+                if (!saved) return;
+                
+                let stages = saved.stages || [{ name: "Main", unitIds: saved.unitIds, code: "" }];
+                const exportData = {
+                    name: saved.name,
+                    stages: stages.map(st => ({
+                        name: st.name,
+                        code: st.code || "",
+                        units: st.unitIds.map(id => {
+                            const u = this.getUnitById(id);
+                            return u ? { id: u.id, slug: u.slug, name: u.name } : null;
+                        }).filter(Boolean)
+                    }))
+                };
+                
+                document.getElementById('json-output-area').value = JSON.stringify(exportData, null, 2);
+                document.getElementById('modal-json-view').classList.remove('hidden');
+            }
+
+            copyJsonToClipboard() {
+                document.getElementById('json-output-area').select();
+                document.execCommand('copy');
+                this.showMessage('コピーしました');
+                document.getElementById('modal-json-view').classList.add('hidden');
+            }
+            
+            // --- Modal List Renderer ---
             renderLoadModalList() {
                 const container = document.getElementById('saved-teams-list');
                 container.innerHTML = '';
@@ -910,44 +963,6 @@
                     container.appendChild(el);
                 });
             }
-
-            confirmDeleteTeam(index) {
-                this.pendingDelete = { type: 'single', index };
-                this.openConfirmModal('このガイドを削除しますか？');
-            }
-
-            confirmDeleteAll() {
-                if (this.savedGuides.length === 0) return;
-                this.pendingDelete = { type: 'all' };
-                this.openConfirmModal('全てのガイドを削除しますか？');
-            }
-
-            viewTeamJson(index) {
-                const saved = this.savedGuides[index];
-                if (!saved) return;
-                
-                let stages = saved.stages || [{ name: "Main", unitIds: saved.unitIds }];
-                const exportData = {
-                    name: saved.name,
-                    stages: stages.map(st => ({
-                        name: st.name,
-                        units: st.unitIds.map(id => {
-                            const u = this.getUnitById(id);
-                            return u ? { id: u.id, slug: u.slug, name: u.name } : null;
-                        }).filter(Boolean)
-                    }))
-                };
-                
-                document.getElementById('json-output-area').value = JSON.stringify(exportData, null, 2);
-                document.getElementById('modal-json-view').classList.remove('hidden');
-            }
-
-            copyJsonToClipboard() {
-                document.getElementById('json-output-area').select();
-                document.execCommand('copy');
-                this.showMessage('コピーしました');
-                document.getElementById('modal-json-view').classList.add('hidden');
-            }
         }
 
         async function initApp() {
@@ -963,7 +978,7 @@
                 
                 let notebooks = null;
                 if (resNB.ok) notebooks = await resNB.json();
-                
+
                 window.app = new TeamPlanner(tftData.unit, tftData.traits, notebooks);
                 
             } catch (e) {
