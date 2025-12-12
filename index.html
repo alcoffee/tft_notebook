@@ -78,17 +78,13 @@
                 TFT Set 16 Team Planner
             </h1>
             <div class="flex flex-wrap gap-2 justify-center">
-                <!-- Edit Actions -->
                 <button id="btn-sort" onclick="app.sortTeam()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     コスト順
                 </button>
                 <button id="btn-reset" onclick="app.clearTeam()" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     リセット
                 </button>
-                
                 <div class="w-px bg-slate-600 mx-1 hidden sm:block"></div>
-
-                <!-- Save Actions -->
                 <button id="btn-save" onclick="app.openSaveModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     ガイド保存
                 </button>
@@ -155,7 +151,6 @@
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
                 <h2 class="text-lg font-semibold text-slate-200 mb-4 border-b border-slate-700 pb-2">アクティブシナジー</h2>
                 <div id="traits-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    <!-- Traits rendered here -->
                     <div class="col-span-full text-center text-slate-500 py-4">
                         ユニットを追加してシナジーを表示
                     </div>
@@ -185,7 +180,6 @@
 
                 <!-- Champion Grid -->
                 <div id="champion-pool" class="grid grid-cols-4 sm:grid-cols-5 gap-3 p-1 overflow-y-auto flex-grow content-start">
-                    <!-- Champions injected here -->
                     <div class="col-span-full flex flex-col items-center justify-center py-10 text-slate-400 gap-3">
                         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                         <p>データを読み込んでいます...</p>
@@ -309,10 +303,10 @@
                 this.unitsData = unitsData || [];
                 this.traitsData = traitsData || [];
                 
-                this.team = [];
+                this.team = []; // Deprecated, use currentStage.unitIds
                 this.maxTeamSize = 13;
                 this.filter = { cost: 'all', search: '' };
-                this.savedTeams = [];
+                this.savedTeams = []; // Actually Saved Guides
                 this.pendingDelete = null;
                 this.renameStageIndex = null;
                 
@@ -360,24 +354,69 @@
             }
 
             importExternalNotebooks(data) {
-                const imported = Object.keys(data).map((teamName, index) => {
-                    const units = data[teamName];
-                    const unitIds = units.map(u => u.id).filter(id => this.unitsData.some(ud => ud.id === id));
-                    
-                    return {
-                        id: Date.now() + index,
-                        name: teamName,
-                        stages: [
-                            { name: "Final Board", unitIds: unitIds }
-                        ],
-                        date: '外部データ'
-                    };
-                });
+                let imported = [];
+
+                if (Array.isArray(data)) {
+                    // Array of guides
+                    imported = data.map((guide, index) => this.parseGuideData(guide, index));
+                } else if (data.stages && Array.isArray(data.stages)) {
+                    // Single guide object
+                    imported = [this.parseGuideData(data, 0)];
+                } else {
+                    // Legacy: map of flat teams
+                    imported = Object.keys(data).map((teamName, index) => {
+                        const units = data[teamName];
+                        const unitIds = this.mapUnitsToIds(units);
+                        
+                        return {
+                            id: Date.now() + index,
+                            name: teamName,
+                            stages: [
+                                { name: "Final Board", unitIds: unitIds }
+                            ],
+                            date: '外部データ'
+                        };
+                    });
+                }
                 
                 if (imported.length > 0) {
-                    this.savedTeams = imported;
+                    this.savedTeams = [...this.savedTeams, ...imported];
                     this.saveToLocalStorage();
                 }
+            }
+
+            parseGuideData(guide, index) {
+                // Parse a guide object { name: "...", stages: [ {name, units} ] }
+                const stages = (guide.stages || []).map(stage => ({
+                    name: stage.name || "Stage",
+                    unitIds: this.mapUnitsToIds(stage.units)
+                }));
+
+                // Fallback if no stages but units exist at top level (hybrid format?)
+                if (stages.length === 0 && guide.units) {
+                    stages.push({
+                        name: "Main",
+                        unitIds: this.mapUnitsToIds(guide.units)
+                    });
+                }
+
+                return {
+                    id: Date.now() + index,
+                    name: guide.name || `Guide ${index + 1}`,
+                    stages: stages,
+                    date: '外部データ'
+                };
+            }
+
+            mapUnitsToIds(units) {
+                if (!units || !Array.isArray(units)) return [];
+                return units.map(u => {
+                    // unit object {id, slug} or just ID?
+                    // notebooks.json example had {id, slug, name} objects
+                    if (u && typeof u === 'object' && u.id) return u.id;
+                    if (typeof u === 'number') return u; 
+                    return null;
+                }).filter(id => id && this.unitsData.some(ud => ud.id === id));
             }
 
             toggleButtons(disabled) {
@@ -416,7 +455,7 @@
                 const input = document.getElementById('add-stage-name-input');
                 const newStageName = input.value.trim() || `Lv${5 + this.currentGuide.stages.length}`;
 
-                // Clone current stage units
+                // Clone current stage units for continuity
                 const currentUnits = [...this.currentStage.unitIds];
                 
                 this.currentGuide.stages.push({
@@ -596,6 +635,7 @@
                         if (data.savedTeams && Array.isArray(data.savedTeams)) {
                             this.savedTeams = data.savedTeams;
                         }
+                        // Restore active guide state
                         if (data.currentGuide) {
                             this.currentGuide = data.currentGuide;
                             this.activeStageIndex = data.activeStageIndex || 0;
@@ -981,7 +1021,6 @@
                 `;
             }
 
-            // Restore missing methods
             addToTeam(id) {
                 if (this.currentStage.unitIds.length >= this.maxTeamSize) return;
                 
@@ -1137,7 +1176,6 @@
             const poolEl = document.getElementById('champion-pool');
 
             try {
-                // Fetch both data sources in parallel
                 const [dataResponse, notebooksResponse] = await Promise.all([
                     fetch(DATA_URL),
                     fetch(NOTEBOOKS_URL)
@@ -1155,7 +1193,6 @@
                     console.warn(`Notebooks fetch failed: ${notebooksResponse.status}`);
                 }
                 
-                // Initialize app with both data sets
                 window.app = new TeamPlanner(tftData.unit, tftData.traits, notebooksData);
                 
             } catch (error) {
