@@ -132,7 +132,7 @@
                 <!-- Stage Controls -->
                 <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-700">
                     <span class="text-xs text-slate-400 mr-1">現在のステージから:</span>
-                    <button onclick="app.openAddStageModal('next')" class="bg-slate-700 hover:bg-blue-900/50 hover:text-blue-200 hover:border-blue-500 border border-slate-600 text-slate-200 px-3 py-1 rounded text-xs transition flex items-center gap-1">
+                    <button onclick="app.openAddStageModal('normal')" class="bg-slate-700 hover:bg-blue-900/50 hover:text-blue-200 hover:border-blue-500 border border-slate-600 text-slate-200 px-3 py-1 rounded text-xs transition flex items-center gap-1">
                         <span class="text-blue-400 font-bold text-lg leading-none">↓</span> Next
                     </button>
                     <button onclick="app.openAddStageModal('alter')" class="bg-slate-700 hover:bg-purple-900/50 hover:text-purple-200 hover:border-purple-500 border border-slate-600 text-slate-200 px-3 py-1 rounded text-xs transition flex items-center gap-1">
@@ -335,7 +335,10 @@
                 </div>
             </div>
 
-            <div class="p-4 border-t border-slate-700 flex justify-between bg-slate-800/50 rounded-b-xl">
+            <div class="p-4 border-t border-slate-700 flex justify-between bg-slate-800/50 rounded-b-xl flex-wrap gap-2">
+                <button onclick="app.viewAllGuidesJson()" class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition mr-auto">
+                    全ガイドJSON出力
+                </button>
                 <button onclick="app.confirmDeleteAll()" class="text-red-400 hover:text-red-300 text-sm font-semibold transition">
                     全データを削除
                 </button>
@@ -491,8 +494,6 @@
 
                 if (hasDefinedIds) {
                     // Import as defined tree structure
-                    // Need to map old IDs to new ones or trust them? Trust if they are strings/unique.
-                    // For safety, let's keep them if unique, else gen new.
                     rawStages.forEach((s) => {
                         stages.push({
                             id: s.id || Utils.generateId(),
@@ -504,7 +505,7 @@
                         });
                     });
                 } else {
-                    // Import as Linear Chain (Fallback for old/flat format)
+                    // Import as Linear Chain (Fallback)
                     rawStages.forEach((s, idx) => {
                         const id = Utils.generateId();
                         stages.push({
@@ -598,8 +599,8 @@
                     // Next: Child of current
                     parentId = this.activeStageId;
                     this.addingStageType = 'normal'; // Standardize type name
-                } else if (this.addingStageType === 'alter') {
-                    // Alter: Sibling of current (Child of current's parent)
+                } else if (this.addingStageType === 'alter' || this.addingStageType === 'branch') {
+                    // Alter/Branch: Sibling of current (Child of current's parent)
                     parentId = this.currentStage.parentId;
                 }
 
@@ -687,14 +688,20 @@
 
                     let typeColor = "bg-blue-500";
                     if (node.type === 'alter') typeColor = "bg-purple-500";
+                    if (node.type === 'branch') typeColor = "bg-orange-500";
 
                     el.className = `stage-node flex items-center p-2 rounded mb-1 ${isActive ? 'active' : ''}`;
-                    // Simple indentation logic
-                    el.style.marginLeft = `${depth * 20}px`;
+                    el.style.marginLeft = `${depth * 20}px`; // Simple indentation
+                    if (node.type !== 'normal' && depth > 0) {
+                         el.classList.add(`type-${node.type}`);
+                    } else {
+                         el.classList.add('type-normal');
+                    }
+
                     el.onclick = () => this.switchStage(node.id);
 
                     el.innerHTML = `
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 w-full">
                             <span class="type-indicator" style="background-color: var(--tw-${typeColor}); box-shadow: 0 0 5px var(--tw-${typeColor})"></span>
                             <span class="text-sm font-bold truncate flex-grow ${isActive ? 'text-white' : 'text-slate-400'}">${node.name}</span>
                             <span class="text-[10px] text-slate-600 bg-slate-800 px-1 rounded">${node.unitIds.length}</span>
@@ -765,7 +772,7 @@
                     el.innerHTML = ids.length ? '' : '<span class="text-[10px] text-slate-500">なし</span>';
                     ids.forEach(id => {
                         const u = this.getUnitById(id);
-                        if(u) el.innerHTML += `<div class="relative w-8 h-8 rounded border ${Utils.getCostBorderClass(u.cost)} overflow-hidden" title="${u.name}"><img src="${Utils.getUnitImage(u.slug)}" class="w-full h-full object-cover"></div>`;
+                        if(u) el.innerHTML += `<div class="relative w-8 h-8 rounded border-2 ${Utils.getCostBorderClass(u.cost)} overflow-hidden" title="${u.name}"><img src="${Utils.getUnitImage(u.slug)}" class="w-full h-full object-cover"></div>`;
                     });
                 };
                 render(added, inDiv);
@@ -976,13 +983,13 @@
             openSaveModal() {
                 document.getElementById('save-team-name-input').value = this.currentGuide.name;
                 document.getElementById('modal-save-name').classList.remove('hidden');
+                document.getElementById('save-team-name-input').focus();
             }
             closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
 
             confirmSaveTeam() {
                 const name = document.getElementById('save-team-name-input').value.trim() || `ガイド ${this.savedGuides.length + 1}`;
                 this.currentGuide.name = name;
-
                 const newEntry = {
                     id: Date.now(),
                     name: name,
@@ -1002,9 +1009,9 @@
                 this.renderLoadModalList();
             }
             closeLoadModal() { document.getElementById('modal-saved-teams').classList.add('hidden'); }
-
             openAddStageModal(type) {
                 this.addingStageType = type;
+                // Pre-fill name based on current name or type
                 let suggestion = "Stage";
                 if (type === 'normal') {
                    const match = this.currentStage.name.match(/Lv(\d+)/i);
@@ -1022,7 +1029,6 @@
                 document.getElementById('add-stage-name-input').focus();
             }
             closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
-
             openRenameStageModal(stageId, e) {
                 if(e) e.stopPropagation();
                 // If id passed (from tree button), use it. Else use active.
@@ -1075,6 +1081,31 @@
                 this.closeConfirmModal();
             }
 
+            viewAllGuidesJson() {
+                 if (this.savedGuides.length === 0) {
+                     this.showMessage('保存されたガイドはありません');
+                     return;
+                 }
+
+                 const exportData = this.savedGuides.map(guide => ({
+                     name: guide.name,
+                     stages: guide.stages.map(st => ({
+                        id: st.id,
+                        name: st.name,
+                        type: st.type,
+                        parentId: st.parentId,
+                        code: st.code || "",
+                        units: st.unitIds.map(id => {
+                            const u = this.getUnitById(id);
+                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null; // Added cost
+                        }).filter(Boolean)
+                     }))
+                 }));
+
+                 document.getElementById('json-output-area').value = JSON.stringify(exportData, null, 2);
+                 document.getElementById('modal-json-view').classList.remove('hidden');
+            }
+
             viewTeamJson(index) {
                 const saved = this.savedGuides[index];
                 if (!saved) return;
@@ -1090,7 +1121,7 @@
                         code: st.code || "",
                         units: st.unitIds.map(id => {
                             const u = this.getUnitById(id);
-                            return u ? { id: u.id, slug: u.slug, name: u.name } : null;
+                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null; // Added cost
                         }).filter(Boolean)
                     }))
                 };
@@ -1161,28 +1192,10 @@
                         units = saved.unitIds;
                     }
 
-                    // Show initial and final stage units
-                    let initialUnits = [];
-                    if (stages.length > 1) {
-                         initialUnits = stages[0].unitIds || [];
-                    }
-
-                    const renderUnitImgs = (uIds) => {
-                         return uIds.slice(0, 5).map(id => {
-                            const u = this.getUnitById(id);
-                            return u ? `<img src="${Utils.getUnitImage(u.slug)}" class="w-6 h-6 rounded-full border border-slate-500 object-cover" title="${u.name}">` : '';
-                        }).join('');
-                    };
-
-                    const finalImgs = renderUnitImgs(units);
-                    const initImgs = initialUnits.length > 0 ? renderUnitImgs(initialUnits) : '';
-
-                    let previewHtml = '';
-                    if (initImgs) {
-                        previewHtml = `<div class="flex items-center gap-2 opacity-60">${initImgs}<span class="text-slate-500">→</span></div>`;
-                    }
-                    previewHtml += `<div class="flex gap-1">${finalImgs}</div>`;
-
+                    const imgs = units.slice(0, 7).map(id => {
+                        const u = this.getUnitById(id);
+                        return u ? `<img src="${Utils.getUnitImage(u.slug)}" class="w-6 h-6 rounded-full border-2 ${Utils.getCostBorderClass(u.cost)} object-cover" title="${u.name}">` : '';
+                    }).join('');
 
                     const el = document.createElement('div');
                     el.className = 'bg-slate-700/50 rounded-lg p-3 flex flex-col sm:flex-row justify-between items-center gap-3 border border-slate-600 hover:border-slate-500 transition';
@@ -1193,7 +1206,7 @@
                                 <span class="text-xs text-slate-400 whitespace-nowrap">${saved.date}</span>
                                 <span class="text-xs bg-slate-600 px-1.5 rounded text-slate-300 ml-2">${stages.length} Stages</span>
                             </div>
-                            <div class="flex gap-1 overflow-hidden items-center">${previewHtml}</div>
+                            <div class="flex gap-1 overflow-hidden">${imgs}${units.length > 7 ? `<span class="text-xs text-slate-500 flex items-center">+${units.length - 7}</span>` : ''}</div>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto justify-end">
                             <button onclick="app.applySavedTeam(${realIdx})" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold">読込</button>

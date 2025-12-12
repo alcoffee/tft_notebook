@@ -12,22 +12,26 @@
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 33,
             "slug": "jhin",
-            "name": "Jhin"
+            "name": "Jhin",
+            "cost": 1
           },
           {
             "id": 63,
             "slug": "rumble",
-            "name": "Rumble"
+            "name": "Rumble",
+            "cost": 1
           },
           {
             "id": 81,
             "slug": "tristana",
-            "name": "Tristana"
+            "name": "Tristana",
+            "cost": 2
           }
         ]
       },
@@ -41,32 +45,38 @@
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 33,
             "slug": "jhin",
-            "name": "Jhin"
+            "name": "Jhin",
+            "cost": 1
           },
           {
             "id": 63,
             "slug": "rumble",
-            "name": "Rumble"
+            "name": "Rumble",
+            "cost": 1
           },
           {
             "id": 68,
             "slug": "shen",
-            "name": "Shen"
+            "name": "Shen",
+            "cost": 1
           },
           {
             "id": 81,
             "slug": "tristana",
-            "name": "Tristana"
+            "name": "Tristana",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           }
         ]
       },
@@ -80,37 +90,44 @@
           {
             "id": 4,
             "slug": "anivia",
-            "name": "Anivia"
+            "name": "Anivia",
+            "cost": 1
           },
           {
             "id": 63,
             "slug": "rumble",
-            "name": "Rumble"
+            "name": "Rumble",
+            "cost": 1
           },
           {
             "id": 7,
             "slug": "ashe",
-            "name": "Ashe"
+            "name": "Ashe",
+            "cost": 2
           },
           {
             "id": 81,
             "slug": "tristana",
-            "name": "Tristana"
+            "name": "Tristana",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           }
         ]
       },
@@ -124,42 +141,50 @@
           {
             "id": 7,
             "slug": "ashe",
-            "name": "Ashe"
+            "name": "Ashe",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           },
           {
             "id": 43,
             "slug": "lissandra",
-            "name": "Lissandra"
+            "name": "Lissandra",
+            "cost": 4
           },
           {
             "id": 78,
             "slug": "taric",
-            "name": "Taric"
+            "name": "Taric",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 96,
             "slug": "yunara",
-            "name": "Yunara"
+            "name": "Yunara",
+            "cost": 4
           }
         ]
       },
@@ -173,47 +198,56 @@
           {
             "id": 7,
             "slug": "ashe",
-            "name": "Ashe"
+            "name": "Ashe",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           },
           {
             "id": 43,
             "slug": "lissandra",
-            "name": "Lissandra"
+            "name": "Lissandra",
+            "cost": 4
           },
           {
             "id": 78,
             "slug": "taric",
-            "name": "Taric"
+            "name": "Taric",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 96,
             "slug": "yunara",
-            "name": "Yunara"
+            "name": "Yunara",
+            "cost": 4
           },
           {
             "id": 64,
             "slug": "ryze",
-            "name": "Ryze"
+            "name": "Ryze",
+            "cost": 7
           }
         ]
       },
@@ -227,22 +261,26 @@
           {
             "id": 31,
             "slug": "illaoi",
-            "name": "Illaoi"
+            "name": "Illaoi",
+            "cost": 1
           },
           {
             "id": 33,
             "slug": "jhin",
-            "name": "Jhin"
+            "name": "Jhin",
+            "cost": 1
           },
           {
             "id": 68,
             "slug": "shen",
-            "name": "Shen"
+            "name": "Shen",
+            "cost": 1
           },
           {
             "id": 92,
             "slug": "xinzhao",
-            "name": "Xin Zhao"
+            "name": "Xin Zhao",
+            "cost": 2
           }
         ]
       },
@@ -256,32 +294,38 @@
           {
             "id": 31,
             "slug": "illaoi",
-            "name": "Illaoi"
+            "name": "Illaoi",
+            "cost": 1
           },
           {
             "id": 33,
             "slug": "jhin",
-            "name": "Jhin"
+            "name": "Jhin",
+            "cost": 1
           },
           {
             "id": 63,
             "slug": "rumble",
-            "name": "Rumble"
+            "name": "Rumble",
+            "cost": 1
           },
           {
             "id": 68,
             "slug": "shen",
-            "name": "Shen"
+            "name": "Shen",
+            "cost": 1
           },
           {
             "id": 81,
             "slug": "tristana",
-            "name": "Tristana"
+            "name": "Tristana",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           }
         ]
       },
@@ -295,37 +339,44 @@
           {
             "id": 4,
             "slug": "anivia",
-            "name": "Anivia"
+            "name": "Anivia",
+            "cost": 1
           },
           {
             "id": 33,
             "slug": "jhin",
-            "name": "Jhin"
+            "name": "Jhin",
+            "cost": 1
           },
           {
             "id": 63,
             "slug": "rumble",
-            "name": "Rumble"
+            "name": "Rumble",
+            "cost": 1
           },
           {
             "id": 68,
             "slug": "shen",
-            "name": "Shen"
+            "name": "Shen",
+            "cost": 1
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           }
         ]
       },
@@ -339,42 +390,50 @@
           {
             "id": 7,
             "slug": "ashe",
-            "name": "Ashe"
+            "name": "Ashe",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           },
           {
             "id": 43,
             "slug": "lissandra",
-            "name": "Lissandra"
+            "name": "Lissandra",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 96,
             "slug": "yunara",
-            "name": "Yunara"
+            "name": "Yunara",
+            "cost": 4
           },
           {
             "id": 78,
             "slug": "taric",
-            "name": "Taric"
+            "name": "Taric",
+            "cost": 4
           }
         ]
       },
@@ -388,47 +447,56 @@
           {
             "id": 7,
             "slug": "ashe",
-            "name": "Ashe"
+            "name": "Ashe",
+            "cost": 2
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 65,
             "slug": "sejuani",
-            "name": "Sejuani"
+            "name": "Sejuani",
+            "cost": 3
           },
           {
             "id": 43,
             "slug": "lissandra",
-            "name": "Lissandra"
+            "name": "Lissandra",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 96,
             "slug": "yunara",
-            "name": "Yunara"
+            "name": "Yunara",
+            "cost": 4
           },
           {
             "id": 78,
             "slug": "taric",
-            "name": "Taric"
+            "name": "Taric",
+            "cost": 4
           },
           {
             "id": 64,
             "slug": "ryze",
-            "name": "Ryze"
+            "name": "Ryze",
+            "cost": 7
           }
         ]
       }
@@ -447,27 +515,32 @@
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 4,
             "slug": "anivia",
-            "name": "Anivia"
+            "name": "Anivia",
+            "cost": 1
           },
           {
             "id": 54,
             "slug": "neeko",
-            "name": "Neeko"
+            "name": "Neeko",
+            "cost": 2
           },
           {
             "id": 10,
             "slug": "bard",
-            "name": "Bard"
+            "name": "Bard",
+            "cost": 2
           }
         ]
       },
@@ -481,37 +554,44 @@
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 58,
             "slug": "poppy",
-            "name": "Poppy"
+            "name": "Poppy",
+            "cost": 2
           },
           {
             "id": 92,
             "slug": "xinzhao",
-            "name": "Xin Zhao"
+            "name": "Xin Zhao",
+            "cost": 2
           },
           {
             "id": 84,
             "slug": "vayne",
-            "name": "Vayne"
+            "name": "Vayne",
+            "cost": 3
           },
           {
             "id": 10,
             "slug": "bard",
-            "name": "Bard"
+            "name": "Bard",
+            "cost": 2
           },
           {
             "id": 26,
             "slug": "galio",
-            "name": "Galio"
+            "name": "Galio",
+            "cost": 5
           }
         ]
       },
@@ -525,42 +605,50 @@
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 58,
             "slug": "poppy",
-            "name": "Poppy"
+            "name": "Poppy",
+            "cost": 2
           },
           {
             "id": 92,
             "slug": "xinzhao",
-            "name": "Xin Zhao"
+            "name": "Xin Zhao",
+            "cost": 2
           },
           {
             "id": 84,
             "slug": "vayne",
-            "name": "Vayne"
+            "name": "Vayne",
+            "cost": 3
           },
           {
             "id": 28,
             "slug": "garen",
-            "name": "Garen"
+            "name": "Garen",
+            "cost": 4
           },
           {
             "id": 47,
             "slug": "lux",
-            "name": "Lux"
+            "name": "Lux",
+            "cost": 4
           },
           {
             "id": 26,
             "slug": "galio",
-            "name": "Galio"
+            "name": "Galio",
+            "cost": 5
           }
         ]
       },
@@ -574,47 +662,56 @@
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 40,
             "slug": "kogmaw",
-            "name": "Kog'Maw"
+            "name": "Kog'Maw",
+            "cost": 1
           },
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 35,
             "slug": "kaisa",
-            "name": "Kai'Sa"
+            "name": "Kai'Sa",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 67,
             "slug": "sett",
-            "name": "Sett"
+            "name": "Sett",
+            "cost": 5
           },
           {
             "id": 26,
             "slug": "galio",
-            "name": "Galio"
+            "name": "Galio",
+            "cost": 5
           }
         ]
       },
@@ -628,52 +725,62 @@
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 40,
             "slug": "kogmaw",
-            "name": "Kog'Maw"
+            "name": "Kog'Maw",
+            "cost": 1
           },
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 37,
             "slug": "kennen",
-            "name": "Kennen"
+            "name": "Kennen",
+            "cost": 3
           },
           {
             "id": 39,
             "slug": "kobukoyuumi",
-            "name": "Kobuko & Yuumi"
+            "name": "Kobuko & Yuumi",
+            "cost": 3
           },
           {
             "id": 35,
             "slug": "kaisa",
-            "name": "Kai'Sa"
+            "name": "Kai'Sa",
+            "cost": 4
           },
           {
             "id": 90,
             "slug": "wukong",
-            "name": "Wukong"
+            "name": "Wukong",
+            "cost": 4
           },
           {
             "id": 67,
             "slug": "sett",
-            "name": "Sett"
+            "name": "Sett",
+            "cost": 5
           },
           {
             "id": 26,
             "slug": "galio",
-            "name": "Galio"
+            "name": "Galio",
+            "cost": 5
           },
           {
             "id": 64,
             "slug": "ryze",
-            "name": "Ryze"
+            "name": "Ryze",
+            "cost": 7
           }
         ]
       },
@@ -687,47 +794,56 @@
           {
             "id": 32,
             "slug": "jarvaniv",
-            "name": "Jarvan IV"
+            "name": "Jarvan IV",
+            "cost": 1
           },
           {
             "id": 73,
             "slug": "sona",
-            "name": "Sona"
+            "name": "Sona",
+            "cost": 1
           },
           {
             "id": 92,
             "slug": "xinzhao",
-            "name": "Xin Zhao"
+            "name": "Xin Zhao",
+            "cost": 2
           },
           {
             "id": 84,
             "slug": "vayne",
-            "name": "Vayne"
+            "name": "Vayne",
+            "cost": 3
           },
           {
             "id": 28,
             "slug": "garen",
-            "name": "Garen"
+            "name": "Garen",
+            "cost": 4
           },
           {
             "id": 47,
             "slug": "lux",
-            "name": "Lux"
+            "name": "Lux",
+            "cost": 4
           },
           {
             "id": 74,
             "slug": "swain",
-            "name": "Swain"
+            "name": "Swain",
+            "cost": 4
           },
           {
             "id": 75,
             "slug": "sylas",
-            "name": "Sylas"
+            "name": "Sylas",
+            "cost": 7
           },
           {
             "id": 26,
             "slug": "galio",
-            "name": "Galio"
+            "name": "Galio",
+            "cost": 5
           }
         ]
       }
