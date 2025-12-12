@@ -8,25 +8,25 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans JP', sans-serif; }
-        
+
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
         /* Cost Colors */
-        .cost-1 { border-color: #9ca3af; } /* Gray */
-        .cost-2 { border-color: #22c55e; } /* Green */
-        .cost-3 { border-color: #3b82f6; } /* Blue */
-        .cost-4 { border-color: #a855f7; } /* Purple */
-        .cost-5, .cost-7 { border-color: #eab308; } /* Gold */
-        
-        .trait-tier-0 { background-color: #334155; color: #94a3b8; } /* Inactive */
-        .trait-tier-1 { background-color: #78350f; color: #fdba74; border: 1px solid #92400e; } /* Bronze */
-        .trait-tier-2 { background-color: #374151; color: #e5e7eb; border: 1px solid #9ca3af; } /* Silver */
-        .trait-tier-3 { background-color: #ca8a04; color: #fff; border: 1px solid #fde047; box-shadow: 0 0 10px rgba(234, 179, 8, 0.5); } /* Gold */
-        .trait-tier-4 { background-color: #e879f9; color: #fff; background-image: linear-gradient(135deg, #a855f7, #ec4899); box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); } /* Prismatic */
+        .cost-1 { border-color: #9ca3af; }
+        .cost-2 { border-color: #22c55e; }
+        .cost-3 { border-color: #3b82f6; }
+        .cost-4 { border-color: #a855f7; }
+        .cost-5, .cost-7 { border-color: #eab308; }
+
+        .trait-tier-0 { background-color: #334155; color: #94a3b8; }
+        .trait-tier-1 { background-color: #78350f; color: #fdba74; border: 1px solid #92400e; }
+        .trait-tier-2 { background-color: #374151; color: #e5e7eb; border: 1px solid #9ca3af; }
+        .trait-tier-3 { background-color: #ca8a04; color: #fff; border: 1px solid #fde047; box-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .trait-tier-4 { background-color: #e879f9; color: #fff; background-image: linear-gradient(135deg, #a855f7, #ec4899); box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); }
 
         .champ-card { transition: transform 0.1s; }
         .champ-card:active { transform: scale(0.95); }
@@ -35,18 +35,50 @@
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.2s;
-            pointer-events: none; /* Ensure tooltip doesn't block mouse events */
+            pointer-events: none;
         }
         .has-tooltip:hover .tooltip {
             visibility: visible;
             opacity: 1;
         }
-        /* Ensure tooltips are always on top */
         .tooltip { z-index: 100; }
 
-        /* Modal Styles */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Tree Stage Styles */
+        .stage-node {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left-width: 3px;
+        }
+        .stage-node:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .stage-node.active {
+            background-color: rgba(30, 41, 59, 0.8);
+            border-left-color: #3b82f6; /* Default Blue */
+        }
+        .stage-node.active.type-normal { border-left-color: #3b82f6; }
+        .stage-node.active.type-alter { border-left-color: #a855f7; }
+
+        .stage-node:not(.active) {
+            border-left-color: transparent;
+            color: #94a3b8;
+        }
+
+        /* Type Indicators in Tree */
+        .tree-branch-line {
+            border-left: 1px solid #475569;
+            border-bottom: 1px solid #475569;
+            position: absolute;
+            left: -12px;
+            top: -10px;
+            height: 24px;
+            width: 10px;
+            border-bottom-left-radius: 4px;
         }
     </style>
 </head>
@@ -59,21 +91,17 @@
                 TFT Set 16 Team Planner
             </h1>
             <div class="flex flex-wrap gap-2 justify-center">
-                <!-- Edit Actions -->
                 <button id="btn-sort" onclick="app.sortTeam()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     コスト順
                 </button>
                 <button id="btn-reset" onclick="app.clearTeam()" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
                     リセット
                 </button>
-                
                 <div class="w-px bg-slate-600 mx-1 hidden sm:block"></div>
-
-                <!-- Save Actions -->
-                <button id="btn-save" onclick="app.openSaveModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                <button id="btn-save" onclick="app.openSaveModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded text-sm font-bold transition">
                     ガイド保存
                 </button>
-                <button id="btn-load" onclick="app.openLoadModal()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                <button id="btn-load" onclick="app.openLoadModal()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded text-sm font-bold transition">
                     ガイド一覧
                 </button>
             </div>
@@ -82,24 +110,52 @@
 
     <!-- Main Content -->
     <main class="flex-grow container mx-auto p-4 flex flex-col lg:flex-row gap-6">
-        
+
         <!-- Left Column: Team & Traits -->
         <div class="lg:w-2/3 flex flex-col gap-6 order-2 lg:order-1">
-            
-            <!-- Stage Tabs Area -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar" id="stage-tabs-container">
-                <!-- Tabs injected by JS -->
+
+            <!-- Stage Tree Navigator -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-3 shadow-xl mb-4">
+                <div class="flex justify-between items-center mb-2 px-2 border-b border-slate-700 pb-2">
+                    <h3 class="text-sm font-bold text-slate-300">構成フロー (ステージ遷移)</h3>
+                    <div class="flex gap-3 text-[10px] font-bold">
+                        <span class="text-blue-400 flex items-center gap-1">● Next(続き)</span>
+                        <span class="text-purple-400 flex items-center gap-1">● Alter(変化)</span>
+                    </div>
+                </div>
+
+                <!-- Tree Container -->
+                <div id="stage-tree-container" class="flex flex-col gap-0.5 overflow-x-auto pb-2 mb-3 max-h-48 overflow-y-auto pr-2 pl-2">
+                    <!-- Tree nodes injected by JS -->
+                </div>
+
+                <!-- Stage Controls -->
+                <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-700">
+                    <span class="text-xs text-slate-400 mr-1">現在のステージから:</span>
+                    <button onclick="app.openAddStageModal('next')" class="bg-slate-700 hover:bg-blue-900/50 hover:text-blue-200 hover:border-blue-500 border border-slate-600 text-slate-200 px-3 py-1 rounded text-xs transition flex items-center gap-1">
+                        <span class="text-blue-400 font-bold text-lg leading-none">↓</span> Next
+                    </button>
+                    <button onclick="app.openAddStageModal('alter')" class="bg-slate-700 hover:bg-purple-900/50 hover:text-purple-200 hover:border-purple-500 border border-slate-600 text-slate-200 px-3 py-1 rounded text-xs transition flex items-center gap-1">
+                        <span class="text-purple-400 font-bold text-lg leading-none">→</span> Alter
+                    </button>
+                    <div class="flex-grow"></div>
+                    <button onclick="app.deleteCurrentStage()" class="text-red-400 hover:text-red-300 text-xs underline" title="このステージを削除">削除</button>
+                </div>
             </div>
 
             <!-- Active Team Area -->
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
                 <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
-                    <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-2">
-                        現在のチーム <span id="team-count" class="text-sm text-slate-400 ml-2">(0/13)</span>
-                    </h2>
-                    <span id="data-source-indicator" class="text-xs text-slate-500 flex items-center gap-1">
-                        <!-- Filled by JS -->
-                    </span>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-lg font-semibold text-slate-200">
+                            <span id="current-stage-name" class="text-white">初期構成</span>
+                            <button onclick="app.openRenameStageModal()" class="ml-2 text-slate-500 hover:text-white transition" title="ステージ名を変更">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
+                            </button>
+                        </h2>
+                        <span id="team-count" class="text-sm text-slate-400 ml-2">(0/13)</span>
+                    </div>
+                    <span id="data-source-indicator" class="text-xs text-slate-500 flex items-center gap-1"></span>
                 </div>
 
                 <!-- Guide Code Input -->
@@ -110,7 +166,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
                     </button>
                 </div>
-                
+
                 <!-- Team Grid -->
                 <div id="team-grid" class="flex flex-wrap gap-4 min-h-[100px] items-center justify-center lg:justify-start bg-slate-900/50 p-4 rounded-lg border-2 border-dashed border-slate-700">
                     <p class="text-slate-500 text-sm select-none pointer-events-none">データの読み込みを待機しています...</p>
@@ -121,7 +177,7 @@
                     <div class="bg-slate-900/80 rounded-lg p-3 border border-slate-600">
                         <h3 class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                            構成移行ガイド (前のステージとの差分)
+                            構成移行ガイド <span class="text-[10px] font-normal text-slate-500 ml-1">(親: <span id="diff-parent-name" class="text-slate-300"></span> との差分)</span>
                         </h3>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <div class="flex-1 bg-emerald-900/20 p-2 rounded border border-emerald-900/50">
@@ -145,24 +201,23 @@
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl">
                 <h2 class="text-lg font-semibold text-slate-200 mb-4 border-b border-slate-700 pb-2">アクティブシナジー</h2>
                 <div id="traits-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    <!-- Traits rendered here -->
                     <div class="col-span-full text-center text-slate-500 py-4">
                         ユニットを追加してシナジーを表示
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <!-- Right Column: Unit Selector -->
         <div class="lg:w-1/3 order-1 lg:order-2">
             <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl sticky top-24 max-h-[calc(100vh-8rem)] flex flex-col">
-                
+
                 <!-- Filters -->
                 <div class="flex flex-col gap-3 mb-4">
-                    <input type="text" id="search-input" placeholder="名前、特性、スキル..." 
+                    <input type="text" id="search-input" placeholder="名前、特性、スキル..."
                            class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition" disabled>
-                    
+
                     <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
                         <button onclick="app.filterCost('all')" class="filter-btn active bg-blue-600 text-white px-3 py-1 rounded text-xs whitespace-nowrap">All</button>
                         <button onclick="app.filterCost(1)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-gray-400">1 Cost</button>
@@ -175,7 +230,6 @@
 
                 <!-- Champion Grid -->
                 <div id="champion-pool" class="grid grid-cols-4 sm:grid-cols-5 gap-3 p-1 overflow-y-auto flex-grow content-start">
-                    <!-- Champions injected here -->
                     <div class="col-span-full flex flex-col items-center justify-center py-10 text-slate-400 gap-3">
                         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                         <p>データを読み込んでいます...</p>
@@ -187,7 +241,7 @@
     </main>
 
     <!-- Modals -->
-    
+
     <!-- Save Name Modal -->
     <div id="modal-save-name" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6">
@@ -205,7 +259,11 @@
     <div id="modal-add-stage" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6">
             <h3 class="text-lg font-bold text-white mb-4">新しいステージを追加</h3>
-            <p class="text-xs text-slate-400 mb-4">現在の構成をコピーして新しいステージを作成します。</p>
+            <p class="text-xs text-slate-400 mb-2">現在の構成をコピーして新しいステージを作成します。</p>
+            <div class="mb-4">
+                <span id="add-stage-type-display" class="px-2 py-1 rounded text-xs text-white font-bold bg-slate-700">Normal</span>
+                <span class="text-xs text-slate-500 ml-2" id="add-stage-type-desc"></span>
+            </div>
             <input type="text" id="add-stage-name-input" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white mb-4 focus:border-blue-500 outline-none" placeholder="ステージ名を入力 (例: Lv8)">
             <div class="flex justify-end gap-3">
                 <button onclick="app.closeAddStageModal()" class="text-slate-400 hover:text-white text-sm font-bold px-3 py-2">キャンセル</button>
@@ -270,7 +328,7 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div class="flex-grow overflow-y-auto p-4">
                 <div id="saved-teams-list" class="space-y-3">
                     <p class="text-slate-500 text-center py-4">読み込み中...</p>
@@ -298,7 +356,6 @@
             MAX_TEAM_SIZE: 13,
         };
 
-        // Utility Functions
         const Utils = {
             getUnitImage: (slug) => `${CONFIG.IMAGE_BASE_URL}${slug}.jpg`,
             getCostColorClass: (cost) => {
@@ -310,6 +367,7 @@
                 return borders[cost] || 'border-slate-500';
             },
             safeLower: (str) => (str || '').toString().toLowerCase(),
+            generateId: () => Math.random().toString(36).substr(2, 9),
         };
 
         class TeamPlanner {
@@ -317,19 +375,32 @@
                 // Data
                 this.unitsData = unitsData || [];
                 this.traitsData = traitsData || [];
-                
+
                 // State
                 this.savedGuides = [];
+                // Guide structure: { name, stages: [ { id, name, unitIds, type, parentId, code } ] }
                 this.currentGuide = {
                     name: "新しいガイド",
-                    stages: [{ name: "初期構成", unitIds: [], code: "" }] // Added code per stage
+                    stages: []
                 };
-                this.activeStageIndex = 0;
+                // Initialize with root stage
+                const rootId = Utils.generateId();
+                this.currentGuide.stages.push({
+                    id: rootId,
+                    name: "初期構成",
+                    unitIds: [],
+                    type: 'normal',
+                    parentId: null,
+                    code: ""
+                });
+
+                this.activeStageId = rootId; // Track by ID instead of index
+
                 this.filter = { cost: 'all', search: '' };
                 this.pendingDelete = null;
                 this.renameStageIndex = null;
+                this.addingStageType = 'normal';
 
-                // Initialization
                 this.toggleButtons(false);
                 this.enableSearchInput();
                 this.initData(notebooksData);
@@ -338,10 +409,11 @@
             }
 
             get currentStage() {
-                return this.currentGuide.stages[this.activeStageIndex];
+                return this.currentGuide.stages.find(s => s.id === this.activeStageId) || this.currentGuide.stages[0];
             }
 
             // --- 1. Initialization & Data ---
+
             initData(notebooksData) {
                 this.loadFromLocalStorage();
                 if (this.savedGuides.length === 0 && notebooksData) {
@@ -355,19 +427,19 @@
                     const rawData = localStorage.getItem(CONFIG.STORAGE_KEY);
                     if (rawData) {
                         const data = JSON.parse(rawData);
-                        const saved = data.savedGuides || data.savedTeams || [];
-                        if (Array.isArray(saved)) this.savedGuides = saved;
-                        if (data.currentGuide) {
+                        if (data.savedGuides) this.savedGuides = data.savedGuides;
+
+                        if (data.currentGuide && Array.isArray(data.currentGuide.stages) && data.currentGuide.stages.length > 0) {
                             this.currentGuide = data.currentGuide;
-                            this.activeStageIndex = data.activeStageIndex || 0;
-                            // Migrate structure if needed
-                            this.currentGuide.stages.forEach(stage => {
-                                if (stage.code === undefined) stage.code = "";
-                            });
+                            this.activeStageId = data.activeStageId;
+                            // Fallback if ID is invalid
+                            if (!this.currentGuide.stages.some(s => s.id === this.activeStageId)) {
+                                this.activeStageId = this.currentGuide.stages[0].id;
+                            }
                         }
                     }
                 } catch (e) {
-                    console.error("Local load failed:", e);
+                    console.error("Local load failed", e);
                 }
             }
 
@@ -376,35 +448,27 @@
                     const data = {
                         savedGuides: this.savedGuides,
                         currentGuide: this.currentGuide,
-                        activeStageIndex: this.activeStageIndex,
+                        activeStageId: this.activeStageId,
                         lastUpdated: new Date().toISOString()
                     };
                     localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
-                } catch (e) {
-                    console.error("Local save failed:", e);
-                }
+                } catch (e) { console.error("Local save failed", e); }
             }
 
             importExternalNotebooks(data) {
                 let imported = [];
                 if (Array.isArray(data)) {
-                    imported = data.map((g, i) => this.parseGuideData(g, i));
-                } else if (data.stages && Array.isArray(data.stages)) {
+                    // Check if it's already in new format or old flat format
+                    if (data.length > 0 && data[0].stages) {
+                        imported = data.map((g, i) => this.parseGuideData(g, i));
+                    } else {
+                         // Fallback for flat array of single teams if any
+                         imported = data.map((g, i) => this.parseGuideData(g, i));
+                    }
+                } else if (data.stages) {
                     imported = [this.parseGuideData(data, 0)];
-                } else {
-                    // Legacy: map of flat teams
-                    imported = Object.keys(data).map((teamName, index) => {
-                        const units = data[teamName];
-                        const unitIds = this.mapUnitsToIds(units);
-                        return {
-                            id: Date.now() + index,
-                            name: teamName,
-                            stages: [{ name: "Final Board", unitIds: unitIds, code: "" }],
-                            date: '外部データ'
-                        };
-                    });
                 }
-                
+
                 if (imported.length > 0) {
                     this.savedGuides = [...this.savedGuides, ...imported];
                     this.saveToLocalStorage();
@@ -412,18 +476,49 @@
             }
 
             parseGuideData(guide, index) {
-                const stages = (guide.stages || []).map(s => ({
-                    name: s.name || "Stage",
-                    unitIds: this.mapUnitsToIds(s.units),
-                    code: s.code || ""
-                }));
-                if (stages.length === 0 && guide.units) {
-                    stages.push({ 
-                        name: "Main", 
-                        unitIds: this.mapUnitsToIds(guide.units),
-                        code: guide.code || ""
+                // Convert external JSON stages to internal format (add IDs, parentIds for linear chain)
+                const stages = [];
+                let parentId = null;
+
+                const rawStages = Array.isArray(guide.stages) ? guide.stages : [];
+                // If units exist at top level, treat as single stage or main
+                if (rawStages.length === 0 && guide.units) {
+                    rawStages.push({ name: "Main", units: guide.units });
+                }
+
+                // Check if IDs are already defined in the JSON (Tree Structure Import)
+                const hasDefinedIds = rawStages.some(s => s.id);
+
+                if (hasDefinedIds) {
+                    // Import as defined tree structure
+                    // Need to map old IDs to new ones or trust them? Trust if they are strings/unique.
+                    // For safety, let's keep them if unique, else gen new.
+                    rawStages.forEach((s) => {
+                        stages.push({
+                            id: s.id || Utils.generateId(),
+                            name: s.name || "Stage",
+                            unitIds: this.mapUnitsToIds(s.units),
+                            type: s.type || 'normal',
+                            parentId: s.parentId || null,
+                            code: s.code || ""
+                        });
+                    });
+                } else {
+                    // Import as Linear Chain (Fallback for old/flat format)
+                    rawStages.forEach((s, idx) => {
+                        const id = Utils.generateId();
+                        stages.push({
+                            id: id,
+                            name: s.name || `Stage ${idx+1}`,
+                            unitIds: this.mapUnitsToIds(s.units),
+                            type: 'normal',
+                            parentId: parentId,
+                            code: s.code || ""
+                        });
+                        parentId = id; // Chain them
                     });
                 }
+
                 return {
                     id: Date.now() + index,
                     name: guide.name || `Guide ${index + 1}`,
@@ -434,54 +529,247 @@
 
             mapUnitsToIds(units) {
                 if (!Array.isArray(units)) return [];
-                return units.map(u => (u && u.id) ? u.id : (typeof u === 'number' ? u : null))
-                            .filter(id => id && this.getUnitById(id));
+                return units.map(u => {
+                    if (u && u.id) return u.id;
+                    if (typeof u === 'number') return u;
+                    return null;
+                }).filter(id => id && this.getUnitById(id));
             }
 
-            getUnitById(id) {
-                return this.unitsData.find(u => u.id === id);
-            }
+            getUnitById(id) { return this.unitsData.find(u => u.id === id); }
+            getUnitsFromIds(ids) { return ids.map(id => this.getUnitById(id)).filter(Boolean); }
 
-            getUnitsFromIds(ids) {
-                return ids.map(id => this.getUnitById(id)).filter(Boolean);
-            }
 
-            // --- 2. Stage Operations ---
-            switchStage(index) {
-                if (index < 0 || index >= this.currentGuide.stages.length) return;
-                this.activeStageIndex = index;
+            // --- 2. Stage Logic (Tree) ---
+
+            switchStage(stageId) {
+                this.activeStageId = stageId;
                 this.saveToLocalStorage();
-                this.renderStages();
-                this.renderTeam();
-                this.renderGuideMeta(); // Update Code Input
+                this.renderAll();
             }
+
+            openAddStageModal(type) {
+                this.addingStageType = type;
+                const input = document.getElementById('add-stage-name-input');
+                const typeDisplay = document.getElementById('add-stage-type-display');
+                const typeDesc = document.getElementById('add-stage-type-desc');
+
+                let defaultName = "Next Stage";
+                let typeText = "Next";
+                let typeColor = "bg-blue-700";
+                let desc = "現在の構成を引き継いで次の段階に進みます。";
+
+                if (type === 'normal') { // "next" button passes 'normal'
+                     // Try to guess Lv based on current name
+                    const match = this.currentStage.name.match(/Lv(\d+)/i);
+                    if (match) {
+                        defaultName = `Lv${parseInt(match[1]) + 1}`;
+                    } else {
+                        // If root is "初期構成", maybe next is Lv5
+                        if (this.currentStage.name === "初期構成") defaultName = "Lv5";
+                        else defaultName = "Next Stage";
+                    }
+                } else if (type === 'alter') {
+                    defaultName = this.currentStage.name + "'";
+                    typeText = "Alter";
+                    typeColor = "bg-purple-700";
+                    desc = "現在の構成の別パターンを作成します（同階層）。";
+                }
+
+                input.value = defaultName;
+                typeDisplay.textContent = typeText;
+                typeDisplay.className = `px-2 py-1 rounded text-xs text-white font-bold ${typeColor}`;
+                typeDesc.textContent = desc;
+
+                document.getElementById('modal-add-stage').classList.remove('hidden');
+                input.focus();
+            }
+
+            closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
 
             confirmAddStage() {
                 const input = document.getElementById('add-stage-name-input');
-                const name = input.value.trim() || `Lv${5 + this.currentGuide.stages.length}`;
-                
-                this.currentGuide.stages.push({
+                const name = input.value.trim() || "New Stage";
+
+                const newId = Utils.generateId();
+                let parentId = null;
+
+                if (this.addingStageType === 'normal' || this.addingStageType === 'next') {
+                    // Next: Child of current
+                    parentId = this.activeStageId;
+                    this.addingStageType = 'normal'; // Standardize type name
+                } else if (this.addingStageType === 'alter') {
+                    // Alter: Sibling of current (Child of current's parent)
+                    parentId = this.currentStage.parentId;
+                }
+
+                // Clone current units
+                const units = [...this.currentStage.unitIds];
+
+                const newStage = {
+                    id: newId,
                     name: name,
-                    unitIds: [...this.currentStage.unitIds],
-                    code: "" // Empty code for new stage
-                });
-                
-                this.activeStageIndex = this.currentGuide.stages.length - 1;
+                    unitIds: units,
+                    type: this.addingStageType,
+                    parentId: parentId,
+                    code: ""
+                };
+
+                this.currentGuide.stages.push(newStage);
+                this.activeStageId = newId;
+
                 this.saveToLocalStorage();
                 this.renderAll();
                 this.closeAddStageModal();
             }
 
-            confirmRenameStage() {
-                if (this.renameStageIndex === null) return;
-                const input = document.getElementById('rename-stage-input');
-                const name = input.value.trim();
-                if (name) {
-                    this.currentGuide.stages[this.renameStageIndex].name = name;
-                    this.saveToLocalStorage();
-                    this.renderStages();
+            deleteCurrentStage() {
+                if (this.currentGuide.stages.length <= 1) {
+                    this.showMessage("これ以上ステージを削除できません（最低1つ必要です）");
+                    return;
                 }
-                this.closeRenameStageModal();
+                if (!confirm(`ステージ「${this.currentStage.name}」を削除しますか？\n(このステージから派生しているステージもリンクが切れます)`)) return;
+
+                const delId = this.activeStageId;
+                const parentId = this.currentStage.parentId;
+
+                // Re-parent children to deleted node's parent (Maintain tree)
+                this.currentGuide.stages.forEach(s => {
+                    if (s.parentId === delId) s.parentId = parentId;
+                });
+
+                // Remove stage
+                this.currentGuide.stages = this.currentGuide.stages.filter(s => s.id !== delId);
+
+                // Determine new active stage
+                // Try parent, or just the first available one
+                if (parentId && this.currentGuide.stages.find(s => s.id === parentId)) {
+                    this.activeStageId = parentId;
+                } else {
+                     this.activeStageId = this.currentGuide.stages[0].id;
+                }
+
+                this.saveToLocalStorage();
+                this.renderAll();
+            }
+
+            // --- UI Rendering ---
+
+            renderAll() {
+                this.renderChampionPool();
+                this.renderStages();
+                this.renderTeam();
+                this.renderGuideMeta();
+            }
+
+            renderStages() {
+                const container = document.getElementById('stage-tree-container');
+                container.innerHTML = '';
+
+                // Build tree structure for rendering
+                const stages = this.currentGuide.stages;
+                const map = {};
+                stages.forEach(s => map[s.id] = { ...s, children: [] });
+
+                const roots = [];
+                stages.forEach(s => {
+                    if (s.parentId && map[s.parentId]) {
+                        map[s.parentId].children.push(map[s.id]);
+                    } else {
+                        roots.push(map[s.id]);
+                    }
+                });
+
+                // Recursive render with indentation
+                const renderNode = (node, depth) => {
+                    const el = document.createElement('div');
+                    const isActive = node.id === this.activeStageId;
+
+                    let typeColor = "bg-blue-500";
+                    if (node.type === 'alter') typeColor = "bg-purple-500";
+
+                    el.className = `stage-node flex items-center p-2 rounded mb-1 ${isActive ? 'active' : ''}`;
+                    // Simple indentation logic
+                    el.style.marginLeft = `${depth * 20}px`;
+                    el.onclick = () => this.switchStage(node.id);
+
+                    el.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <span class="type-indicator" style="background-color: var(--tw-${typeColor}); box-shadow: 0 0 5px var(--tw-${typeColor})"></span>
+                            <span class="text-sm font-bold truncate flex-grow ${isActive ? 'text-white' : 'text-slate-400'}">${node.name}</span>
+                            <span class="text-[10px] text-slate-600 bg-slate-800 px-1 rounded">${node.unitIds.length}</span>
+                        </div>
+                    `;
+
+                    // Add edit button if active
+                    if (isActive) {
+                        const editBtn = document.createElement('button');
+                        editBtn.className = "ml-2 p-1 rounded hover:bg-slate-700 text-slate-500 hover:text-white transition z-10";
+                        editBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>`;
+                        editBtn.onclick = (e) => this.openRenameStageModal(node.id, e); // Pass ID
+                        el.querySelector('.flex').appendChild(editBtn);
+                    }
+
+                    container.appendChild(el);
+
+                    if (node.children) {
+                        node.children.forEach(child => renderNode(child, depth + 1));
+                    }
+                };
+
+                roots.forEach(r => renderNode(r, 0));
+            }
+
+            renderGuideMeta() {
+                const input = document.getElementById('guide-code-input');
+                document.getElementById('current-stage-name').textContent = this.currentStage.name;
+                if (input) input.value = this.currentStage.code || '';
+            }
+
+            renderTransitionDiff() {
+                const diffDiv = document.getElementById('transition-diff');
+                const inDiv = document.getElementById('diff-in');
+                const outDiv = document.getElementById('diff-out');
+                const parentNameSpan = document.getElementById('diff-parent-name');
+
+                const parentId = this.currentStage.parentId;
+                const parentStage = this.currentGuide.stages.find(s => s.id === parentId);
+
+                if (!parentStage) {
+                    diffDiv.classList.add('hidden');
+                    return;
+                }
+
+                parentNameSpan.textContent = `「${parentStage.name}」`;
+                diffDiv.classList.remove('hidden');
+
+                const prevIds = parentStage.unitIds;
+                const currIds = this.currentStage.unitIds;
+
+                const countIds = (ids) => {
+                    const c = {}; ids.forEach(id => c[id] = (c[id] || 0) + 1); return c;
+                };
+                const prevC = countIds(prevIds);
+                const currC = countIds(currIds);
+                const allIds = new Set([...prevIds, ...currIds]);
+
+                const added = [], removed = [];
+                allIds.forEach(id => {
+                    const p = prevC[id] || 0;
+                    const c = currC[id] || 0;
+                    if (c > p) for(let i=0; i<c-p; i++) added.push(id);
+                    else if (p > c) for(let i=0; i<p-c; i++) removed.push(id);
+                });
+
+                const render = (ids, el) => {
+                    el.innerHTML = ids.length ? '' : '<span class="text-[10px] text-slate-500">なし</span>';
+                    ids.forEach(id => {
+                        const u = this.getUnitById(id);
+                        if(u) el.innerHTML += `<div class="relative w-8 h-8 rounded border ${Utils.getCostBorderClass(u.cost)} overflow-hidden" title="${u.name}"><img src="${Utils.getUnitImage(u.slug)}" class="w-full h-full object-cover"></div>`;
+                    });
+                };
+                render(added, inDiv);
+                render(removed, outDiv);
             }
 
             // --- 3. Team Operations ---
@@ -491,19 +779,16 @@
                 this.saveToLocalStorage();
                 this.renderTeam();
             }
-
             removeFromTeam(index) {
                 this.currentStage.unitIds.splice(index, 1);
                 this.saveToLocalStorage();
                 this.renderTeam();
             }
-
             clearTeam() {
                 this.currentStage.unitIds = [];
                 this.saveToLocalStorage();
                 this.renderTeam();
             }
-
             sortTeam() {
                 const units = this.getUnitsFromIds(this.currentStage.unitIds);
                 units.sort((a, b) => (a.cost !== b.cost) ? a.cost - b.cost : a.name.localeCompare(b.name));
@@ -512,64 +797,55 @@
                 this.renderTeam();
             }
 
-            // --- 4. Rendering ---
-            renderAll() {
-                this.renderChampionPool();
-                this.renderStages();
-                this.renderTeam();
-                this.renderGuideMeta();
-            }
-            
-            renderGuideMeta() {
-                const input = document.getElementById('guide-code-input');
-                if (input) {
-                    input.value = this.currentStage.code || '';
-                }
-            }
+            // --- 4. Render Team & Pool ---
+            renderTeam() {
+                const grid = document.getElementById('team-grid');
+                const countEl = document.getElementById('team-count');
+                const currentUnits = this.getUnitsFromIds(this.currentStage.unitIds);
 
-            renderStages() {
-                const container = document.getElementById('stage-tabs-container');
-                container.innerHTML = '';
-                this.currentGuide.stages.forEach((stage, index) => {
-                    const isActive = index === this.activeStageIndex;
+                grid.innerHTML = '';
+                countEl.textContent = `(${currentUnits.length}/${CONFIG.MAX_TEAM_SIZE})`;
+
+                this.calculateTraits(currentUnits);
+                this.renderTransitionDiff();
+
+                if (currentUnits.length === 0) {
+                    grid.innerHTML = '<p class="text-slate-500 text-sm select-none pointer-events-none w-full text-center">下のリストからチャンピオンを選択してください</p>';
+                    return;
+                }
+
+                currentUnits.forEach((u, idx) => {
                     const el = document.createElement('div');
-                    el.className = `stage-tab px-4 py-1 rounded-full text-sm font-bold whitespace-nowrap transition border select-none ${isActive ? 'active' : ''}`;
-                    el.onclick = () => this.switchStage(index);
-                    el.innerHTML = `<span>${stage.name}</span>`;
-                    if (isActive) {
-                        const editBtn = document.createElement('button');
-                        editBtn.className = "ml-2 p-0.5 rounded hover:bg-white/20 text-white/70 hover:text-white transition";
-                        editBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>`;
-                        editBtn.onclick = (e) => this.openRenameStageModal(index, e);
-                        el.appendChild(editBtn);
-                    }
-                    container.appendChild(el);
+                    el.className = 'relative cursor-pointer group has-tooltip';
+                    el.onclick = () => this.removeFromTeam(idx);
+                    el.innerHTML = `
+                        <div class="relative w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden champ-card cost-${u.cost}">
+                            <img src="${Utils.getUnitImage(u.slug)}" alt="${u.name}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-red-500/0 hover:bg-red-500/40 flex items-center justify-center transition-colors">
+                                <span class="text-white font-bold opacity-0 hover:opacity-100 text-2xl">×</span>
+                            </div>
+                        </div>
+                        ${this.generateTooltip(u)}
+                    `;
+                    grid.appendChild(el);
                 });
-                const addBtn = document.createElement('button');
-                addBtn.className = "px-3 py-1 rounded-full text-sm font-bold text-slate-400 border border-slate-600 hover:text-white hover:bg-slate-700 transition";
-                addBtn.innerHTML = "+";
-                addBtn.onclick = () => this.openAddStageModal();
-                container.appendChild(addBtn);
             }
 
             renderChampionPool() {
                 const pool = document.getElementById('champion-pool');
                 pool.innerHTML = '';
-                
                 const term = Utils.safeLower(this.filter.search);
                 const filtered = this.unitsData.filter(u => {
-                    const costMatch = this.filter.cost === 'all' || 
+                    const costMatch = this.filter.cost === 'all' ||
                         (this.filter.cost === 5 && u.cost >= 5) || u.cost === this.filter.cost;
-                    const searchMatch = !term || 
-                        Utils.safeLower(u.name).includes(term) || 
+                    const searchMatch = !term ||
+                        Utils.safeLower(u.name).includes(term) ||
                         (u.synergies || []).some(t => Utils.safeLower(t).includes(term)) ||
                         Utils.safeLower(u.role).includes(term) ||
                         (u.ability && (Utils.safeLower(u.ability.name).includes(term) || Utils.safeLower(u.ability.description).includes(term)));
                     return costMatch && searchMatch;
                 });
-
                 filtered.sort((a, b) => (a.cost !== b.cost) ? a.cost - b.cost : a.name.localeCompare(b.name));
-
                 filtered.forEach(u => {
                     const el = document.createElement('div');
                     el.className = 'flex flex-col items-center cursor-pointer group relative w-full';
@@ -589,36 +865,6 @@
                 `;
             }
 
-            renderTeam() {
-                const grid = document.getElementById('team-grid');
-                const units = this.getUnitsFromIds(this.currentStage.unitIds);
-                document.getElementById('team-count').textContent = `(${units.length}/${CONFIG.MAX_TEAM_SIZE})`;
-                this.calculateTraits(units);
-                this.renderDiff();
-                
-                grid.innerHTML = '';
-                if (units.length === 0) {
-                    grid.innerHTML = '<p class="text-slate-500 text-sm select-none pointer-events-none w-full text-center">下のリストからチャンピオンを選択してください</p>';
-                    return;
-                }
-
-                units.forEach((u, idx) => {
-                    const el = document.createElement('div');
-                    el.className = 'relative cursor-pointer group has-tooltip';
-                    el.onclick = () => this.removeFromTeam(idx);
-                    el.innerHTML = `
-                        <div class="relative w-16 h-16 md:w-20 md:h-20 rounded border-2 overflow-hidden champ-card cost-${u.cost}">
-                            <img src="${Utils.getUnitImage(u.slug)}" alt="${u.name}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-red-500/0 hover:bg-red-500/40 flex items-center justify-center transition-colors">
-                                <span class="text-white font-bold opacity-0 hover:opacity-100 text-2xl">×</span>
-                            </div>
-                        </div>
-                        ${this.generateTooltip(u)}
-                    `;
-                    grid.appendChild(el);
-                });
-            }
-
             generateTooltip(u) {
                 const costColor = Utils.getCostColorClass(u.cost);
                 let info = '';
@@ -630,9 +876,8 @@
                     const v = (val) => val && val.includes ? val.split('/')[0] : val;
                     info += `<div class="grid grid-cols-3 gap-1 text-[10px] text-slate-400 border-t border-slate-600 pt-2"><div>HP:${v(u.base_stats.health)}</div><div>AD:${v(u.base_stats.attack_damage)}</div><div>AS:${u.base_stats.attack_speed}</div></div>`;
                 }
-                if (u.unlock) {
-                    info += `<div class="text-[10px] text-yellow-200/80 mt-2 border-t border-slate-600 pt-1">Unlock: ${u.unlock}</div>`;
-                }
+                if (u.unlock) info += `<div class="text-[10px] text-yellow-200/80 mt-2 border-t border-slate-600 pt-1">Unlock: ${u.unlock}</div>`;
+
                 return `<div class="tooltip absolute z-50 top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-slate-800 border border-slate-600 rounded-lg p-3 shadow-2xl pointer-events-none">
                     <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-white text-sm">${u.name}</h3><span class="${costColor} font-bold text-xs">$${u.cost}</span></div>
                     <div class="flex flex-wrap gap-1 mb-2">${u.synergies.map(s => `<span class="bg-slate-700 px-1.5 py-0.5 rounded text-[10px] text-slate-300">${s}</span>`).join('')}</div>
@@ -640,53 +885,10 @@
                 </div>`;
             }
 
-            renderDiff() {
-                const diffDiv = document.getElementById('transition-diff');
-                if (this.activeStageIndex === 0) {
-                    diffDiv.classList.add('hidden');
-                    return;
-                }
-                const prevIds = this.currentGuide.stages[this.activeStageIndex - 1].unitIds;
-                const currIds = this.currentStage.unitIds;
-                
-                const countIds = (ids) => {
-                    const c = {}; ids.forEach(id => c[id] = (c[id] || 0) + 1); return c;
-                };
-                const prevC = countIds(prevIds);
-                const currC = countIds(currIds);
-                const allIds = new Set([...prevIds, ...currIds]);
-                
-                const added = [], removed = [];
-                allIds.forEach(id => {
-                    const p = prevC[id] || 0;
-                    const c = currC[id] || 0;
-                    if (c > p) for(let i=0; i<c-p; i++) added.push(id);
-                    else if (p > c) for(let i=0; i<p-c; i++) removed.push(id);
-                });
-
-                if (added.length === 0 && removed.length === 0) {
-                    diffDiv.classList.add('hidden');
-                    return;
-                }
-                
-                diffDiv.classList.remove('hidden');
-                
-                const render = (ids, containerId) => {
-                    const el = document.getElementById(containerId);
-                    el.innerHTML = ids.length ? '' : '<span class="text-[10px] text-slate-500">なし</span>';
-                    ids.forEach(id => {
-                        const u = this.getUnitById(id);
-                        if(u) el.innerHTML += `<div class="relative w-8 h-8 rounded border ${Utils.getCostBorderClass(u.cost)} overflow-hidden" title="${u.name}"><img src="${Utils.getUnitImage(u.slug)}" class="w-full h-full object-cover"></div>`;
-                    });
-                };
-                render(added, 'diff-in');
-                render(removed, 'diff-out');
-            }
-
             calculateTraits(units) {
                 const container = document.getElementById('traits-container');
                 container.innerHTML = '';
-                
+
                 const traitCounts = {};
                 const seenSlugs = new Set();
                 units.forEach(u => {
@@ -700,7 +902,7 @@
                     const count = traitCounts[name];
                     const data = this.traitsData.find(t => t.name === name);
                     if (!data) return null;
-                    
+
                     let tier = 0;
                     if (data.unique && count >= 1) tier = 3;
                     if (name === 'Targon' && count >= 1) tier = 3;
@@ -718,7 +920,7 @@
                 }).filter(Boolean);
 
                 activeTraits.sort((a, b) => (b.tier - a.tier) || (b.count - a.count));
-                
+
                 if (activeTraits.length === 0) {
                      container.innerHTML = '<div class="col-span-full text-center text-slate-500 py-4">ユニットを追加してシナジーを表示</div>';
                      return;
@@ -750,65 +952,42 @@
 
             // --- Event Handlers ---
             setupEventListeners() {
-                const searchInput = document.getElementById('search-input');
-                if (searchInput) {
-                    searchInput.addEventListener('input', (e) => {
-                        this.filter.search = e.target.value;
-                        this.renderChampionPool();
-                    });
-                }
-                const codeInput = document.getElementById('guide-code-input');
-                if (codeInput) {
-                    codeInput.addEventListener('input', (e) => this.updateGuideCode(e.target.value));
-                }
-            }
-
-            updateGuideCode(value) {
-                this.currentStage.code = value.trim();
-                this.saveToLocalStorage();
-            }
-
-            copyGuideCode() {
-                const code = this.currentStage.code;
-                if (!code) return;
-                navigator.clipboard.writeText(code).then(() => {
-                    this.showMessage('コードをコピーしました');
+                document.getElementById('search-input').addEventListener('input', (e) => {
+                    this.filter.search = e.target.value; this.renderChampionPool();
+                });
+                document.getElementById('guide-code-input').addEventListener('input', (e) => {
+                    this.currentStage.code = e.target.value.trim(); this.saveToLocalStorage();
                 });
             }
-
-            toggleButtons(disabled) {
-                ['btn-sort', 'btn-reset', 'btn-save', 'btn-load'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.disabled = disabled;
-                });
-            }
-            
-            enableSearchInput() {
-                const el = document.getElementById('search-input');
-                if (el) el.disabled = false;
-                const codeEl = document.getElementById('guide-code-input');
-                if (codeEl) codeEl.disabled = false;
-            }
-
             updateIndicator() {
                 const el = document.getElementById('data-source-indicator');
-                if (this.savedGuides.length > 0) {
-                    el.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> 準備完了';
-                } else {
-                    el.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500"></span> 新規作成';
-                }
+                if (this.savedGuides.length > 0) el.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> 準備完了';
+                else el.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500"></span> 新規作成';
+            }
+            toggleButtons(disabled) {
+                ['btn-sort', 'btn-reset', 'btn-save', 'btn-load'].forEach(id => document.getElementById(id).disabled = disabled);
+            }
+            enableSearchInput() {
+                document.getElementById('search-input').disabled = false;
+                document.getElementById('guide-code-input').disabled = false;
             }
 
             // --- Modals ---
+            openSaveModal() {
+                document.getElementById('save-team-name-input').value = this.currentGuide.name;
+                document.getElementById('modal-save-name').classList.remove('hidden');
+            }
+            closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
+
             confirmSaveTeam() {
-                const input = document.getElementById('save-team-name-input');
-                const name = input.value.trim() || `ガイド ${this.savedGuides.length + 1}`;
+                const name = document.getElementById('save-team-name-input').value.trim() || `ガイド ${this.savedGuides.length + 1}`;
                 this.currentGuide.name = name;
-                
+
                 const newEntry = {
                     id: Date.now(),
                     name: name,
                     stages: JSON.parse(JSON.stringify(this.currentGuide.stages)),
+                    code: this.currentGuide.code,
                     date: new Date().toLocaleString('ja-JP')
                 };
 
@@ -818,58 +997,57 @@
                 this.showMessage(`「${name}」を保存しました`);
             }
 
-            applySavedTeam(index) {
-                const saved = this.savedGuides[index];
-                if (!saved) return;
-                
-                this.currentGuide = JSON.parse(JSON.stringify(saved));
-                // Fix legacy format
-                if (!this.currentGuide.stages && this.currentGuide.unitIds) {
-                    this.currentGuide.stages = [{ name: "Main", unitIds: this.currentGuide.unitIds, code: "" }];
-                }
-                
-                this.activeStageIndex = 0;
-                this.saveToLocalStorage();
-                this.renderAll();
-                this.closeLoadModal();
-                this.showMessage(`「${saved.name}」を読み込みました`);
-            }
-
-            executeDelete() {
-                if (!this.pendingDelete) return;
-                if (this.pendingDelete.type === 'single') {
-                    this.savedGuides.splice(this.pendingDelete.index, 1);
-                } else {
-                    this.savedGuides = [];
-                }
-                this.saveToLocalStorage();
+            openLoadModal() {
+                document.getElementById('modal-saved-teams').classList.remove('hidden');
                 this.renderLoadModalList();
-                this.closeConfirmModal();
             }
-
-            // Boilerplate Modals
-            openSaveModal() {
-                document.getElementById('save-team-name-input').value = this.currentGuide.name;
-                document.getElementById('modal-save-name').classList.remove('hidden');
-                document.getElementById('save-team-name-input').focus();
-            }
-            closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
-            openLoadModal() { document.getElementById('modal-saved-teams').classList.remove('hidden'); this.renderLoadModalList(); }
             closeLoadModal() { document.getElementById('modal-saved-teams').classList.add('hidden'); }
-            openAddStageModal() {
-                document.getElementById('add-stage-name-input').value = `Lv${5 + this.currentGuide.stages.length}`;
+
+            openAddStageModal(type) {
+                this.addingStageType = type;
+                let suggestion = "Stage";
+                if (type === 'normal') {
+                   const match = this.currentStage.name.match(/Lv(\d+)/i);
+                   if (match) suggestion = `Lv${parseInt(match[1]) + 1}`;
+                   else if (this.currentStage.name === "初期構成") suggestion = "Lv5";
+                   else suggestion = "Next Stage";
+                } else if (type === 'alter') {
+                   suggestion = this.currentStage.name + "'";
+                } else if (type === 'branch') {
+                   suggestion = "分岐ルート";
+                }
+
+                document.getElementById('add-stage-name-input').value = suggestion;
                 document.getElementById('modal-add-stage').classList.remove('hidden');
                 document.getElementById('add-stage-name-input').focus();
             }
             closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
-            openRenameStageModal(index, e) {
+
+            openRenameStageModal(stageId, e) {
                 if(e) e.stopPropagation();
-                this.renameStageIndex = index;
-                document.getElementById('rename-stage-input').value = this.currentGuide.stages[index].name;
-                document.getElementById('modal-rename-stage').classList.remove('hidden');
-                document.getElementById('rename-stage-input').focus();
+                // If id passed (from tree button), use it. Else use active.
+                this.renameStageId = stageId || this.activeStageId;
+                const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
+
+                if (stage) {
+                    document.getElementById('rename-stage-input').value = stage.name;
+                    document.getElementById('modal-rename-stage').classList.remove('hidden');
+                    document.getElementById('rename-stage-input').focus();
+                }
             }
             closeRenameStageModal() { document.getElementById('modal-rename-stage').classList.add('hidden'); }
+
+            confirmRenameStage() {
+                const name = document.getElementById('rename-stage-input').value.trim();
+                const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
+                if (name && stage) {
+                    stage.name = name;
+                    this.saveToLocalStorage();
+                    this.renderAll();
+                }
+                this.closeRenameStageModal();
+            }
+
             openConfirmModal(msg) {
                 document.getElementById('modal-confirm-text').innerText = msg;
                 document.getElementById('modal-confirm').classList.remove('hidden');
@@ -889,16 +1067,26 @@
                 this.pendingDelete = { type: 'all' };
                 this.openConfirmModal('全てのガイドを削除しますか？');
             }
+            executeDelete() {
+                if(this.pendingDelete.type === 'single') this.savedGuides.splice(this.pendingDelete.index, 1);
+                else this.savedGuides = [];
+                this.saveToLocalStorage();
+                this.renderLoadModalList();
+                this.closeConfirmModal();
+            }
 
             viewTeamJson(index) {
                 const saved = this.savedGuides[index];
                 if (!saved) return;
-                
-                let stages = saved.stages || [{ name: "Main", unitIds: saved.unitIds, code: "" }];
+
+                // Export including tree structure
                 const exportData = {
                     name: saved.name,
-                    stages: stages.map(st => ({
+                    stages: saved.stages.map(st => ({
+                        id: st.id,
                         name: st.name,
+                        type: st.type,
+                        parentId: st.parentId,
                         code: st.code || "",
                         units: st.unitIds.map(id => {
                             const u = this.getUnitById(id);
@@ -906,7 +1094,7 @@
                         }).filter(Boolean)
                     }))
                 };
-                
+
                 document.getElementById('json-output-area').value = JSON.stringify(exportData, null, 2);
                 document.getElementById('modal-json-view').classList.remove('hidden');
             }
@@ -917,7 +1105,42 @@
                 this.showMessage('コピーしました');
                 document.getElementById('modal-json-view').classList.add('hidden');
             }
-            
+
+            copyGuideCode() {
+                const code = this.currentStage.code;
+                if (!code) return;
+                navigator.clipboard.writeText(code).then(() => this.showMessage('コードをコピーしました'));
+            }
+
+            applySavedTeam(index) {
+                const saved = this.savedGuides[index];
+                if (!saved) return;
+
+                // Load and ensure valid active stage
+                this.currentGuide = JSON.parse(JSON.stringify(saved));
+
+                // Compatibility check: Convert old flat saved teams to single stage if needed
+                if (!this.currentGuide.stages && this.currentGuide.unitIds) {
+                    const rootId = Utils.generateId();
+                    this.currentGuide.stages = [{
+                        id: rootId,
+                        name: "Main",
+                        unitIds: this.currentGuide.unitIds,
+                        type: 'normal',
+                        parentId: null,
+                        code: ""
+                    }];
+                }
+
+                // Set active to first stage
+                this.activeStageId = this.currentGuide.stages[0].id;
+
+                this.saveToLocalStorage();
+                this.renderAll();
+                this.closeLoadModal();
+                this.showMessage(`「${saved.name}」を読み込みました。`);
+            }
+
             // --- Modal List Renderer ---
             renderLoadModalList() {
                 const container = document.getElementById('saved-teams-list');
@@ -926,22 +1149,40 @@
                     container.innerHTML = '<p class="text-slate-500 text-center py-8">保存されたガイドはありません。</p>';
                     return;
                 }
-                
+
                 [...this.savedGuides].reverse().forEach((saved, revIdx) => {
                     const realIdx = this.savedGuides.length - 1 - revIdx;
                     const stages = saved.stages || (saved.unitIds ? [1] : []);
                     let units = [];
-                    
+
                     if (saved.stages && saved.stages.length > 0) {
                         units = saved.stages[saved.stages.length - 1].unitIds;
                     } else if (saved.unitIds) {
                         units = saved.unitIds;
                     }
-                    
-                    const imgs = units.slice(0, 7).map(id => {
-                        const u = this.getUnitById(id);
-                        return u ? `<img src="${Utils.getUnitImage(u.slug)}" class="w-6 h-6 rounded-full border border-slate-500 object-cover" title="${u.name}">` : '';
-                    }).join('');
+
+                    // Show initial and final stage units
+                    let initialUnits = [];
+                    if (stages.length > 1) {
+                         initialUnits = stages[0].unitIds || [];
+                    }
+
+                    const renderUnitImgs = (uIds) => {
+                         return uIds.slice(0, 5).map(id => {
+                            const u = this.getUnitById(id);
+                            return u ? `<img src="${Utils.getUnitImage(u.slug)}" class="w-6 h-6 rounded-full border border-slate-500 object-cover" title="${u.name}">` : '';
+                        }).join('');
+                    };
+
+                    const finalImgs = renderUnitImgs(units);
+                    const initImgs = initialUnits.length > 0 ? renderUnitImgs(initialUnits) : '';
+
+                    let previewHtml = '';
+                    if (initImgs) {
+                        previewHtml = `<div class="flex items-center gap-2 opacity-60">${initImgs}<span class="text-slate-500">→</span></div>`;
+                    }
+                    previewHtml += `<div class="flex gap-1">${finalImgs}</div>`;
+
 
                     const el = document.createElement('div');
                     el.className = 'bg-slate-700/50 rounded-lg p-3 flex flex-col sm:flex-row justify-between items-center gap-3 border border-slate-600 hover:border-slate-500 transition';
@@ -952,7 +1193,7 @@
                                 <span class="text-xs text-slate-400 whitespace-nowrap">${saved.date}</span>
                                 <span class="text-xs bg-slate-600 px-1.5 rounded text-slate-300 ml-2">${stages.length} Stages</span>
                             </div>
-                            <div class="flex gap-1 overflow-hidden">${imgs}${units.length > 7 ? `<span class="text-xs text-slate-500 flex items-center">+${units.length - 7}</span>` : ''}</div>
+                            <div class="flex gap-1 overflow-hidden items-center">${previewHtml}</div>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto justify-end">
                             <button onclick="app.applySavedTeam(${realIdx})" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold">読込</button>
@@ -972,21 +1213,21 @@
                     fetch(CONFIG.DATA_URL),
                     fetch(CONFIG.NOTEBOOKS_URL)
                 ]);
-                
+
                 if (!resData.ok) throw new Error("Data fetch failed");
                 const tftData = await resData.json();
-                
+
                 let notebooks = null;
                 if (resNB.ok) notebooks = await resNB.json();
 
                 window.app = new TeamPlanner(tftData.unit, tftData.traits, notebooks);
-                
+
             } catch (e) {
                 console.error(e);
                 poolEl.innerHTML = `<div class="col-span-full text-center text-red-500 py-10">読み込みエラー: ${e.message}</div>`;
             }
         }
-        
+
         initApp();
     </script>
 </body>

@@ -3,7 +3,11 @@
     "name": "ライズユナラ",
     "stages": [
       {
-        "name": "ジン進行",
+        "id": "ryze_1",
+        "name": "トリスジン進行",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
         "units": [
           {
             "id": 32,
@@ -28,7 +32,11 @@
         ]
       },
       {
+        "id": "ryze_2",
         "name": "Lv6",
+        "type": "normal",
+        "parentId": "ryze_1",
+        "code": "",
         "units": [
           {
             "id": 32,
@@ -63,7 +71,11 @@
         ]
       },
       {
+        "id": "ryze_3",
         "name": "Lv7",
+        "type": "normal",
+        "parentId": "ryze_2",
+        "code": "",
         "units": [
           {
             "id": 4,
@@ -103,7 +115,11 @@
         ]
       },
       {
+        "id": "ryze_4",
         "name": "Lv8",
+        "type": "normal",
+        "parentId": "ryze_3",
+        "code": "",
         "units": [
           {
             "id": 7,
@@ -148,7 +164,11 @@
         ]
       },
       {
+        "id": "ryze_5",
         "name": "Lv9",
+        "type": "normal",
+        "parentId": "ryze_4",
+        "code": "",
         "units": [
           {
             "id": 7,
@@ -196,6 +216,221 @@
             "name": "Ryze"
           }
         ]
+      },
+      {
+        "id": "1adkodqso",
+        "name": "アイオニア進行（啓発の道）",
+        "type": "alter",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi"
+          },
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin"
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen"
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao"
+          }
+        ]
+      },
+      {
+        "id": "38e03tp2j",
+        "name": "Lv6 アイオニア",
+        "type": "normal",
+        "parentId": "1adkodqso",
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi"
+          },
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin"
+          },
+          {
+            "id": 63,
+            "slug": "rumble",
+            "name": "Rumble"
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen"
+          },
+          {
+            "id": 81,
+            "slug": "tristana",
+            "name": "Tristana"
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen"
+          }
+        ]
+      },
+      {
+        "id": "4d3es81u9",
+        "name": "Lv7 アイオニア",
+        "type": "normal",
+        "parentId": "38e03tp2j",
+        "code": "",
+        "units": [
+          {
+            "id": 4,
+            "slug": "anivia",
+            "name": "Anivia"
+          },
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin"
+          },
+          {
+            "id": 63,
+            "slug": "rumble",
+            "name": "Rumble"
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen"
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen"
+          },
+          {
+            "id": 39,
+            "slug": "kobukoyuumi",
+            "name": "Kobuko & Yuumi"
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani"
+          }
+        ]
+      },
+      {
+        "id": "h6d69aulx",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "4d3es81u9",
+        "code": "",
+        "units": [
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe"
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen"
+          },
+          {
+            "id": 39,
+            "slug": "kobukoyuumi",
+            "name": "Kobuko & Yuumi"
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani"
+          },
+          {
+            "id": 43,
+            "slug": "lissandra",
+            "name": "Lissandra"
+          },
+          {
+            "id": 90,
+            "slug": "wukong",
+            "name": "Wukong"
+          },
+          {
+            "id": 96,
+            "slug": "yunara",
+            "name": "Yunara"
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric"
+          }
+        ]
+      },
+      {
+        "id": "v0ddzyedq",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "h6d69aulx",
+        "code": "",
+        "units": [
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe"
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen"
+          },
+          {
+            "id": 39,
+            "slug": "kobukoyuumi",
+            "name": "Kobuko & Yuumi"
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani"
+          },
+          {
+            "id": 43,
+            "slug": "lissandra",
+            "name": "Lissandra"
+          },
+          {
+            "id": 90,
+            "slug": "wukong",
+            "name": "Wukong"
+          },
+          {
+            "id": 96,
+            "slug": "yunara",
+            "name": "Yunara"
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric"
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze"
+          }
+        ]
       }
     ]
   },
@@ -203,7 +438,11 @@
     "name": "ソナリロ",
     "stages": [
       {
+        "id": "sona_1",
         "name": "ソナ進行",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
         "units": [
           {
             "id": 73,
@@ -233,7 +472,11 @@
         ]
       },
       {
+        "id": "sona_2",
         "name": "Lv6",
+        "type": "normal",
+        "parentId": "sona_1",
+        "code": "",
         "units": [
           {
             "id": 73,
@@ -273,7 +516,11 @@
         ]
       },
       {
+        "id": "sona_3",
         "name": "Lv7",
+        "type": "normal",
+        "parentId": "sona_2",
+        "code": "",
         "units": [
           {
             "id": 73,
@@ -318,7 +565,11 @@
         ]
       },
       {
+        "id": "sona_4",
         "name": "Lv8",
+        "type": "normal",
+        "parentId": "sona_3",
+        "code": "",
         "units": [
           {
             "id": 32,
@@ -368,7 +619,11 @@
         ]
       },
       {
+        "id": "sona_5",
         "name": "Lv9",
+        "type": "normal",
+        "parentId": "sona_4",
+        "code": "",
         "units": [
           {
             "id": 32,
@@ -419,6 +674,60 @@
             "id": 64,
             "slug": "ryze",
             "name": "Ryze"
+          }
+        ]
+      },
+      {
+        "id": "ppiljbktn",
+        "name": "Lv8 デマーシア継続",
+        "type": "alter",
+        "parentId": "sona_3",
+        "code": "",
+        "units": [
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV"
+          },
+          {
+            "id": 73,
+            "slug": "sona",
+            "name": "Sona"
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao"
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne"
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen"
+          },
+          {
+            "id": 47,
+            "slug": "lux",
+            "name": "Lux"
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain"
+          },
+          {
+            "id": 75,
+            "slug": "sylas",
+            "name": "Sylas"
+          },
+          {
+            "id": 26,
+            "slug": "galio",
+            "name": "Galio"
           }
         ]
       }
