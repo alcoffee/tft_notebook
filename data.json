@@ -334,7 +334,7 @@
       "name": "Blitzcrank",
       "cost": 1,
       "synergies": [
-        "zaun",
+        "Zaun",
         "Juggernaut"
       ],
       "ability": {
@@ -552,7 +552,7 @@
       "name": "Dr. Mundo",
       "cost": 3,
       "synergies": [
-        "zaun",
+        "Zaun",
         "Bruiser"
       ],
       "ability": {
