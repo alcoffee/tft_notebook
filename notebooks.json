@@ -927,12 +927,6 @@
             "slug": "nautilus",
             "name": "Nautilus",
             "cost": 3
-          },
-          {
-            "id": 100,
-            "slug": "zoe",
-            "name": "Zoe",
-            "cost": 3
           }
         ]
       },
@@ -968,28 +962,34 @@
             "cost": 3
           },
           {
-            "id": 84,
-            "slug": "vayne",
-            "name": "Vayne",
-            "cost": 3
-          },
-          {
-            "id": 100,
-            "slug": "zoe",
-            "name": "Zoe",
-            "cost": 3
-          },
-          {
             "id": 94,
             "slug": "yone",
             "name": "Yone",
             "cost": 4
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 97,
+            "slug": "zaahen",
+            "name": "Zaahen",
+            "cost": 7
           }
         ]
       },
       {
         "id": "ul4bk1ydq",
-        "name": "超越の道ザーヘン Lv8",
+        "name": "超越or繁栄の道ザーヘン Lv8",
         "type": "normal",
         "parentId": "rz11d96pc",
         "code": "",
@@ -1031,22 +1031,34 @@
             "cost": 4
           },
           {
-            "id": 1,
-            "slug": "aatrox",
-            "name": "Aatrox",
-            "cost": 5
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
           },
           {
             "id": 26,
             "slug": "galio",
             "name": "Galio",
             "cost": 5
+          },
+          {
+            "id": 1,
+            "slug": "aatrox",
+            "name": "Aatrox",
+            "cost": 5
+          },
+          {
+            "id": 97,
+            "slug": "zaahen",
+            "name": "Zaahen",
+            "cost": 7
           }
         ]
       },
       {
         "id": "7eenp97lf",
-        "name": "超越の道ザーヘン Lv8PVE_3体同時開放",
+        "name": "超越の道ザーヘン Lv8PVE_3体同時開放_精霊の道なら続投",
         "type": "alter",
         "parentId": "rz11d96pc",
         "code": "",
@@ -1110,6 +1122,75 @@
             "slug": "kaisa",
             "name": "Kai'Sa",
             "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "h3tsy9y82",
+        "name": "超越の道ザーヘン Lv9",
+        "type": "normal",
+        "parentId": "ul4bk1ydq",
+        "code": "",
+        "units": [
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne",
+            "cost": 3
+          },
+          {
+            "id": 12,
+            "slug": "belveth",
+            "name": "Bel'Veth",
+            "cost": 4
+          },
+          {
+            "id": 35,
+            "slug": "kaisa",
+            "name": "Kai'Sa",
+            "cost": 4
+          },
+          {
+            "id": 94,
+            "slug": "yone",
+            "name": "Yone",
+            "cost": 4
+          },
+          {
+            "id": 1,
+            "slug": "aatrox",
+            "name": "Aatrox",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          },
+          {
+            "id": 26,
+            "slug": "galio",
+            "name": "Galio",
+            "cost": 5
+          },
+          {
+            "id": 97,
+            "slug": "zaahen",
+            "name": "Zaahen",
+            "cost": 7
           }
         ]
       }
