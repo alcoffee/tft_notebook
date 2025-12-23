@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFT Set 16 Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(30, 30, 30, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            z-index: 10;
+            width: 280px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #f0b232;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #ddd;
+        }
+
+        .control-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f0b232;
+            font-size: 1.5rem;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            padding: 20px 40px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        #graph-container {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: left;
+            padding: 12px;
+            background: rgba(15, 15, 15, 0.95);
+            border: 1px solid #555;
+            border-radius: 6px;
+            pointer-events: none;
+            color: white;
+            font-size: 13px;
+            max-width: 320px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            display: none;
+            z-index: 20;
+            backdrop-filter: blur(4px);
+        }
+
+        .tooltip h3 {
+            margin: 0 0 5px 0;
+            color: #f0b232;
+            font-size: 1.1rem;
+        }
+        
+        .tooltip .meta {
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.85rem;
+        }
+
+        .trait-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            font-size: 0.75rem;
+            border: 1px solid #444;
+        }
+        .trait-region { background-color: #5a4a20; border-color: #f0b232; color: #ffd700; }
+        .trait-class { background-color: #203a5a; border-color: #4fa3ff; color: #add8e6; }
+        .trait-unique { background-color: #444; border-color: #777; color: #ccc; }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            margin-right: 8px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #222; }
+        ::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+    </style>
+</head>
+<body>
+
+<div id="loading">Loading Data...</div>
+
+<div id="controls">
+    <h2>TFT Set 16 Visualizer</h2>
+    
+    <div class="control-group">
+        <span class="control-group-title">レイアウト (Layout)</span>
+        <label><input type="radio" name="layout" value="force" checked> シナジー クラスター (Venn)</label>
+        <label><input type="radio" name="layout" value="cost"> コスト階層 (Hierarchy)</label>
+    </div>
+
+    <div class="control-group">
+        <span class="control-group-title">シナジー / 紋章 (Traits)</span>
+        <label>
+            <input type="checkbox" id="show-region" checked> 
+            <span class="legend-color" style="background-color: #f0b232;"></span>
+            地域特性 (Region/Spatula)
+        </label>
+        <label>
+            <input type="checkbox" id="show-class" checked> 
+            <span class="legend-color" style="background-color: #4fa3ff;"></span>
+            クラス特性 (Class/Pan)
+        </label>
+        <div style="margin-left: 26px; font-size: 0.8rem; color: #888; margin-top: 4px;">
+            ※ 金色はヘラ派生、青色はフライパン派生を表します
+        </div>
+    </div>
+
+    <div class="control-group">
+        <span class="control-group-title">その他のつながり (Links)</span>
+        <label>
+            <input type="checkbox" id="show-unlock" checked> 
+            <span class="legend-color" style="background-color: #e74c3c;"></span>
+            アンロック条件 (Unlock)
+        </label>
+        <label>
+            <input type="checkbox" id="show-skills"> 
+            <span class="legend-color" style="background-color: #2ecc71;"></span>
+            特別な絆 (Special Bonds)
+        </label>
+    </div>
+
+    <div style="font-size: 0.8rem; color: #888; border-top: 1px solid #444; padding-top: 10px;">
+        ※ドラッグで移動可能<br>
+        ※ホバーで詳細・レシピ表示
+    </div>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+<div id="graph-container"></div>
+
+<script>
+// --- Configuration & Constants ---
+const DATA_URL = "./data.json";
+
+// Fallback Emblem Data (used if not present in the fetched JSON)
+const DEFAULT_EMBLEMS = [
+    {"name": "スレイヤーの紋章", "trait": "スレイヤー", "en_trait": "Slayer", "composition": ["フライパン", "B.F.ソード"]},
+    {"name": "ノクサスの紋章", "trait": "ノクサス", "en_trait": "Noxus", "composition": ["へら", "B.F.ソード"]},
+    {"name": "アイオニアの紋章", "trait": "アイオニア", "en_trait": "Ionia", "composition": ["へら", "ムダニ デカイ ロッド"]},
+    {"name": "アルカニストの紋章", "trait": "アルカニスト", "en_trait": "Arcanist", "composition": ["フライパン", "ムダニ デカイ ロッド"]},
+    {"name": "インヴォーカーの紋章", "trait": "インヴォーカー", "en_trait": "Invoker", "composition": ["フライパン", "女神の涙"]},
+    {"name": "ビルジウォーターの紋章", "trait": "ビルジウォーター", "en_trait": "Bilgewater", "composition": ["へら", "女神の涙"]},
+    {"name": "ヴォイドの紋章", "trait": "ヴォイド", "en_trait": "Void", "composition": ["へら", "リカーブ ボウ"]},
+    {"name": "韋駄天の紋章", "trait": "韋駄天", "en_trait": "Quickstriker", "composition": ["フライパン", "リカーブ ボウ"]},
+    {"name": "ディフェンダーの紋章", "trait": "ディフェンダー", "en_trait": "Defender", "composition": ["フライパン", "チェイン ベスト"]},
+    {"name": "デマーシアの紋章", "trait": "デマーシア", "en_trait": "Demacia", "composition": ["へら", "チェイン ベスト"]},
+    {"name": "ジャガーノートの紋章", "trait": "ジャガーノート", "en_trait": "Juggernaut", "composition": ["フライパン", "ネガトロン クローク"]},
+    {"name": "ヨードルの紋章", "trait": "ヨードル", "en_trait": "Yordle", "composition": ["へら", "ネガトロン クローク"]},
+    {"name": "ブルーザーの紋章", "trait": "ブルーザー", "en_trait": "Bruiser", "composition": ["フライパン", "ジャイアント ベルト"]},
+    {"name": "フレヨルドの紋章", "trait": "フレヨルド", "en_trait": "Freljord", "composition": ["へら", "ジャイアント ベルト"]},
+    {"name": "ヴァンキッシャーの紋章", "trait": "ヴァンキッシャー", "en_trait": "Vanquisher", "composition": ["フライパン", "スパーリング グローブ"]},
+    {"name": "ゾウンの紋章", "trait": "ゾウン", "en_trait": "Zaun", "composition": ["へら", "スパーリング グローブ"]},
+    {"name": "イシュタルの紋章", "trait": "イシュタル", "en_trait": "Ixtal", "composition": []},
+    {"name": "ガンスリンガーの紋章", "trait": "ガンスリンガー", "en_trait": "Gunslinger", "composition": []},
+    {"name": "ディスラプターの紋章", "trait": "ディスラプター", "en_trait": "Disruptor", "composition": []},
+    {"name": "ピルトーヴァーの紋章", "trait": "ピルトーヴァー", "en_trait": "Piltover", "composition": []},
+    {"name": "ロングショットの紋章", "trait": "ロングショット", "en_trait": "Longshot", "composition": []},
+    {"name": "ワーデンの紋章", "trait": "ワーデン", "en_trait": "Warden", "composition": []}
+];
+
+// Manual Exceptions & Additions
+const MANUAL_TRAITS = {
+    "Targon": "region",
+    "Shurima": "region",
+    "Shadow Isles": "region",
+    "Sorcerer": "class",
+    "Assassin": "class",
+    "Darkin": "unique",
+    "World Ender": "unique",
+    "Dark Child": "unique",
+    "Star Forger": "unique",
+    "Emperor": "unique",
+    "Caretaker": "unique",
+    "Riftscourge": "unique",
+    "HexMech": "unique",
+    "Glutton": "unique",
+    "Blacksmith": "unique",
+    "Eternal": "unique",
+    "Soulbound": "unique",
+    "Huntress": "unique",
+    "Immortal": "unique",
+    "Rune Mage": "unique",
+    "The Boss": "unique",
+    "Ascendant": "unique",
+    "Dragonborn": "unique",
+    "Chronokeeper": "unique",
+    "Heroic": "unique",
+    "Assimilator": "unique"
+};
+
+// Special Synergy Pairs
+const SPECIAL_SYNERGY_PAIRS = [
+    ["Draven", "Darius"], ["Ashe", "Tryndamere"], ["Graves", "Twisted Fate"],
+    ["Yasuo", "Yone"], ["Diana", "Leona"], ["Warwick", "Jinx"], ["Warwick", "Vi"],
+    ["Annie", "Tibbers"]
+];
+
+// --- Main Initialization ---
+d3.json(DATA_URL).then(fetchedData => {
+    // Hide loading screen
+    document.getElementById("loading").style.display = "none";
+
+    // Handle data structure: fetchedData might be { unit: [...], emblems: [...] } or just { unit: [...] } or just [...]
+    let units = [];
+    let emblems = [];
+
+    if (Array.isArray(fetchedData)) {
+        units = fetchedData; // Assuming array of units
+        emblems = DEFAULT_EMBLEMS;
+    } else {
+        units = fetchedData.unit || [];
+        emblems = fetchedData.emblems || DEFAULT_EMBLEMS;
+    }
+
+    if (units.length === 0) {
+        alert("データが見つかりませんでした。");
+        return;
+    }
+
+    initializeVisualization(units, emblems);
+
+}).catch(error => {
+    document.getElementById("loading").innerText = "Error loading data: " + error;
+    console.error("Data loading failed:", error);
+});
+
+
+function initializeVisualization(units, emblems) {
+    
+    // --- Trait Classification Logic ---
+    const traitMap = new Map();
+
+    // Populate from Emblem Data
+    emblems.forEach(e => {
+        let type = 'unique'; 
+        if (e.composition && e.composition.includes("へら")) {
+            type = 'region';
+        } else if (e.composition && e.composition.includes("フライパン")) {
+            type = 'class';
+        } else {
+            const en = e.en_trait;
+            if (["Ixtal", "Piltover"].includes(en)) type = 'region';
+            if (["Gunslinger", "Disruptor", "Longshot", "Warden"].includes(en)) type = 'class';
+        }
+        traitMap.set(e.en_trait, { type: type, name_jp: e.trait, composition: e.composition });
+    });
+
+    // Apply Manual Exceptions
+    Object.keys(MANUAL_TRAITS).forEach(key => {
+        if (!traitMap.has(key)) {
+            traitMap.set(key, { type: MANUAL_TRAITS[key], name_jp: key, composition: [] });
+        } else {
+            if (["Targon", "Shurima"].includes(key)) {
+                traitMap.get(key).type = 'region';
+            }
+        }
+    });
+
+    function getTraitInfo(traitName) {
+        return traitMap.get(traitName) || { type: 'unique', name_jp: traitName, composition: [] };
+    }
+
+    // --- Node Processing ---
+    const nodes = units.map(u => {
+        // Special logic for Zaahen: add Immortal traits if missing
+        let traits = [...u.synergies];
+        if (u.name === "Zaahen") {
+            const immortalTraits = ["Ionia", "Demacia", "Warden"];
+            immortalTraits.forEach(t => {
+                if (!traits.includes(t)) traits.push(t);
+            });
+        }
+
+        return {
+            id: u.id,
+            name: u.name,
+            cost: u.cost,
+            slug: u.slug,
+            traits: traits,
+            ability: u.ability,
+            unlock: u.unlock,
+            role: u.role,
+            stats: u.base_stats,
+            x: Math.random() * 800,
+            y: Math.random() * 600
+        };
+    });
+
+    // --- Link Generation Logic ---
+    const links = [];
+
+    // 1. Trait Links
+    for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const u1 = nodes[i];
+            const u2 = nodes[j];
+            
+            const sharedTraits = u1.traits.filter(t => u2.traits.includes(t));
+            
+            if (sharedTraits.length > 0) {
+                const hasRegion = sharedTraits.some(t => getTraitInfo(t).type === 'region');
+                const hasClass = sharedTraits.some(t => getTraitInfo(t).type === 'class');
+                
+                links.push({
+                    source: u1.id,
+                    target: u2.id,
+                    type: 'trait',
+                    traits: sharedTraits,
+                    hasRegion: hasRegion,
+                    hasClass: hasClass
+                });
+            }
+        }
+    }
+
+    // 2. Unlock Condition Links
+    nodes.forEach(u1 => {
+        if (u1.unlock) {
+            nodes.forEach(u2 => {
+                if (u1.id !== u2.id) {
+                    // Use Regex with word boundaries to avoid partial matches (e.g., "Vi" inside "Viego")
+                    // Escape special characters in name just in case
+                    const escapedName = u2.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`\\b${escapedName}\\b`);
+                    
+                    if (regex.test(u1.unlock)) {
+                        links.push({
+                            source: u2.id,
+                            target: u1.id,
+                            type: "unlock",
+                            info: `Required for ${u1.name}`
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    // 3. Special Synergies
+    SPECIAL_SYNERGY_PAIRS.forEach(pair => {
+        const u1 = nodes.find(n => n.name === pair[0]);
+        const u2 = nodes.find(n => n.name === pair[1]);
+        if (u1 && u2) {
+            links.push({ source: u1.id, target: u2.id, type: "skill", info: "Special Bond" });
+        }
+    });
+
+    // --- D3 Visualization Setup ---
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const svg = d3.select("#graph-container")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .call(d3.zoom().on("zoom", (event) => {
+            g.attr("transform", event.transform);
+        }))
+        .append("g");
+
+    const g = svg.append("g");
+
+    const defs = svg.append("defs");
+    nodes.forEach(d => {
+        defs.append("pattern")
+            .attr("id", "img_" + d.id)
+            .attr("height", "100%")
+            .attr("width", "100%")
+            .attr("patternContentUnits", "objectBoundingBox")
+            .append("image")
+            .attr("height", 1)
+            .attr("width", 1)
+            .attr("preserveAspectRatio", "none")
+            .attr("href", `./thumbs/${d.slug}.jpg`);
+    });
+
+    svg.append("defs").append("marker")
+        .attr("id", "arrowhead")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 25)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5")
+        .attr("fill", "#e74c3c");
+
+    // --- Simulation ---
+    let linkElements = g.append("g").selectAll("line");
+    let nodeElements = g.append("g").selectAll("circle");
+
+    const simulation = d3.forceSimulation(nodes)
+        .force("charge", d3.forceManyBody().strength(-350))
+        .force("collide", d3.forceCollide().radius(35))
+        .force("x", d3.forceX(width / 2).strength(0.06))
+        .force("y", d3.forceY(height / 2).strength(0.06));
+
+    const linkForce = d3.forceLink(links)
+        .id(d => d.id)
+        .strength(link => {
+            if (link.type === 'trait') return 0.04; 
+            if (link.type === 'unlock') return 0.2;
+            if (link.type === 'skill') return 0.2;
+            return 0.1;
+        });
+
+    simulation.force("link", linkForce);
+
+    // --- Helper Functions within closure ---
+    function getLinkColor(d, showRegion, showClass) {
+        if (d.type === 'unlock') return "#e74c3c";
+        if (d.type === 'skill') return "#2ecc71";
+        
+        if (d.type === 'trait') {
+            if (d.hasRegion && showRegion) return "#f0b232";
+            if (d.hasClass && showClass) return "#4fa3ff";
+            return "#444";
+        }
+        return "#999";
+    }
+
+    function getStrokeWidth(type) {
+        switch(type) {
+            case 'trait': return 1.5;
+            case 'unlock': return 2.5;
+            case 'skill': return 2.5;
+            default: return 1;
+        }
+    }
+
+    function getCostColor(cost) {
+        const colors = { 1: "#a0a0a0", 2: "#15b886", 3: "#00bfff", 4: "#d900db", 5: "#f0b232", 7: "#ff4d4d" };
+        return colors[cost] || "#fff";
+    }
+
+    // --- Render Loop ---
+    function render() {
+        const showRegion = document.getElementById("show-region").checked;
+        const showClass = document.getElementById("show-class").checked;
+        const showUnlock = document.getElementById("show-unlock").checked;
+        const showSkills = document.getElementById("show-skills").checked;
+
+        const filteredLinks = links.filter(l => {
+            if (l.type === 'trait') {
+                const regionMatch = l.hasRegion && showRegion;
+                const classMatch = l.hasClass && showClass;
+                return regionMatch || classMatch;
+            }
+            if (l.type === 'unlock') return showUnlock;
+            if (l.type === 'skill') return showSkills;
+            return false;
+        });
+
+        linkElements = linkElements.data(filteredLinks, d => d.source.id + "-" + d.target.id + "-" + d.type);
+        linkElements.exit().remove();
+        const linkEnter = linkElements.enter().append("line")
+            .attr("stroke-width", d => getStrokeWidth(d.type))
+            .attr("opacity", 0.7)
+            .attr("marker-end", d => d.type === 'unlock' ? "url(#arrowhead)" : null);
+        
+        linkElements = linkEnter.merge(linkElements)
+            .attr("stroke", d => getLinkColor(d, showRegion, showClass));
+
+        nodeElements = nodeElements.data(nodes, d => d.id);
+        const nodeEnter = nodeElements.enter().append("circle")
+            .attr("r", 24)
+            .attr("fill", d => `url(#img_${d.id})`)
+            .attr("stroke", d => getCostColor(d.cost))
+            .attr("stroke-width", 2.5)
+            .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended))
+            .on("mouseover", showTooltip)
+            .on("mouseout", hideTooltip);
+
+        nodeElements = nodeEnter.merge(nodeElements);
+
+        linkForce.links(filteredLinks);
+
+        const layout = document.querySelector('input[name="layout"]:checked').value;
+        if (layout === "cost") {
+            simulation.force("y", d3.forceY(d => {
+                const map = {1: 0.1, 2: 0.25, 3: 0.45, 4: 0.65, 5: 0.85, 7: 1.0};
+                return height * (map[d.cost] || 0.5) - (height * 0.1); 
+            }).strength(0.8));
+            simulation.force("x", d3.forceX(width / 2).strength(0.05));
+        } else {
+            simulation.force("y", d3.forceY(height / 2).strength(0.06));
+            simulation.force("x", d3.forceX(width / 2).strength(0.06));
+        }
+        simulation.alpha(1).restart();
+    }
+
+    // --- Event Listeners & Interaction ---
+    simulation.on("tick", () => {
+        linkElements
+            .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+        nodeElements
+            .attr("cx", d => d.x).attr("cy", d => d.y);
+    });
+
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x; d.fy = d.y;
+    }
+    function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
+    function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null; d.fy = null;
+    }
+
+    const tooltip = document.getElementById("tooltip");
+    function showTooltip(event, d) {
+        const traitsHtml = d.traits.map(t => {
+            const info = getTraitInfo(t);
+            const typeClass = `trait-${info.type}`;
+            return `<span class="trait-badge ${typeClass}">${t}</span>`;
+        }).join("");
+
+        const recipeHtml = d.traits.map(t => {
+            const info = getTraitInfo(t);
+            if (info.composition && info.composition.length > 0) {
+                return `<div style="font-size:11px; margin-top:2px;">
+                    <span style="color:${info.type==='region'?'#f0b232':'#4fa3ff'}">● ${info.name_jp || t}</span>: 
+                    ${info.composition.join(" + ")}
+                </div>`;
+            }
+            return "";
+        }).join("");
+
+        const unlockHtml = d.unlock ? `<div style="margin-top:8px; color:#e74c3c; font-weight:bold;">🔓 ${d.unlock}</div>` : "";
+
+        tooltip.innerHTML = `
+            <h3>${d.name}</h3>
+            <span class="meta">Cost ${d.cost} | ${d.role}</span>
+            <div style="margin-bottom:8px;">${traitsHtml}</div>
+            <div style="font-size:11px; color:#ccc; line-height:1.3; margin-bottom:5px;">${d.ability.name}</div>
+            <div style="font-size:11px; color:#999; line-height:1.2;">${d.ability.description.substring(0, 120)}...</div>
+            ${unlockHtml}
+            ${recipeHtml ? `<div style="margin-top:8px; border-top:1px solid #444; padding-top:4px;">${recipeHtml}</div>` : ''}
+        `;
+        
+        tooltip.style.display = "block";
+        tooltip.style.left = (event.pageX + 20) + "px";
+        tooltip.style.top = (event.pageY - 20) + "px";
+        
+        linkElements.attr("opacity", l => (l.source.id === d.id || l.target.id === d.id) ? 1 : 0.1);
+        nodeElements.attr("opacity", n => {
+            const isConnected = links.some(l => 
+                (l.source.id === d.id && l.target.id === n.id) || 
+                (l.source.id === n.id && l.target.id === d.id)
+            );
+            return (n.id === d.id || isConnected) ? 1 : 0.2;
+        });
+    }
+
+    function hideTooltip() {
+        tooltip.style.display = "none";
+        linkElements.attr("opacity", 0.7);
+        nodeElements.attr("opacity", 1);
+    }
+
+    // Attach listeners
+    document.querySelectorAll("input").forEach(input => input.addEventListener("change", render));
+    
+    // Initial Render
+    render();
+}
+
+</script>
+</body>
+</html>
