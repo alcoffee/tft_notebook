@@ -1195,5 +1195,601 @@
         ]
       }
     ]
+  },
+  {
+    "name": "T-Hex構成",
+    "stages": [
+      {
+        "id": "jxxw83sjm",
+        "name": "トレードセクター系",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 40,
+            "slug": "kogmaw",
+            "name": "Kog'Maw",
+            "cost": 1
+          },
+          {
+            "id": 63,
+            "slug": "rumble",
+            "name": "Rumble",
+            "cost": 1
+          },
+          {
+            "id": 79,
+            "slug": "teemo",
+            "name": "Teemo",
+            "cost": 2
+          },
+          {
+            "id": 10,
+            "slug": "bard",
+            "name": "Bard",
+            "cost": 2
+          }
+        ]
+      },
+      {
+        "id": "j5xeqyswg",
+        "name": "レイトゲームスケール",
+        "type": "alter",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          }
+        ]
+      },
+      {
+        "id": "ddqx9y6c2",
+        "name": "Lv6",
+        "type": "normal",
+        "parentId": "j5xeqyswg",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "90e9snt50",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "ddqx9y6c2",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 51,
+            "slug": "missfortune",
+            "name": "Miss Fortune",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "v6okeroxj",
+        "name": "Lv8 フレヨルド",
+        "type": "alter",
+        "parentId": "ddqx9y6c2",
+        "code": "",
+        "units": [
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 51,
+            "slug": "missfortune",
+            "name": "Miss Fortune",
+            "cost": 4
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 43,
+            "slug": "lissandra",
+            "name": "Lissandra",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "blwpgvsld",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "90e9snt50",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 45,
+            "slug": "luciansenna",
+            "name": "Lucian & Senna",
+            "cost": 5
+          },
+          {
+            "id": 57,
+            "slug": "ornn",
+            "name": "Ornn",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "plxtktrzv",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "v6okeroxj",
+        "code": "",
+        "units": [
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 43,
+            "slug": "lissandra",
+            "name": "Lissandra",
+            "cost": 4
+          },
+          {
+            "id": 45,
+            "slug": "luciansenna",
+            "name": "Lucian & Senna",
+            "cost": 5
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 88,
+            "slug": "volibear",
+            "name": "Volibear",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "eez4u5bg6",
+        "name": "Lv6",
+        "type": "normal",
+        "parentId": "jxxw83sjm",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "ytsq4f1eh",
+        "name": "Lv7",
+        "type": "normal",
+        "parentId": "eez4u5bg6",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "k0a2g0ee4",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "ytsq4f1eh",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "ir2dxs3on",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "k0a2g0ee4",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 76,
+            "slug": "thex",
+            "name": "T-Hex",
+            "cost": 5
+          },
+          {
+            "id": 66,
+            "slug": "seraphine",
+            "name": "Seraphine",
+            "cost": 4
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 45,
+            "slug": "luciansenna",
+            "name": "Lucian & Senna",
+            "cost": 5
+          }
+        ]
+      }
+    ]
   }
 ]
