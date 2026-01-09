@@ -246,7 +246,7 @@
     <div id="modal-save-name" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-sm p-6">
             <h3 class="text-lg font-bold text-white mb-4">ガイドを保存</h3>
-            <p class="text-xs text-slate-400 mb-4">現在のすべてのステージ構成を保存します。<br>※ブラウザ内(LocalStorage)に保存されます。</p>
+            <p class="text-xs text-slate-400 mb-4">※リロードすると消えます（一時保存）。</p>
             <input type="text" id="save-team-name-input" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white mb-4 focus:border-blue-500 outline-none" placeholder="ガイド名を入力">
             <div class="flex justify-end gap-3">
                 <button onclick="app.closeSaveModal()" class="text-slate-400 hover:text-white text-sm font-bold px-3 py-2">キャンセル</button>
@@ -308,7 +308,7 @@
     <div id="modal-json-view" class="fixed inset-0 z-[90] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-lg p-6 flex flex-col gap-4">
             <h3 class="text-lg font-bold text-white">ガイドデータ (JSON)</h3>
-            <p class="text-xs text-slate-400">ユニットID、Slug、名前のみを含むJSONデータです。</p>
+            <p class="text-xs text-slate-400">ユニットID、Slug、名前、コストを含むJSONデータです。</p>
             <textarea id="json-output-area" class="w-full h-48 bg-slate-900 border border-slate-600 rounded p-3 text-xs text-slate-300 font-mono focus:outline-none focus:border-blue-500" readonly></textarea>
             <div class="flex justify-end gap-3">
                 <button onclick="app.copyJsonToClipboard()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">コピー</button>
@@ -418,44 +418,17 @@
             // --- 1. Initialization & Data ---
 
             initData(notebooksData) {
-                this.loadFromLocalStorage();
-                if (this.savedGuides.length === 0 && notebooksData) {
+                // Since we removed local storage, we just load notebooksData
+                if (notebooksData) {
                     this.importExternalNotebooks(notebooksData);
                 }
-                this.updateIndicator();
-            }
 
-            loadFromLocalStorage() {
-                try {
-                    const rawData = localStorage.getItem(CONFIG.STORAGE_KEY);
-                    if (rawData) {
-                        const data = JSON.parse(rawData);
-                        if (data.savedGuides) this.savedGuides = data.savedGuides;
-
-                        if (data.currentGuide && Array.isArray(data.currentGuide.stages) && data.currentGuide.stages.length > 0) {
-                            this.currentGuide = data.currentGuide;
-                            this.activeStageId = data.activeStageId;
-                            // Fallback if ID is invalid
-                            if (!this.currentGuide.stages.some(s => s.id === this.activeStageId)) {
-                                this.activeStageId = this.currentGuide.stages[0].id;
-                            }
-                        }
-                    }
-                } catch (e) {
-                    console.error("Local load failed", e);
+                const indicator = document.getElementById('data-source-indicator');
+                if (this.savedGuides.length > 0) {
+                    indicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> 準備完了';
+                } else {
+                    indicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500"></span> 新規作成';
                 }
-            }
-
-            saveToLocalStorage() {
-                try {
-                    const data = {
-                        savedGuides: this.savedGuides,
-                        currentGuide: this.currentGuide,
-                        activeStageId: this.activeStageId,
-                        lastUpdated: new Date().toISOString()
-                    };
-                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
-                } catch (e) { console.error("Local save failed", e); }
             }
 
             importExternalNotebooks(data) {
@@ -474,7 +447,7 @@
 
                 if (imported.length > 0) {
                     this.savedGuides = [...this.savedGuides, ...imported];
-                    this.saveToLocalStorage();
+                    // No save to local storage
                 }
             }
 
@@ -545,7 +518,7 @@
 
             switchStage(stageId) {
                 this.activeStageId = stageId;
-                this.saveToLocalStorage();
+                // No save
                 this.renderAll();
             }
 
@@ -560,8 +533,7 @@
                 let typeColor = "bg-blue-700";
                 let desc = "現在の構成を引き継いで次の段階に進みます。";
 
-                if (type === 'normal') { // "next" button passes 'normal'
-                     // Try to guess Lv based on current name
+                if (type === 'normal') {
                     const match = this.currentStage.name.match(/Lv(\d+)/i);
                     if (match) {
                         defaultName = `Lv${parseInt(match[1]) + 1}`;
@@ -600,7 +572,7 @@
                     parentId = this.activeStageId;
                     this.addingStageType = 'normal'; // Standardize type name
                 } else if (this.addingStageType === 'alter' || this.addingStageType === 'branch') {
-                    // Alter/Branch: Sibling of current (Child of current's parent)
+                    // Alter: Sibling of current (Child of current's parent)
                     parentId = this.currentStage.parentId;
                 }
 
@@ -619,7 +591,7 @@
                 this.currentGuide.stages.push(newStage);
                 this.activeStageId = newId;
 
-                this.saveToLocalStorage();
+                // No save
                 this.renderAll();
                 this.closeAddStageModal();
             }
@@ -650,7 +622,7 @@
                      this.activeStageId = this.currentGuide.stages[0].id;
                 }
 
-                this.saveToLocalStorage();
+                // No save
                 this.renderAll();
             }
 
@@ -691,7 +663,8 @@
                     if (node.type === 'branch') typeColor = "bg-orange-500";
 
                     el.className = `stage-node flex items-center p-2 rounded mb-1 ${isActive ? 'active' : ''}`;
-                    el.style.marginLeft = `${depth * 20}px`; // Simple indentation
+                    // Simple indentation logic
+                    el.style.marginLeft = `${depth * 20}px`; 
                     if (node.type !== 'normal' && depth > 0) {
                          el.classList.add(`type-${node.type}`);
                     } else {
@@ -700,7 +673,11 @@
 
                     el.onclick = () => this.switchStage(node.id);
 
+                    // Simple Tree visual connector if depth > 0
+                    const connector = depth > 0 ? `<div class="tree-branch-line"></div>` : '';
+
                     el.innerHTML = `
+                        ${connector}
                         <div class="flex items-center gap-2 w-full">
                             <span class="type-indicator" style="background-color: var(--tw-${typeColor}); box-shadow: 0 0 5px var(--tw-${typeColor})"></span>
                             <span class="text-sm font-bold truncate flex-grow ${isActive ? 'text-white' : 'text-slate-400'}">${node.name}</span>
@@ -783,24 +760,24 @@
             addToTeam(id) {
                 if (this.currentStage.unitIds.length >= CONFIG.MAX_TEAM_SIZE) return;
                 this.currentStage.unitIds.push(id);
-                this.saveToLocalStorage();
+                // No save
                 this.renderTeam();
             }
             removeFromTeam(index) {
                 this.currentStage.unitIds.splice(index, 1);
-                this.saveToLocalStorage();
+                // No save
                 this.renderTeam();
             }
             clearTeam() {
                 this.currentStage.unitIds = [];
-                this.saveToLocalStorage();
+                // No save
                 this.renderTeam();
             }
             sortTeam() {
                 const units = this.getUnitsFromIds(this.currentStage.unitIds);
                 units.sort((a, b) => (a.cost !== b.cost) ? a.cost - b.cost : a.name.localeCompare(b.name));
                 this.currentStage.unitIds = units.map(u => u.id);
-                this.saveToLocalStorage();
+                // No save
                 this.renderTeam();
             }
 
@@ -963,7 +940,8 @@
                     this.filter.search = e.target.value; this.renderChampionPool();
                 });
                 document.getElementById('guide-code-input').addEventListener('input', (e) => {
-                    this.currentStage.code = e.target.value.trim(); this.saveToLocalStorage();
+                    this.currentStage.code = e.target.value.trim();
+                    // No save
                 });
             }
             updateIndicator() {
@@ -983,7 +961,6 @@
             openSaveModal() {
                 document.getElementById('save-team-name-input').value = this.currentGuide.name;
                 document.getElementById('modal-save-name').classList.remove('hidden');
-                document.getElementById('save-team-name-input').focus();
             }
             closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
 
@@ -994,12 +971,11 @@
                     id: Date.now(),
                     name: name,
                     stages: JSON.parse(JSON.stringify(this.currentGuide.stages)),
-                    code: this.currentGuide.code,
                     date: new Date().toLocaleString('ja-JP')
                 };
 
                 this.savedGuides.push(newEntry);
-                this.saveToLocalStorage();
+                // No save
                 this.closeSaveModal();
                 this.showMessage(`「${name}」を保存しました`);
             }
@@ -1011,7 +987,6 @@
             closeLoadModal() { document.getElementById('modal-saved-teams').classList.add('hidden'); }
             openAddStageModal(type) {
                 this.addingStageType = type;
-                // Pre-fill name based on current name or type
                 let suggestion = "Stage";
                 if (type === 'normal') {
                    const match = this.currentStage.name.match(/Lv(\d+)/i);
@@ -1020,8 +995,6 @@
                    else suggestion = "Next Stage";
                 } else if (type === 'alter') {
                    suggestion = this.currentStage.name + "'";
-                } else if (type === 'branch') {
-                   suggestion = "分岐ルート";
                 }
 
                 document.getElementById('add-stage-name-input').value = suggestion;
@@ -1048,7 +1021,7 @@
                 const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
                 if (name && stage) {
                     stage.name = name;
-                    this.saveToLocalStorage();
+                    // No save
                     this.renderAll();
                 }
                 this.closeRenameStageModal();
@@ -1076,7 +1049,7 @@
             executeDelete() {
                 if(this.pendingDelete.type === 'single') this.savedGuides.splice(this.pendingDelete.index, 1);
                 else this.savedGuides = [];
-                this.saveToLocalStorage();
+                // No save
                 this.renderLoadModalList();
                 this.closeConfirmModal();
             }
@@ -1166,7 +1139,7 @@
                 // Set active to first stage
                 this.activeStageId = this.currentGuide.stages[0].id;
 
-                this.saveToLocalStorage();
+                // No save
                 this.renderAll();
                 this.closeLoadModal();
                 this.showMessage(`「${saved.name}」を読み込みました。`);
