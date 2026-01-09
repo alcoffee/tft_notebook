@@ -1791,5 +1791,273 @@
         ]
       }
     ]
+  },
+  {
+    "name": "ビルジ型",
+    "stages": [
+      {
+        "id": "fk52j7njh",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 21,
+            "slug": "drmundo",
+            "name": "Dr. Mundo",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 25,
+            "slug": "fizz",
+            "name": "Fizz",
+            "cost": 4
+          },
+          {
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
+            "cost": 4
+          },
+          {
+            "id": 77,
+            "slug": "tahmkench",
+            "name": "Tahm Kench",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "デマーシア型",
+    "stages": [
+      {
+        "id": "9md901rsu",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 58,
+            "slug": "poppy",
+            "name": "Poppy",
+            "cost": 2
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "tvrpavzhq",
+        "name": "Lv5",
+        "type": "normal",
+        "parentId": "9md901rsu",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 58,
+            "slug": "poppy",
+            "name": "Poppy",
+            "cost": 2
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "yvf664ndp",
+        "name": "Lv5'",
+        "type": "alter",
+        "parentId": "9md901rsu",
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 26,
+            "slug": "galio",
+            "name": "Galio",
+            "cost": 5
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
   }
 ]
