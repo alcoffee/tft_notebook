@@ -1,5 +1,73 @@
 [
   {
+    "name": "ノクサス型",
+    "stages": [
+      {
+        "id": "ga7hq0yhr",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 19,
+            "slug": "darius",
+            "name": "Darius",
+            "cost": 3
+          },
+          {
+            "id": 22,
+            "slug": "draven",
+            "name": "Draven",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 89,
+            "slug": "warwick",
+            "name": "Warwick",
+            "cost": 4
+          },
+          {
+            "id": 49,
+            "slug": "mel",
+            "name": "Mel",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "ソナリロ",
     "stages": [
       {
