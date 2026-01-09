@@ -36,7 +36,7 @@
       "cost": 3,
       "synergies": [
         "Ionia",
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Fox-Fire",
@@ -117,7 +117,7 @@
       "cost": 5,
       "synergies": [
         "Dark Child",
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Enraged Inferno",
@@ -1078,7 +1078,7 @@
       "cost": 1,
       "synergies": [
         "Void",
-        "Sorcerer",
+        "Arcanist",
         "Longshot"
       ],
       "ability": {
@@ -1241,7 +1241,7 @@
       "cost": 1,
       "synergies": [
         "Yordle",
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Whimsy",
@@ -1268,7 +1268,7 @@
       "cost": 4,
       "synergies": [
         "Demacia",
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Final Spark",
@@ -1459,7 +1459,7 @@
       "cost": 2,
       "synergies": [
         "Ixtal",
-        "Sorcerer",
+        "Arcanist",
         "Defender"
       ],
       "ability": {
@@ -2007,7 +2007,7 @@
       "cost": 4,
       "synergies": [
         "Noxus",
-        "Sorcerer",
+        "Arcanist",
         "Juggernaut"
       ],
       "ability": {
@@ -2035,7 +2035,7 @@
       "cost": 7,
       "synergies": [
         "Chainbreaker",
-        "Sorcerer",
+        "Arcanist",
         "Defender"
       ],
       "ability": {
@@ -2312,7 +2312,7 @@
       "cost": 4,
       "synergies": [
         "Yordle",
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Dark Storm",
@@ -2753,7 +2753,7 @@
       "name": "Tibbers",
       "cost": 5,
       "synergies": [
-        "Sorcerer"
+        "Arcanist"
       ],
       "ability": {
         "name": "Summon: Tibbers",
