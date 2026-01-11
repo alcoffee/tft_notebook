@@ -1085,131 +1085,6 @@
     ]
   },
   {
-    "name": "独創的ノクサス95",
-    "stages": [
-      {
-        "id": "v7rmop7nq",
-        "name": "初期構成",
-        "type": "normal",
-        "parentId": null,
-        "code": "",
-        "units": [
-          {
-            "id": 83,
-            "slug": "twistedfate",
-            "name": "Twisted Fate",
-            "cost": 2
-          },
-          {
-            "id": 22,
-            "slug": "draven",
-            "name": "Draven",
-            "cost": 3
-          },
-          {
-            "id": 27,
-            "slug": "gangplank",
-            "name": "Gangplank",
-            "cost": 3
-          },
-          {
-            "id": 44,
-            "slug": "loris",
-            "name": "Loris",
-            "cost": 3
-          },
-          {
-            "id": 53,
-            "slug": "nautilus",
-            "name": "Nautilus",
-            "cost": 3
-          },
-          {
-            "id": 3,
-            "slug": "ambessa",
-            "name": "Ambessa",
-            "cost": 4
-          },
-          {
-            "id": 74,
-            "slug": "swain",
-            "name": "Swain",
-            "cost": 4
-          },
-          {
-            "id": 14,
-            "slug": "braum",
-            "name": "Braum",
-            "cost": 4
-          }
-        ]
-      },
-      {
-        "id": "ls3gt7nsc",
-        "name": "Lv5",
-        "type": "normal",
-        "parentId": "v7rmop7nq",
-        "code": "",
-        "units": [
-          {
-            "id": 27,
-            "slug": "gangplank",
-            "name": "Gangplank",
-            "cost": 3
-          },
-          {
-            "id": 53,
-            "slug": "nautilus",
-            "name": "Nautilus",
-            "cost": 3
-          },
-          {
-            "id": 3,
-            "slug": "ambessa",
-            "name": "Ambessa",
-            "cost": 4
-          },
-          {
-            "id": 25,
-            "slug": "fizz",
-            "name": "Fizz",
-            "cost": 4
-          },
-          {
-            "id": 74,
-            "slug": "swain",
-            "name": "Swain",
-            "cost": 4
-          },
-          {
-            "id": 78,
-            "slug": "taric",
-            "name": "Taric",
-            "cost": 4
-          },
-          {
-            "id": 49,
-            "slug": "mel",
-            "name": "Mel",
-            "cost": 5
-          },
-          {
-            "id": 98,
-            "slug": "ziggs",
-            "name": "Ziggs",
-            "cost": 5
-          },
-          {
-            "id": 64,
-            "slug": "ryze",
-            "name": "Ryze",
-            "cost": 7
-          }
-        ]
-      }
-    ]
-  },
-  {
     "name": "独創的フレライズ",
     "stages": [
       {
@@ -1569,6 +1444,125 @@
             "slug": "ziggs",
             "name": "Ziggs",
             "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ノクサスライズ",
+    "stages": [
+      {
+        "id": "ls3gt7nsc",
+        "name": "Lv7",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 29,
+            "slug": "graves",
+            "name": "Graves",
+            "cost": 2
+          },
+          {
+            "id": 71,
+            "slug": "sion",
+            "name": "Sion",
+            "cost": 2
+          },
+          {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
+            "id": 19,
+            "slug": "darius",
+            "name": "Darius",
+            "cost": 3
+          },
+          {
+            "id": 22,
+            "slug": "draven",
+            "name": "Draven",
+            "cost": 3
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          }
+        ]
+      },
+      {
+        "id": "f3fzot4hv",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "ls3gt7nsc",
+        "code": "",
+        "units": [
+          {
+            "id": 15,
+            "slug": "briar",
+            "name": "Briar",
+            "cost": 1
+          },
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 39,
+            "slug": "kobukoyuumi",
+            "name": "Kobuko & Yuumi",
+            "cost": 3
+          },
+          {
+            "id": 41,
+            "slug": "leblanc",
+            "name": "LeBlanc",
+            "cost": 3
+          },
+          {
+            "id": 25,
+            "slug": "fizz",
+            "name": "Fizz",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
           },
           {
             "id": 64,
