@@ -1083,5 +1083,501 @@
         ]
       }
     ]
+  },
+  {
+    "name": "独創的ノクサス95",
+    "stages": [
+      {
+        "id": "v7rmop7nq",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
+            "id": 22,
+            "slug": "draven",
+            "name": "Draven",
+            "cost": 3
+          },
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 3,
+            "slug": "ambessa",
+            "name": "Ambessa",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "ls3gt7nsc",
+        "name": "Lv5",
+        "type": "normal",
+        "parentId": "v7rmop7nq",
+        "code": "",
+        "units": [
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 3,
+            "slug": "ambessa",
+            "name": "Ambessa",
+            "cost": 4
+          },
+          {
+            "id": 25,
+            "slug": "fizz",
+            "name": "Fizz",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 49,
+            "slug": "mel",
+            "name": "Mel",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "独創的フレライズ",
+    "stages": [
+      {
+        "id": "saw9n9bgv",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 13,
+            "slug": "blitzcrank",
+            "name": "Blitzcrank",
+            "cost": 1
+          },
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 100,
+            "slug": "zoe",
+            "name": "Zoe",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          }
+        ]
+      },
+      {
+        "id": "69vjpp69u",
+        "name": "Lv9 シンジド",
+        "type": "normal",
+        "parentId": "saw9n9bgv",
+        "code": "",
+        "units": [
+          {
+            "id": 13,
+            "slug": "blitzcrank",
+            "name": "Blitzcrank",
+            "cost": 1
+          },
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 100,
+            "slug": "zoe",
+            "name": "Zoe",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
+            "cost": 4
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "ycxr0tomg",
+        "name": "Lv9 ワーウィック",
+        "type": "alter",
+        "parentId": "saw9n9bgv",
+        "code": "",
+        "units": [
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 34,
+            "slug": "jinx",
+            "name": "Jinx",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 100,
+            "slug": "zoe",
+            "name": "Zoe",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 89,
+            "slug": "warwick",
+            "name": "Warwick",
+            "cost": 4
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "35dcgxjqi",
+        "name": "Lv9 ボリベア",
+        "type": "alter",
+        "parentId": "saw9n9bgv",
+        "code": "",
+        "units": [
+          {
+            "id": 13,
+            "slug": "blitzcrank",
+            "name": "Blitzcrank",
+            "cost": 1
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 21,
+            "slug": "drmundo",
+            "name": "Dr. Mundo",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 100,
+            "slug": "zoe",
+            "name": "Zoe",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 88,
+            "slug": "volibear",
+            "name": "Volibear",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "uuiv4axse",
+        "name": "Lv9 +ジグス",
+        "type": "normal",
+        "parentId": "ycxr0tomg",
+        "code": "",
+        "units": [
+          {
+            "id": 7,
+            "slug": "ashe",
+            "name": "Ashe",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 100,
+            "slug": "zoe",
+            "name": "Zoe",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 89,
+            "slug": "warwick",
+            "name": "Warwick",
+            "cost": 4
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      },
+      {
+        "id": "g08s9crkn",
+        "name": "Lv9 +ジグス",
+        "type": "normal",
+        "parentId": "35dcgxjqi",
+        "code": "",
+        "units": [
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 21,
+            "slug": "drmundo",
+            "name": "Dr. Mundo",
+            "cost": 3
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          },
+          {
+            "id": 65,
+            "slug": "sejuani",
+            "name": "Sejuani",
+            "cost": 3
+          },
+          {
+            "id": 14,
+            "slug": "braum",
+            "name": "Braum",
+            "cost": 4
+          },
+          {
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
+            "cost": 4
+          },
+          {
+            "id": 88,
+            "slug": "volibear",
+            "name": "Volibear",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          },
+          {
+            "id": 64,
+            "slug": "ryze",
+            "name": "Ryze",
+            "cost": 7
+          }
+        ]
+      }
+    ]
   }
 ]
