@@ -512,5 +512,220 @@
         ]
       }
     ]
+  },
+  {
+    "name": "アイオニアデマーシア",
+    "stages": [
+      {
+        "id": "7mje6qr27",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 73,
+            "slug": "sona",
+            "name": "Sona",
+            "cost": 1
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          }
+        ]
+      },
+      {
+        "id": "oe1ig5pb5",
+        "name": "Lv8 アンロック",
+        "type": "normal",
+        "parentId": "7mje6qr27",
+        "code": "",
+        "units": [
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 73,
+            "slug": "sona",
+            "name": "Sona",
+            "cost": 1
+          },
+          {
+            "id": 58,
+            "slug": "poppy",
+            "name": "Poppy",
+            "cost": 2
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 47,
+            "slug": "lux",
+            "name": "Lux",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "dv1xbowze",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "oe1ig5pb5",
+        "code": "",
+        "units": [
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 58,
+            "slug": "poppy",
+            "name": "Poppy",
+            "cost": 2
+          },
+          {
+            "id": 2,
+            "slug": "ahri",
+            "name": "Ahri",
+            "cost": 3
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 47,
+            "slug": "lux",
+            "name": "Lux",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "k5pe0yaht",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "dv1xbowze",
+        "code": "",
+        "units": [
+          {
+            "id": 32,
+            "slug": "jarvaniv",
+            "name": "Jarvan IV",
+            "cost": 1
+          },
+          {
+            "id": 92,
+            "slug": "xinzhao",
+            "name": "Xin Zhao",
+            "cost": 2
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 84,
+            "slug": "vayne",
+            "name": "Vayne",
+            "cost": 3
+          },
+          {
+            "id": 28,
+            "slug": "garen",
+            "name": "Garen",
+            "cost": 4
+          },
+          {
+            "id": 47,
+            "slug": "lux",
+            "name": "Lux",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          },
+          {
+            "id": 98,
+            "slug": "ziggs",
+            "name": "Ziggs",
+            "cost": 5
+          }
+        ]
+      }
+    ]
   }
 ]
