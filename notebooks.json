@@ -1170,5 +1170,145 @@
         ]
       }
     ]
+  },
+  {
+    "name": "イシュタルバード（パンベン）",
+    "stages": [
+      {
+        "id": "4dvor18r4",
+        "name": "初期構成+ベンチ系（アンロック多め故）",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 17,
+            "slug": "caitlyn",
+            "name": "Caitlyn",
+            "cost": 1
+          },
+          {
+            "id": 54,
+            "slug": "neeko",
+            "name": "Neeko",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 44,
+            "slug": "loris",
+            "name": "Loris",
+            "cost": 3
+          }
+        ]
+      },
+      {
+        "id": "qy7bdfila",
+        "name": "Lv6",
+        "type": "normal",
+        "parentId": "4dvor18r4",
+        "code": "",
+        "units": [
+          {
+            "id": 59,
+            "slug": "qiyana",
+            "name": "Qiyana",
+            "cost": 1
+          },
+          {
+            "id": 10,
+            "slug": "bard",
+            "name": "Bard",
+            "cost": 2
+          },
+          {
+            "id": 54,
+            "slug": "neeko",
+            "name": "Neeko",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 50,
+            "slug": "milio",
+            "name": "Milio",
+            "cost": 3
+          }
+        ]
+      },
+      {
+        "id": "xg86fohae",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "qy7bdfila",
+        "code": "",
+        "units": [
+          {
+            "id": 10,
+            "slug": "bard",
+            "name": "Bard",
+            "cost": 2
+          },
+          {
+            "id": 56,
+            "slug": "orianna",
+            "name": "Orianna",
+            "cost": 2
+          },
+          {
+            "id": 54,
+            "slug": "neeko",
+            "name": "Neeko",
+            "cost": 2
+          },
+          {
+            "id": 55,
+            "slug": "nidalee",
+            "name": "Nidalee",
+            "cost": 4
+          },
+          {
+            "id": 72,
+            "slug": "skarner",
+            "name": "Skarner",
+            "cost": 4
+          },
+          {
+            "id": 86,
+            "slug": "vi",
+            "name": "Vi",
+            "cost": 2
+          },
+          {
+            "id": 50,
+            "slug": "milio",
+            "name": "Milio",
+            "cost": 3
+          },
+          {
+            "id": 16,
+            "slug": "brock",
+            "name": "Brock",
+            "cost": 7
+          }
+        ]
+      }
+    ]
   }
 ]
