@@ -1194,10 +1194,15 @@
 
         async function initApp() {
             const poolEl = document.getElementById('champion-pool');
+
+            // キャッシュを回避するためのユニークなクエリパラメータ（例: 現在時刻）
+            const cacheBuster = `?t=${new Date().getTime()}`;
+
             try {
                 const [resData, resNB] = await Promise.all([
-                    fetch(CONFIG.DATA_URL),
-                    fetch(CONFIG.NOTEBOOKS_URL)
+                    // URLの末尾にパラメータを付与
+                    fetch(CONFIG.DATA_URL + cacheBuster, { cache: 'no-cache' }),
+                    fetch(CONFIG.NOTEBOOKS_URL + cacheBuster, { cache: 'no-cache' })
                 ]);
 
                 if (!resData.ok) throw new Error("Data fetch failed");
