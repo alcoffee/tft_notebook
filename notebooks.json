@@ -811,7 +811,7 @@
       },
       {
         "id": "wi59ykwio",
-        "name": "Lv8 アンロックまで耐える",
+        "name": "Lv8 爆発物を探しつつステータスファーム",
         "type": "normal",
         "parentId": "iopswbxmk",
         "code": "",
@@ -868,7 +868,7 @@
       },
       {
         "id": "slnonghlj",
-        "name": "Lv8 TF3を狙い95へ",
+        "name": "Lv8 爆発物が出なかった",
         "type": "alter",
         "parentId": "iopswbxmk",
         "code": "",
@@ -982,7 +982,7 @@
       },
       {
         "id": "ta71vp4zh",
-        "name": "Lv9 95",
+        "name": "Lv9 ビルジ5まで落としビルジ3でTF3へ（操作の簡略化）",
         "type": "normal",
         "parentId": "slnonghlj",
         "code": "",
