@@ -303,5 +303,226 @@
         ]
       }
     ]
+  },
+  {
+    "name": "絶好調の超越の道ヤスオ",
+    "stages": [
+      {
+        "id": "zpj1mu3ud",
+        "name": "初期構成",
+        "type": "normal",
+        "parentId": null,
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 29,
+            "slug": "graves",
+            "name": "Graves",
+            "cost": 2
+          },
+          {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          }
+        ]
+      },
+      {
+        "id": "t2u3rb3kz",
+        "name": "Lv7",
+        "type": "normal",
+        "parentId": "zpj1mu3ud",
+        "code": "",
+        "units": [
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 29,
+            "slug": "graves",
+            "name": "Graves",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          },
+          {
+            "id": 2,
+            "slug": "ahri",
+            "name": "Ahri",
+            "cost": 3
+          },
+          {
+            "id": 90,
+            "slug": "wukong",
+            "name": "Wukong",
+            "cost": 4
+          },
+          {
+            "id": 94,
+            "slug": "yone",
+            "name": "Yone",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "fytn2kjhs",
+        "name": "Lv9",
+        "type": "normal",
+        "parentId": "t2u3rb3kz",
+        "code": "",
+        "units": [
+          {
+            "id": 33,
+            "slug": "jhin",
+            "name": "Jhin",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 29,
+            "slug": "graves",
+            "name": "Graves",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          },
+          {
+            "id": 2,
+            "slug": "ahri",
+            "name": "Ahri",
+            "cost": 3
+          },
+          {
+            "id": 90,
+            "slug": "wukong",
+            "name": "Wukong",
+            "cost": 4
+          },
+          {
+            "id": 94,
+            "slug": "yone",
+            "name": "Yone",
+            "cost": 4
+          },
+          {
+            "id": 96,
+            "slug": "yunara",
+            "name": "Yunara",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "uag936quc",
+        "name": "Lv8 旧来の構成(精霊の道でもOK)",
+        "type": "alter",
+        "parentId": "zpj1mu3ud",
+        "code": "",
+        "units": [
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 54,
+            "slug": "neeko",
+            "name": "Neeko",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          },
+          {
+            "id": 2,
+            "slug": "ahri",
+            "name": "Ahri",
+            "cost": 3
+          },
+          {
+            "id": 37,
+            "slug": "kennen",
+            "name": "Kennen",
+            "cost": 3
+          },
+          {
+            "id": 90,
+            "slug": "wukong",
+            "name": "Wukong",
+            "cost": 4
+          },
+          {
+            "id": 94,
+            "slug": "yone",
+            "name": "Yone",
+            "cost": 4
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          }
+        ]
+      }
+    ]
   }
 ]
