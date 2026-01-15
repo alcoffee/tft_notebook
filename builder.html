@@ -219,12 +219,11 @@
                            class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition" disabled>
 
                     <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-                        <button onclick="app.filterCost('all')" class="filter-btn active bg-blue-600 text-white px-3 py-1 rounded text-xs whitespace-nowrap">All</button>
-                        <button onclick="app.filterCost(1)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-gray-400">1 Cost</button>
-                        <button onclick="app.filterCost(2)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-green-500">2 Cost</button>
-                        <button onclick="app.filterCost(3)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-blue-500">3 Cost</button>
-                        <button onclick="app.filterCost(4)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-purple-500">4 Cost</button>
-                        <button onclick="app.filterCost(5)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-yellow-500">5+ Cost</button>
+                        <button onclick="app.toggleCostSearch(1)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-gray-400" data-cost="1">1 Cost</button>
+                        <button onclick="app.toggleCostSearch(2)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-green-500" data-cost="2">2 Cost</button>
+                        <button onclick="app.toggleCostSearch(3)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-blue-500" data-cost="3">3 Cost</button>
+                        <button onclick="app.toggleCostSearch(4)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-purple-500" data-cost="4">4 Cost</button>
+                        <button onclick="app.toggleCostSearch(5)" class="filter-btn bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs whitespace-nowrap border-b-2 border-yellow-500" data-cost="5">5+ Cost</button>
                     </div>
                 </div>
 
@@ -308,7 +307,7 @@
     <div id="modal-json-view" class="fixed inset-0 z-[90] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-lg p-6 flex flex-col gap-4">
             <h3 class="text-lg font-bold text-white">ガイドデータ (JSON)</h3>
-            <p class="text-xs text-slate-400">ユニットID、Slug、名前、コストを含むJSONデータです。</p>
+            <p class="text-xs text-slate-400">ユニットID、Slug、名前のみを含むJSONデータです。</p>
             <textarea id="json-output-area" class="w-full h-48 bg-slate-900 border border-slate-600 rounded p-3 text-xs text-slate-300 font-mono focus:outline-none focus:border-blue-500" readonly></textarea>
             <div class="flex justify-end gap-3">
                 <button onclick="app.copyJsonToClipboard()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">コピー</button>
@@ -418,27 +417,18 @@
             // --- 1. Initialization & Data ---
 
             initData(notebooksData) {
-                // Since we removed local storage, we just load notebooksData
-                if (notebooksData) {
+                if (this.savedGuides.length === 0 && notebooksData) {
                     this.importExternalNotebooks(notebooksData);
                 }
-
-                const indicator = document.getElementById('data-source-indicator');
-                if (this.savedGuides.length > 0) {
-                    indicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> 準備完了';
-                } else {
-                    indicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500"></span> 新規作成';
-                }
+                this.updateIndicator();
             }
 
             importExternalNotebooks(data) {
                 let imported = [];
                 if (Array.isArray(data)) {
-                    // Check if it's already in new format or old flat format
                     if (data.length > 0 && data[0].stages) {
                         imported = data.map((g, i) => this.parseGuideData(g, i));
                     } else {
-                         // Fallback for flat array of single teams if any
                          imported = data.map((g, i) => this.parseGuideData(g, i));
                     }
                 } else if (data.stages) {
@@ -447,26 +437,22 @@
 
                 if (imported.length > 0) {
                     this.savedGuides = [...this.savedGuides, ...imported];
-                    // No save to local storage
+                    // No save to localStorage
                 }
             }
 
             parseGuideData(guide, index) {
-                // Convert external JSON stages to internal format (add IDs, parentIds for linear chain)
                 const stages = [];
                 let parentId = null;
-
                 const rawStages = Array.isArray(guide.stages) ? guide.stages : [];
-                // If units exist at top level, treat as single stage or main
+
                 if (rawStages.length === 0 && guide.units) {
                     rawStages.push({ name: "Main", units: guide.units });
                 }
 
-                // Check if IDs are already defined in the JSON (Tree Structure Import)
                 const hasDefinedIds = rawStages.some(s => s.id);
 
                 if (hasDefinedIds) {
-                    // Import as defined tree structure
                     rawStages.forEach((s) => {
                         stages.push({
                             id: s.id || Utils.generateId(),
@@ -478,7 +464,6 @@
                         });
                     });
                 } else {
-                    // Import as Linear Chain (Fallback)
                     rawStages.forEach((s, idx) => {
                         const id = Utils.generateId();
                         stages.push({
@@ -489,7 +474,7 @@
                             parentId: parentId,
                             code: s.code || ""
                         });
-                        parentId = id; // Chain them
+                        parentId = id;
                     });
                 }
 
@@ -513,12 +498,10 @@
             getUnitById(id) { return this.unitsData.find(u => u.id === id); }
             getUnitsFromIds(ids) { return ids.map(id => this.getUnitById(id)).filter(Boolean); }
 
-
             // --- 2. Stage Logic (Tree) ---
 
             switchStage(stageId) {
                 this.activeStageId = stageId;
-                // No save
                 this.renderAll();
             }
 
@@ -534,14 +517,13 @@
                 let desc = "現在の構成を引き継いで次の段階に進みます。";
 
                 if (type === 'normal') {
-                    const match = this.currentStage.name.match(/Lv(\d+)/i);
-                    if (match) {
+                   const match = this.currentStage.name.match(/Lv(\d+)/i);
+                   if (match) {
                         defaultName = `Lv${parseInt(match[1]) + 1}`;
-                    } else {
-                        // If root is "初期構成", maybe next is Lv5
+                   } else {
                         if (this.currentStage.name === "初期構成") defaultName = "Lv5";
                         else defaultName = "Next Stage";
-                    }
+                   }
                 } else if (type === 'alter') {
                     defaultName = this.currentStage.name + "'";
                     typeText = "Alter";
@@ -568,15 +550,12 @@
                 let parentId = null;
 
                 if (this.addingStageType === 'normal' || this.addingStageType === 'next') {
-                    // Next: Child of current
                     parentId = this.activeStageId;
-                    this.addingStageType = 'normal'; // Standardize type name
+                    this.addingStageType = 'normal';
                 } else if (this.addingStageType === 'alter' || this.addingStageType === 'branch') {
-                    // Alter: Sibling of current (Child of current's parent)
                     parentId = this.currentStage.parentId;
                 }
 
-                // Clone current units
                 const units = [...this.currentStage.unitIds];
 
                 const newStage = {
@@ -591,7 +570,6 @@
                 this.currentGuide.stages.push(newStage);
                 this.activeStageId = newId;
 
-                // No save
                 this.renderAll();
                 this.closeAddStageModal();
             }
@@ -606,23 +584,18 @@
                 const delId = this.activeStageId;
                 const parentId = this.currentStage.parentId;
 
-                // Re-parent children to deleted node's parent (Maintain tree)
                 this.currentGuide.stages.forEach(s => {
                     if (s.parentId === delId) s.parentId = parentId;
                 });
 
-                // Remove stage
                 this.currentGuide.stages = this.currentGuide.stages.filter(s => s.id !== delId);
 
-                // Determine new active stage
-                // Try parent, or just the first available one
                 if (parentId && this.currentGuide.stages.find(s => s.id === parentId)) {
                     this.activeStageId = parentId;
                 } else {
                      this.activeStageId = this.currentGuide.stages[0].id;
                 }
 
-                // No save
                 this.renderAll();
             }
 
@@ -639,7 +612,6 @@
                 const container = document.getElementById('stage-tree-container');
                 container.innerHTML = '';
 
-                // Build tree structure for rendering
                 const stages = this.currentGuide.stages;
                 const map = {};
                 stages.forEach(s => map[s.id] = { ...s, children: [] });
@@ -653,7 +625,6 @@
                     }
                 });
 
-                // Recursive render with indentation
                 const renderNode = (node, depth) => {
                     const el = document.createElement('div');
                     const isActive = node.id === this.activeStageId;
@@ -663,8 +634,7 @@
                     if (node.type === 'branch') typeColor = "bg-orange-500";
 
                     el.className = `stage-node flex items-center p-2 rounded mb-1 ${isActive ? 'active' : ''}`;
-                    // Simple indentation logic
-                    el.style.marginLeft = `${depth * 20}px`; 
+                    el.style.marginLeft = `${depth * 20}px`;
                     if (node.type !== 'normal' && depth > 0) {
                          el.classList.add(`type-${node.type}`);
                     } else {
@@ -673,7 +643,6 @@
 
                     el.onclick = () => this.switchStage(node.id);
 
-                    // Simple Tree visual connector if depth > 0
                     const connector = depth > 0 ? `<div class="tree-branch-line"></div>` : '';
 
                     el.innerHTML = `
@@ -685,12 +654,11 @@
                         </div>
                     `;
 
-                    // Add edit button if active
                     if (isActive) {
                         const editBtn = document.createElement('button');
                         editBtn.className = "ml-2 p-1 rounded hover:bg-slate-700 text-slate-500 hover:text-white transition z-10";
                         editBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>`;
-                        editBtn.onclick = (e) => this.openRenameStageModal(node.id, e); // Pass ID
+                        editBtn.onclick = (e) => this.openRenameStageModal(node.id, e);
                         el.querySelector('.flex').appendChild(editBtn);
                     }
 
@@ -760,24 +728,20 @@
             addToTeam(id) {
                 if (this.currentStage.unitIds.length >= CONFIG.MAX_TEAM_SIZE) return;
                 this.currentStage.unitIds.push(id);
-                // No save
                 this.renderTeam();
             }
             removeFromTeam(index) {
                 this.currentStage.unitIds.splice(index, 1);
-                // No save
                 this.renderTeam();
             }
             clearTeam() {
                 this.currentStage.unitIds = [];
-                // No save
                 this.renderTeam();
             }
             sortTeam() {
                 const units = this.getUnitsFromIds(this.currentStage.unitIds);
                 units.sort((a, b) => (a.cost !== b.cost) ? a.cost - b.cost : a.name.localeCompare(b.name));
                 this.currentStage.unitIds = units.map(u => u.id);
-                // No save
                 this.renderTeam();
             }
 
@@ -819,14 +783,21 @@
                 const pool = document.getElementById('champion-pool');
                 pool.innerHTML = '';
                 const term = Utils.safeLower(this.filter.search);
+
+                // Parse Cost Filter from search term
+                const costMatches = term.match(/cost:(\d+)/);
+                const costFilterVal = costMatches ? parseInt(costMatches[1]) : 'all';
+                const cleanTerm = term.replace(/cost:\d+/g, '').trim();
+
                 const filtered = this.unitsData.filter(u => {
-                    const costMatch = this.filter.cost === 'all' ||
-                        (this.filter.cost === 5 && u.cost >= 5) || u.cost === this.filter.cost;
-                    const searchMatch = !term ||
-                        Utils.safeLower(u.name).includes(term) ||
-                        (u.synergies || []).some(t => Utils.safeLower(t).includes(term)) ||
-                        Utils.safeLower(u.role).includes(term) ||
-                        (u.ability && (Utils.safeLower(u.ability.name).includes(term) || Utils.safeLower(u.ability.description).includes(term)));
+                    const costMatch = costFilterVal === 'all' ||
+                        (costFilterVal === 5 && u.cost >= 5) || u.cost === costFilterVal;
+
+                    const searchMatch = !cleanTerm ||
+                        Utils.safeLower(u.name).includes(cleanTerm) ||
+                        (u.synergies || []).some(t => Utils.safeLower(t).includes(cleanTerm)) ||
+                        Utils.safeLower(u.role).includes(cleanTerm) ||
+                        (u.ability && (Utils.safeLower(u.ability.name).includes(cleanTerm) || Utils.safeLower(u.ability.description).includes(cleanTerm)));
                     return costMatch && searchMatch;
                 });
                 filtered.sort((a, b) => (a.cost !== b.cost) ? a.cost - b.cost : a.name.localeCompare(b.name));
@@ -937,7 +908,9 @@
             // --- Event Handlers ---
             setupEventListeners() {
                 document.getElementById('search-input').addEventListener('input', (e) => {
-                    this.filter.search = e.target.value; this.renderChampionPool();
+                    this.filter.search = e.target.value;
+                    this.updateCostButtonsState(e.target.value);
+                    this.renderChampionPool();
                 });
                 document.getElementById('guide-code-input').addEventListener('input', (e) => {
                     this.currentStage.code = e.target.value.trim();
@@ -957,6 +930,56 @@
                 document.getElementById('guide-code-input').disabled = false;
             }
 
+            toggleCostSearch(cost) {
+                const input = document.getElementById('search-input');
+                let text = input.value;
+                const costTag = `Cost:${cost}`;
+                const regex = /Cost:\d+/gi;
+
+                if (text.includes(costTag)) {
+                    text = text.replace(costTag, '').trim();
+                } else {
+                    text = text.replace(regex, '').trim();
+                    text = `${text} ${costTag}`.trim();
+                }
+                input.value = text;
+                this.filter.search = text;
+                this.updateCostButtonsState(text);
+                this.renderChampionPool();
+            }
+
+            updateCostButtonsState(text) {
+                const match = text.match(/Cost:(\d+)/i);
+                const activeCost = match ? parseInt(match[1]) : null;
+
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    const btnCost = parseInt(btn.getAttribute('data-cost'));
+                    if (activeCost && btnCost === activeCost) {
+                        btn.classList.remove('bg-slate-700', 'hover:bg-slate-600');
+                        btn.classList.add('bg-blue-600', 'text-white');
+                    } else if (!activeCost && btn.getAttribute('onclick').includes("'all'")) {
+                         // Active state for 'All' when no cost selected?
+                         // Or keep simple: Cost buttons highlight only when active.
+                         btn.classList.remove('bg-blue-600', 'text-white');
+                         btn.classList.add('bg-slate-700', 'hover:bg-slate-600');
+                    } else {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-slate-700', 'hover:bg-slate-600');
+                    }
+                });
+            }
+
+            moveSavedGuide(index, direction) {
+                const newIndex = index + direction;
+                if (newIndex < 0 || newIndex >= this.savedGuides.length) return;
+
+                const temp = this.savedGuides[index];
+                this.savedGuides[index] = this.savedGuides[newIndex];
+                this.savedGuides[newIndex] = temp;
+
+                this.renderLoadModalList();
+            }
+
             // --- Modals ---
             openSaveModal() {
                 document.getElementById('save-team-name-input').value = this.currentGuide.name;
@@ -967,15 +990,16 @@
             confirmSaveTeam() {
                 const name = document.getElementById('save-team-name-input').value.trim() || `ガイド ${this.savedGuides.length + 1}`;
                 this.currentGuide.name = name;
+
                 const newEntry = {
                     id: Date.now(),
                     name: name,
                     stages: JSON.parse(JSON.stringify(this.currentGuide.stages)),
+                    code: this.currentGuide.code,
                     date: new Date().toLocaleString('ja-JP')
                 };
 
                 this.savedGuides.push(newEntry);
-                // No save
                 this.closeSaveModal();
                 this.showMessage(`「${name}」を保存しました`);
             }
@@ -995,6 +1019,8 @@
                    else suggestion = "Next Stage";
                 } else if (type === 'alter') {
                    suggestion = this.currentStage.name + "'";
+                } else if (type === 'branch') {
+                   suggestion = "分岐ルート";
                 }
 
                 document.getElementById('add-stage-name-input').value = suggestion;
@@ -1002,9 +1028,9 @@
                 document.getElementById('add-stage-name-input').focus();
             }
             closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
+
             openRenameStageModal(stageId, e) {
                 if(e) e.stopPropagation();
-                // If id passed (from tree button), use it. Else use active.
                 this.renameStageId = stageId || this.activeStageId;
                 const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
 
@@ -1021,7 +1047,6 @@
                 const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
                 if (name && stage) {
                     stage.name = name;
-                    // No save
                     this.renderAll();
                 }
                 this.closeRenameStageModal();
@@ -1049,7 +1074,6 @@
             executeDelete() {
                 if(this.pendingDelete.type === 'single') this.savedGuides.splice(this.pendingDelete.index, 1);
                 else this.savedGuides = [];
-                // No save
                 this.renderLoadModalList();
                 this.closeConfirmModal();
             }
@@ -1070,7 +1094,7 @@
                         code: st.code || "",
                         units: st.unitIds.map(id => {
                             const u = this.getUnitById(id);
-                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null; // Added cost
+                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null;
                         }).filter(Boolean)
                      }))
                  }));
@@ -1083,7 +1107,6 @@
                 const saved = this.savedGuides[index];
                 if (!saved) return;
 
-                // Export including tree structure
                 const exportData = {
                     name: saved.name,
                     stages: saved.stages.map(st => ({
@@ -1094,7 +1117,7 @@
                         code: st.code || "",
                         units: st.unitIds.map(id => {
                             const u = this.getUnitById(id);
-                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null; // Added cost
+                            return u ? { id: u.id, slug: u.slug, name: u.name, cost: u.cost } : null;
                         }).filter(Boolean)
                     }))
                 };
@@ -1120,10 +1143,8 @@
                 const saved = this.savedGuides[index];
                 if (!saved) return;
 
-                // Load and ensure valid active stage
                 this.currentGuide = JSON.parse(JSON.stringify(saved));
 
-                // Compatibility check: Convert old flat saved teams to single stage if needed
                 if (!this.currentGuide.stages && this.currentGuide.unitIds) {
                     const rootId = Utils.generateId();
                     this.currentGuide.stages = [{
@@ -1136,10 +1157,8 @@
                     }];
                 }
 
-                // Set active to first stage
                 this.activeStageId = this.currentGuide.stages[0].id;
 
-                // No save
                 this.renderAll();
                 this.closeLoadModal();
                 this.showMessage(`「${saved.name}」を読み込みました。`);
@@ -1154,8 +1173,8 @@
                     return;
                 }
 
-                [...this.savedGuides].reverse().forEach((saved, revIdx) => {
-                    const realIdx = this.savedGuides.length - 1 - revIdx;
+                // Render normal order for intuitive Up/Down logic (Top is index 0)
+                this.savedGuides.forEach((saved, index) => {
                     const stages = saved.stages || (saved.unitIds ? [1] : []);
                     let units = [];
 
@@ -1173,6 +1192,10 @@
                     const el = document.createElement('div');
                     el.className = 'bg-slate-700/50 rounded-lg p-3 flex flex-col sm:flex-row justify-between items-center gap-3 border border-slate-600 hover:border-slate-500 transition';
                     el.innerHTML = `
+                        <div class="flex flex-col gap-1 mr-2">
+                             <button onclick="app.moveSavedGuide(${index}, -1)" class="text-slate-400 hover:text-white px-1" ${index === 0 ? 'disabled style="opacity:0.3"' : ''}>↑</button>
+                             <button onclick="app.moveSavedGuide(${index}, 1)" class="text-slate-400 hover:text-white px-1" ${index === this.savedGuides.length - 1 ? 'disabled style="opacity:0.3"' : ''}>↓</button>
+                        </div>
                         <div class="flex-grow w-full sm:w-auto">
                             <div class="flex items-baseline gap-2 mb-1">
                                 <span class="font-bold text-white text-lg truncate">${saved.name}</span>
@@ -1182,9 +1205,9 @@
                             <div class="flex gap-1 overflow-hidden">${imgs}${units.length > 7 ? `<span class="text-xs text-slate-500 flex items-center">+${units.length - 7}</span>` : ''}</div>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto justify-end">
-                            <button onclick="app.applySavedTeam(${realIdx})" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold">読込</button>
-                            <button onclick="app.viewTeamJson(${realIdx})" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold">JSON</button>
-                            <button onclick="app.confirmDeleteTeam(${realIdx})" class="bg-red-600/20 hover:bg-red-600/40 text-red-300 border border-red-800 px-3 py-1.5 rounded text-sm">削除</button>
+                            <button onclick="app.applySavedTeam(${index})" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-bold">読込</button>
+                            <button onclick="app.viewTeamJson(${index})" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-sm font-bold">JSON</button>
+                            <button onclick="app.confirmDeleteTeam(${index})" class="bg-red-600/20 hover:bg-red-600/40 text-red-300 border border-red-800 px-3 py-1.5 rounded text-sm">削除</button>
                         </div>
                     `;
                     container.appendChild(el);
@@ -1194,15 +1217,10 @@
 
         async function initApp() {
             const poolEl = document.getElementById('champion-pool');
-
-            // キャッシュを回避するためのユニークなクエリパラメータ（例: 現在時刻）
-            const cacheBuster = `?t=${new Date().getTime()}`;
-
             try {
                 const [resData, resNB] = await Promise.all([
-                    // URLの末尾にパラメータを付与
-                    fetch(CONFIG.DATA_URL + cacheBuster, { cache: 'no-cache' }),
-                    fetch(CONFIG.NOTEBOOKS_URL + cacheBuster, { cache: 'no-cache' })
+                    fetch(CONFIG.DATA_URL),
+                    fetch(CONFIG.NOTEBOOKS_URL)
                 ]);
 
                 if (!resData.ok) throw new Error("Data fetch failed");
