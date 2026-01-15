@@ -79,10 +79,10 @@
             "cost": 3
           },
           {
-            "id": 2,
-            "slug": "ahri",
-            "name": "Ahri",
-            "cost": 3
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
+            "cost": 4
           }
         ]
       },
@@ -118,15 +118,15 @@
             "cost": 2
           },
           {
-            "id": 34,
-            "slug": "jinx",
-            "name": "Jinx",
+            "id": 48,
+            "slug": "malzahar",
+            "name": "Malzahar",
             "cost": 3
           },
           {
-            "id": 74,
-            "slug": "swain",
-            "name": "Swain",
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
             "cost": 4
           }
         ]
@@ -220,6 +220,12 @@
             "cost": 4
           },
           {
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
+            "cost": 4
+          },
+          {
             "id": 72,
             "slug": "skarner",
             "name": "Skarner",
@@ -232,16 +238,10 @@
             "cost": 4
           },
           {
-            "id": 89,
-            "slug": "warwick",
-            "name": "Warwick",
+            "id": 78,
+            "slug": "taric",
+            "name": "Taric",
             "cost": 4
-          },
-          {
-            "id": 98,
-            "slug": "ziggs",
-            "name": "Ziggs",
-            "cost": 5
           }
         ]
       },
@@ -252,6 +252,12 @@
         "parentId": "iktdg99zo",
         "code": "",
         "units": [
+          {
+            "id": 40,
+            "slug": "kogmaw",
+            "name": "Kog'Maw",
+            "cost": 1
+          },
           {
             "id": 18,
             "slug": "chogath",
@@ -271,22 +277,16 @@
             "cost": 3
           },
           {
+            "id": 35,
+            "slug": "kaisa",
+            "name": "Kai'Sa",
+            "cost": 4
+          },
+          {
             "id": 62,
             "slug": "riftherald",
             "name": "Rift Herald",
             "cost": 4
-          },
-          {
-            "id": 70,
-            "slug": "singed",
-            "name": "Singed",
-            "cost": 4
-          },
-          {
-            "id": 34,
-            "slug": "jinx",
-            "name": "Jinx",
-            "cost": 3
           },
           {
             "id": 66,
@@ -295,9 +295,9 @@
             "cost": 4
           },
           {
-            "id": 89,
-            "slug": "warwick",
-            "name": "Warwick",
+            "id": 70,
+            "slug": "singed",
+            "name": "Singed",
             "cost": 4
           }
         ]
@@ -366,6 +366,12 @@
             "cost": 2
           },
           {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
             "id": 93,
             "slug": "yasuo",
             "name": "Yasuo",
@@ -381,12 +387,6 @@
             "id": 12,
             "slug": "belveth",
             "name": "Bel'Veth",
-            "cost": 4
-          },
-          {
-            "id": 51,
-            "slug": "missfortune",
-            "name": "Miss Fortune",
             "cost": 4
           },
           {
@@ -474,6 +474,12 @@
             "cost": 2
           },
           {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
             "id": 93,
             "slug": "yasuo",
             "name": "Yasuo",
@@ -484,12 +490,6 @@
             "slug": "gangplank",
             "name": "Gangplank",
             "cost": 3
-          },
-          {
-            "id": 51,
-            "slug": "missfortune",
-            "name": "Miss Fortune",
-            "cost": 4
           },
           {
             "id": 94,
@@ -507,6 +507,75 @@
             "id": 67,
             "slug": "sett",
             "name": "Sett",
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "id": "akirsnrze",
+        "name": "Lv9 5コスト追加",
+        "type": "normal",
+        "parentId": "tta1s78xk",
+        "code": "",
+        "units": [
+          {
+            "id": 29,
+            "slug": "graves",
+            "name": "Graves",
+            "cost": 2
+          },
+          {
+            "id": 83,
+            "slug": "twistedfate",
+            "name": "Twisted Fate",
+            "cost": 2
+          },
+          {
+            "id": 93,
+            "slug": "yasuo",
+            "name": "Yasuo",
+            "cost": 2
+          },
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 94,
+            "slug": "yone",
+            "name": "Yone",
+            "cost": 4
+          },
+          {
+            "id": 1,
+            "slug": "aatrox",
+            "name": "Aatrox",
+            "cost": 5
+          },
+          {
+            "id": 67,
+            "slug": "sett",
+            "name": "Sett",
+            "cost": 5
+          },
+          {
+            "id": 24,
+            "slug": "fiddlesticks",
+            "name": "Fiddlesticks",
+            "cost": 5
+          },
+          {
+            "id": 38,
+            "slug": "kindred",
+            "name": "Kindred",
+            "cost": 5
+          },
+          {
+            "id": 45,
+            "slug": "luciansenna",
+            "name": "Lucian & Senna",
             "cost": 5
           }
         ]
