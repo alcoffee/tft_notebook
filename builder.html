@@ -167,6 +167,11 @@
                     </button>
                 </div>
 
+                <!-- Memo Input (Global for Guide) -->
+                <div class="mb-4">
+                    <textarea id="guide-note-input" class="w-full bg-slate-900/50 border border-slate-700 rounded px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-blue-500 resize-none h-16" placeholder="メモ"></textarea>
+                </div>
+
                 <!-- Team Grid -->
                 <div id="team-grid" class="flex flex-wrap gap-4 min-h-[100px] items-center justify-center lg:justify-start bg-slate-900/50 p-4 rounded-lg border-2 border-dashed border-slate-700">
                     <p class="text-slate-500 text-sm select-none pointer-events-none">データの読み込みを待機しています...</p>
@@ -307,7 +312,7 @@
     <div id="modal-json-view" class="fixed inset-0 z-[90] hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl w-full max-w-lg p-6 flex flex-col gap-4">
             <h3 class="text-lg font-bold text-white">ガイドデータ (JSON)</h3>
-            <p class="text-xs text-slate-400">ユニットID、Slug、名前のみを含むJSONデータです。</p>
+            <p class="text-xs text-slate-400">ユニットID、Slug、名前、コストを含むJSONデータです。</p>
             <textarea id="json-output-area" class="w-full h-48 bg-slate-900 border border-slate-600 rounded p-3 text-xs text-slate-300 font-mono focus:outline-none focus:border-blue-500" readonly></textarea>
             <div class="flex justify-end gap-3">
                 <button onclick="app.copyJsonToClipboard()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">コピー</button>
@@ -380,9 +385,10 @@
 
                 // State
                 this.savedGuides = [];
-                // Guide structure: { name, stages: [ { id, name, unitIds, type, parentId, code } ] }
+                // Guide structure: { name, note, stages: [ { id, name, unitIds, type, parentId, code } ] }
                 this.currentGuide = {
                     name: "新しいガイド",
+                    note: "", // Guide-wide note
                     stages: []
                 };
                 // Initialize with root stage
@@ -481,6 +487,7 @@
                 return {
                     id: Date.now() + index,
                     name: guide.name || `Guide ${index + 1}`,
+                    note: guide.note || "", // Import guide note
                     stages: stages,
                     date: '外部データ'
                 };
@@ -507,39 +514,22 @@
 
             openAddStageModal(type) {
                 this.addingStageType = type;
-                const input = document.getElementById('add-stage-name-input');
-                const typeDisplay = document.getElementById('add-stage-type-display');
-                const typeDesc = document.getElementById('add-stage-type-desc');
-
-                let defaultName = "Next Stage";
-                let typeText = "Next";
-                let typeColor = "bg-blue-700";
-                let desc = "現在の構成を引き継いで次の段階に進みます。";
-
+                let suggestion = "Stage";
                 if (type === 'normal') {
                    const match = this.currentStage.name.match(/Lv(\d+)/i);
-                   if (match) {
-                        defaultName = `Lv${parseInt(match[1]) + 1}`;
-                   } else {
-                        if (this.currentStage.name === "初期構成") defaultName = "Lv5";
-                        else defaultName = "Next Stage";
-                   }
+                   if (match) suggestion = `Lv${parseInt(match[1]) + 1}`;
+                   else if (this.currentStage.name === "初期構成") suggestion = "Lv5";
+                   else suggestion = "Next Stage";
                 } else if (type === 'alter') {
-                    defaultName = this.currentStage.name + "'";
-                    typeText = "Alter";
-                    typeColor = "bg-purple-700";
-                    desc = "現在の構成の別パターンを作成します（同階層）。";
+                   suggestion = this.currentStage.name + "'";
+                } else if (type === 'branch') {
+                   suggestion = "分岐ルート";
                 }
 
-                input.value = defaultName;
-                typeDisplay.textContent = typeText;
-                typeDisplay.className = `px-2 py-1 rounded text-xs text-white font-bold ${typeColor}`;
-                typeDesc.textContent = desc;
-
+                document.getElementById('add-stage-name-input').value = suggestion;
                 document.getElementById('modal-add-stage').classList.remove('hidden');
-                input.focus();
+                document.getElementById('add-stage-name-input').focus();
             }
-
             closeAddStageModal() { document.getElementById('modal-add-stage').classList.add('hidden'); }
 
             confirmAddStage() {
@@ -673,9 +663,13 @@
             }
 
             renderGuideMeta() {
-                const input = document.getElementById('guide-code-input');
+                const codeInput = document.getElementById('guide-code-input');
+                const noteInput = document.getElementById('guide-note-input');
+
                 document.getElementById('current-stage-name').textContent = this.currentStage.name;
-                if (input) input.value = this.currentStage.code || '';
+
+                if (codeInput) codeInput.value = this.currentStage.code || '';
+                if (noteInput) noteInput.value = this.currentGuide.note || ''; // Global note
             }
 
             renderTransitionDiff() {
@@ -912,11 +906,26 @@
                     this.updateCostButtonsState(e.target.value);
                     this.renderChampionPool();
                 });
-                document.getElementById('guide-code-input').addEventListener('input', (e) => {
-                    this.currentStage.code = e.target.value.trim();
-                    // No save
-                });
+
+                const codeInput = document.getElementById('guide-code-input');
+                if(codeInput) {
+                    codeInput.addEventListener('input', (e) => this.updateGuideCode(e.target.value));
+                }
+
+                const noteInput = document.getElementById('guide-note-input');
+                if(noteInput) {
+                    noteInput.addEventListener('input', (e) => this.updateGuideNote(e.target.value));
+                }
             }
+
+            updateGuideCode(value) {
+                this.currentStage.code = value.trim();
+            }
+
+            updateGuideNote(value) {
+                this.currentGuide.note = value;
+            }
+
             updateIndicator() {
                 const el = document.getElementById('data-source-indicator');
                 if (this.savedGuides.length > 0) el.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> 準備完了';
@@ -958,8 +967,6 @@
                         btn.classList.remove('bg-slate-700', 'hover:bg-slate-600');
                         btn.classList.add('bg-blue-600', 'text-white');
                     } else if (!activeCost && btn.getAttribute('onclick').includes("'all'")) {
-                         // Active state for 'All' when no cost selected?
-                         // Or keep simple: Cost buttons highlight only when active.
                          btn.classList.remove('bg-blue-600', 'text-white');
                          btn.classList.add('bg-slate-700', 'hover:bg-slate-600');
                     } else {
@@ -984,6 +991,7 @@
             openSaveModal() {
                 document.getElementById('save-team-name-input').value = this.currentGuide.name;
                 document.getElementById('modal-save-name').classList.remove('hidden');
+                document.getElementById('save-team-name-input').focus();
             }
             closeSaveModal() { document.getElementById('modal-save-name').classList.add('hidden'); }
 
@@ -994,6 +1002,7 @@
                 const newEntry = {
                     id: Date.now(),
                     name: name,
+                    note: this.currentGuide.note, // Save note
                     stages: JSON.parse(JSON.stringify(this.currentGuide.stages)),
                     code: this.currentGuide.code,
                     date: new Date().toLocaleString('ja-JP')
@@ -1009,6 +1018,7 @@
                 this.renderLoadModalList();
             }
             closeLoadModal() { document.getElementById('modal-saved-teams').classList.add('hidden'); }
+
             openAddStageModal(type) {
                 this.addingStageType = type;
                 let suggestion = "Stage";
@@ -1031,6 +1041,7 @@
 
             openRenameStageModal(stageId, e) {
                 if(e) e.stopPropagation();
+                // If id passed (from tree button), use it. Else use active.
                 this.renameStageId = stageId || this.activeStageId;
                 const stage = this.currentGuide.stages.find(s => s.id === this.renameStageId);
 
@@ -1086,6 +1097,7 @@
 
                  const exportData = this.savedGuides.map(guide => ({
                      name: guide.name,
+                     note: guide.note || "", // Added note
                      stages: guide.stages.map(st => ({
                         id: st.id,
                         name: st.name,
@@ -1109,6 +1121,7 @@
 
                 const exportData = {
                     name: saved.name,
+                    note: saved.note || "", // Added note
                     stages: saved.stages.map(st => ({
                         id: st.id,
                         name: st.name,
@@ -1145,6 +1158,7 @@
 
                 this.currentGuide = JSON.parse(JSON.stringify(saved));
 
+                // Compatibility check
                 if (!this.currentGuide.stages && this.currentGuide.unitIds) {
                     const rootId = Utils.generateId();
                     this.currentGuide.stages = [{
@@ -1156,7 +1170,9 @@
                         code: ""
                     }];
                 }
+                if (this.currentGuide.note === undefined) this.currentGuide.note = "";
 
+                // Set active to first stage
                 this.activeStageId = this.currentGuide.stages[0].id;
 
                 this.renderAll();
