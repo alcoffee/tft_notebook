@@ -1,7 +1,7 @@
 [
   {
     "name": "ビルジウォーター",
-    "note": "",
+    "note": "2-1までにTFが来たらほぼ必ず行きたい\nコブコ、ヴォリベアを開放し爆発物を手に入れることでライズを狙う形\n今まで通りの95の2種類の形がある\nいずれの場合もTForイラオイを星3にすると後半の進行が楽になるのでゴールドを使わずにサーペントを消費して重ねたい\n\n1-4で2回までリロールしてTFを探しに行ってもいいその際、何かしらの1コストを重ねて保険をかける\nその1コストがスレイヤーであればGPリロールへ\n\nGPとTFでは必要なアイテムがまるっきり違う\nライズ: 裁断を軸にAPダメージを最大化していく\nGP:クイシル+ラスウィスなどの物理アイテム\nGPは比較的にアイテムに融通が利くので叩き付けを取りたい",
     "stages": [
       {
         "id": "331gwmamn",
@@ -44,6 +44,24 @@
         "code": "",
         "units": [
           {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 87,
+            "slug": "viego",
+            "name": "Viego",
+            "cost": 1
+          },
+          {
             "id": 7,
             "slug": "ashe",
             "name": "Ashe",
@@ -56,28 +74,10 @@
             "cost": 2
           },
           {
-            "id": 81,
-            "slug": "tristana",
-            "name": "Tristana",
-            "cost": 2
-          },
-          {
             "id": 83,
             "slug": "twistedfate",
             "name": "Twisted Fate",
             "cost": 2
-          },
-          {
-            "id": 92,
-            "slug": "xinzhao",
-            "name": "Xin Zhao",
-            "cost": 2
-          },
-          {
-            "id": 53,
-            "slug": "nautilus",
-            "name": "Nautilus",
-            "cost": 3
           }
         ]
       },
@@ -107,12 +107,6 @@
             "cost": 2
           },
           {
-            "id": 22,
-            "slug": "draven",
-            "name": "Draven",
-            "cost": 3
-          },
-          {
             "id": 27,
             "slug": "gangplank",
             "name": "Gangplank",
@@ -135,6 +129,12 @@
             "slug": "missfortune",
             "name": "Miss Fortune",
             "cost": 4
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
           }
         ]
       },
@@ -197,7 +197,7 @@
       },
       {
         "id": "51mdelo8m",
-        "name": "Lv8",
+        "name": "Lv8 コブコボリベア解放",
         "type": "normal",
         "parentId": "wi59ykwio",
         "code": "",
@@ -213,12 +213,6 @@
             "slug": "illaoi",
             "name": "Illaoi",
             "cost": 1
-          },
-          {
-            "id": 7,
-            "slug": "ashe",
-            "name": "Ashe",
-            "cost": 2
           },
           {
             "id": 83,
@@ -242,6 +236,12 @@
             "id": 25,
             "slug": "fizz",
             "name": "Fizz",
+            "cost": 4
+          },
+          {
+            "id": 43,
+            "slug": "lissandra",
+            "name": "Lissandra",
             "cost": 4
           },
           {
@@ -440,12 +440,159 @@
             "cost": 7
           }
         ]
+      },
+      {
+        "id": "gjh8778zl",
+        "name": "Lv5 NoTF",
+        "type": "alter",
+        "parentId": "331gwmamn",
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 68,
+            "slug": "shen",
+            "name": "Shen",
+            "cost": 1
+          },
+          {
+            "id": 15,
+            "slug": "briar",
+            "name": "Briar",
+            "cost": 1
+          },
+          {
+            "id": 59,
+            "slug": "qiyana",
+            "name": "Qiyana",
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "id": "r8ideaea2",
+        "name": "Lv7",
+        "type": "normal",
+        "parentId": "gjh8778zl",
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 59,
+            "slug": "qiyana",
+            "name": "Qiyana",
+            "cost": 1
+          },
+          {
+            "id": 71,
+            "slug": "sion",
+            "name": "Sion",
+            "cost": 2
+          },
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 3,
+            "slug": "ambessa",
+            "name": "Ambessa",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          }
+        ]
+      },
+      {
+        "id": "j8ftre5h7",
+        "name": "Lv8",
+        "type": "normal",
+        "parentId": "r8ideaea2",
+        "code": "",
+        "units": [
+          {
+            "id": 31,
+            "slug": "illaoi",
+            "name": "Illaoi",
+            "cost": 1
+          },
+          {
+            "id": 71,
+            "slug": "sion",
+            "name": "Sion",
+            "cost": 2
+          },
+          {
+            "id": 27,
+            "slug": "gangplank",
+            "name": "Gangplank",
+            "cost": 3
+          },
+          {
+            "id": 53,
+            "slug": "nautilus",
+            "name": "Nautilus",
+            "cost": 3
+          },
+          {
+            "id": 3,
+            "slug": "ambessa",
+            "name": "Ambessa",
+            "cost": 4
+          },
+          {
+            "id": 74,
+            "slug": "swain",
+            "name": "Swain",
+            "cost": 4
+          },
+          {
+            "id": 12,
+            "slug": "belveth",
+            "name": "Bel'Veth",
+            "cost": 4
+          },
+          {
+            "id": 60,
+            "slug": "reksai",
+            "name": "Rek'Sai",
+            "cost": 2
+          },
+          {
+            "id": 24,
+            "slug": "fiddlesticks",
+            "name": "Fiddlesticks",
+            "cost": 5
+          }
+        ]
       }
     ]
   },
   {
     "name": "2のトリックエコー",
-    "note": "",
+    "note": "イシュタル型が主流\n！ヴォイド型は間違っている可能性大！\nいずれの場合もディスラプターを出したファイターのエコーがメインキャリー\n2のトリック以外でも行けるかは不明\nイシュタルバードとニーコが競合するので注意",
     "stages": [
       {
         "id": "rr2ml7f2z",
@@ -751,7 +898,7 @@
   },
   {
     "name": "絶好調の超越の道ヤスオ",
-    "note": "",
+    "note": "オリジナル構成\n絶対弱い\n検証中",
     "stages": [
       {
         "id": "zpj1mu3ud",
@@ -1030,7 +1177,7 @@
   },
   {
     "name": "絶好調ソナリロ",
-    "note": "",
+    "note": "イラオイシェンからやるのが楽しそう（普通にデマーシアやアニヴィアでやった方がいい）\nそもそも絶好調がいらない？",
     "stages": [
       {
         "id": "foh8dnx9s",
@@ -1147,7 +1294,7 @@
   },
   {
     "name": "イシュタルバード（パンベン）",
-    "note": "",
+    "note": "うーん\nアンロックユニットが多いから普通のリロール系オーグじゃ厳しいと思うんだけど\nパンドラのベンチならアンロックユニットの排出率が落ちないらしい（要検証）",
     "stages": [
       {
         "id": "4dvor18r4",
@@ -1288,7 +1435,7 @@
   },
   {
     "name": "アイオニアデマーシア",
-    "note": "",
+    "note": "これも嘘松構成\nまあ悟りの道の場合はアイオニアに勝てる気がしないから\nこれで4位以内入れないかなって感じの逃げ構成",
     "stages": [
       {
         "id": "7mje6qr27",
